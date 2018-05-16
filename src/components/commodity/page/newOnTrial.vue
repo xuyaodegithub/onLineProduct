@@ -3,7 +3,7 @@
     <!--<div>-->
       <!--<lebal>产品名称</lebal>-->
     <!--</div>-->
-    <el-form ref="form" :model="form" label-width="80px">
+    <el-form ref="form" :model="form" label-width="100px">
       <el-form-item label="产品名称:">
         <p style="width: 60%;display: inline-block;text-indent: 10px">{{CouponWithGoodsResult.productName}}</p>
         <el-button type="success" size="mini" round style="margin-left: 15px;" @click="popoverAlert(['VchoseGoods','one'])" v-if="upDataSaleGoodsResult.type ==='add'">选择产品</el-button>
@@ -51,6 +51,9 @@
            <el-button type="success" size="mini"  style="margin-left: 15px;width: 60px;" @click="changePromise(changeAll)">批量</el-button>
          </p>
        </el-form-item>
+      <el-form-item label="试用销售时间:">
+        <el-input v-model="tryTime" size="small"></el-input>
+      </el-form-item>
       <el-form-item label="试用类型:">
         <el-radio-group v-model="typeTrial"><!--:disabled="classWh === '1'"-->
           <el-radio :label=1 style="width: auto;">普通试用</el-radio>
@@ -175,6 +178,8 @@ export default {
   name: 'newOnTrial',
   data () {
     return {
+      tryTime:'',
+      tryDay:[{title:'1天',val:1},{title:'2天',val:2},{title:'3天',val:3}],
       timerList:[
         {timer:'00:00'}, {timer:'01:00'}, {timer:'02:00'}, {timer:'03:00'}, {timer:'04:00'}, {timer:'05:00'}, {timer:'06:00'}, {timer:'07:00'},
         {timer:'08:00'}, {timer:'09:00'}, {timer:'10:00'}, {timer:'11:00'}, {timer:'12:00'}, {timer:'13:00'}, {timer:'14:00'},
@@ -324,6 +329,7 @@ export default {
       this.typeTrial=''
       this.isSetTop=1
       this.isStatus=1
+      this.tryTime=''
     }else{
       let obj={
         togetherProductIds:'',
@@ -356,6 +362,7 @@ export default {
       this.value9=this.upDataSaleGoodsResult.item.dailyStartTime
       this.everyNum=this.upDataSaleGoodsResult.item.dayLimitCount
       this.isOutCountry=this.upDataSaleGoodsResult.item.isOverSeasProduct
+      this.tryTime = this.upDataSaleGoodsResult.item.freeUseDays
       let data={
         freeUseProductId:this.upDataSaleGoodsResult.item.id,
         type:1
@@ -391,6 +398,7 @@ export default {
         isSetTop:this.isSetTop,
        // normalStores:'',//试用库存
         tip:this.form.trip,
+        freeUseDays:this.tryTime
        // startDate:,
         //endDate:'',
       }
@@ -469,12 +477,12 @@ export default {
           this.changeNum=true
         }
       }
-      if(this.changeNum && this.activeNum){
+      if(this.changeNum && this.activeNum && data.freeUseDays){
         this.addFreeUseProductActions(data)
         this.$emit('to-change',this.backTitle)
       }else{
         this.$message({
-          message:'库存数量或每场放量填写有误',
+          message:'库存数量或销售时间或每场放量填写有误',
           type:'warning'
         })
       }

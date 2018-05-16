@@ -113,7 +113,7 @@
         deep: true
       }
     },
-    activated () {
+    mounted () {
       let data = {
         type: 1
       }

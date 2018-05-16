@@ -40,7 +40,8 @@ const muneManage={
         sortField:'',
         page:'',
         rows:'',
-        sortOrder:'asc'
+        sortOrder:'asc',
+        filter_I_status:''
       },
       //创建试用商品
       addFreeUseProductMM:{
@@ -135,6 +136,7 @@ const muneManage={
       state.editor.freeUseProductListMM.filter_S_productName_contains=data.filter_S_productName
       state.editor.freeUseProductListMM.filter_I_type=data.filter_I_type
       state.editor.freeUseProductListMM.sortOrder=data.sortOrder
+      state.editor.freeUseProductListMM.filter_I_status=data.filter_I_status
     },
     GET_FREEUSE_PRODUCT_LIST(state,res){
       state.page.freeUseProductListResult=res.data

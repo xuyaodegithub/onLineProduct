@@ -107,7 +107,7 @@
       let obj={
         page:1,
         rows:10,
-        type:2
+        filter_I_type:2
       }
       this.storeGiftBagListActions(obj)
 

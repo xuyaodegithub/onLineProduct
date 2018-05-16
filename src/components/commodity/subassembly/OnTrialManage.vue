@@ -7,12 +7,6 @@
     </p>
     <p v-if="title=='seachOnTrialGoods'">
       <label>产品名称:</label><el-input v-model="Gtitle" placeholder="请输入产品名称" size="mini"></el-input>
-      <!--<label>是否推荐:</label>&lt;!&ndash;<el-input v-model="GupGo" placeholder="请输入产品名称" size="mini"></el-input>&ndash;&gt;-->
-      <!--<el-radio-group v-model="isAudio">&lt;!&ndash;:disabled="classWh === '1'"&ndash;&gt;-->
-        <!--<el-radio :label=3 style="width: auto;">全部</el-radio>-->
-        <!--<el-radio :label=0 style="width: auto;">否</el-radio>-->
-        <!--<el-radio :label=1 style="width: auto;">是</el-radio>-->
-      <!--</el-radio-group>-->
       <label>试用类型:</label>
        <el-radio-group v-model="status"><!--:disabled="classWh === '1'"-->
         <el-radio :label="0" style="width: auto;">全部</el-radio>
@@ -20,6 +14,12 @@
         <el-radio :label="2" style="width: auto;">新品首试</el-radio>
         <el-radio :label="3" style="width: auto;">整点抢</el-radio>
         <el-radio :label="4" style="width: auto;">试海外</el-radio>
+      </el-radio-group>
+      <label>状态:</label><!--<el-input v-model="filter_I_status" placeholder="请输入产品名称" size="mini"></el-input>-->
+      <el-radio-group v-model="isAudio"><!--:disabled="classWh === '1'"-->
+        <el-radio :label=3 style="width: auto;">全部</el-radio>
+        <el-radio :label=0 style="width: auto;">下架</el-radio>
+        <el-radio :label=1 style="width: auto;">上架</el-radio>
       </el-radio-group>
       <!--<label>特卖时间:</label><el-date-picker type="date" placeholder="选择日期" v-model="date1" style="width:150px;" size="mini"></el-date-picker>-->
       <el-button type="primary" style="width:100px;margin-left: 20px;" round size="mini" icon="el-icon-search" @click="seachGoodsList()">搜索</el-button>
@@ -56,6 +56,7 @@
         filter_S_productName:'',
        // filter_I_isRecommend:'',
         filter_I_type:'',
+        filter_I_status:'',
         sortField:'sort',
         page:1,
         rows:10,
@@ -94,12 +95,9 @@
         rows:10,
         sortOrder:'asc'
       }
-//      if(this.isAudio!==3){
-//        obj.filter_I_isRecommend=this.isAudio
-//      }
-//      if(this.status!==3){
-//        obj.filter_I_status=this.status
-//      }
+      if(this.isAudio!==3){
+        obj.filter_I_status=this.isAudio
+      }
       this.seachMsg=obj
       this.freeUseProductListActions(obj)
 

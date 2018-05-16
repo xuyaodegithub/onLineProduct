@@ -6,8 +6,8 @@
       </el-form-item>
       <el-form-item label="收益设置:">
        <div class="priceSet" style="padding: 20px 0;">
-         <p><label>明星督导:</label> <el-input v-model="isMoreStar" size="small" ></el-input></p>
-         <p><label>明星督导:</label> <el-input v-model="isStar" size="small" ></el-input></p>
+         <p><label>联创:</label> <el-input v-model="isMoreStar" size="small" ></el-input></p>
+         <p><label>联创:</label> <el-input v-model="isStar" size="small" ></el-input></p>
          <p><label>高级督导:</label> <el-input v-model="isSoHighPrice" size="small" ></el-input></p>
          <p><label>高级督导:</label> <el-input v-model="isHighPrice" size="small" ></el-input></p>
          <p><label>督导:</label> <el-input v-model="isDuDao" size="small" ></el-input></p>
@@ -61,7 +61,7 @@
         deep: true
       }
     },
-    activated(){
+    mounted(){
       let data={
         type:2
       }

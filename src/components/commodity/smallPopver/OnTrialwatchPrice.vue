@@ -145,6 +145,7 @@ this.salePrice0=this.popoverAlive.SSSnum.price
         isSetTop:this.popoverAlive.SSSnum.isSetTop,
         // normalStores:'',//试用库存
         tip:this.popoverAlive.SSSnum.tip,
+        freeUseDays:this.popoverAlive.SSSnum.freeUseDays
         // startDate:,
         //endDate:'',
       }
