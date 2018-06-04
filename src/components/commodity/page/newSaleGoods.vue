@@ -5,7 +5,8 @@
     <!--</div>-->
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="产品名称:">
-        <el-input v-model="CouponWithGoodsResult.productName" size="small" disabled></el-input>
+        <p style="width: auto;display: inline-block;text-indent: 10px">{{CouponWithGoodsResult.productName}}</p>
+        <!--<el-input v-model="CouponWithGoodsResult.productName" size="small" disabled></el-input>-->
         <el-button type="success" size="mini" round style="margin-left: 15px;" @click="popoverAlert(['VchoseGoods','one'])" v-if="upDataSaleGoodsResult.type==='add'">选择产品</el-button>
       </el-form-item>
        <el-form-item label="产品信息:">
@@ -82,8 +83,8 @@
           <el-radio :label=0 style="width: auto;">下架</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="排序:">
-        <el-input v-model="form.sort" size="small" style="width: 250px;"></el-input>
+      <el-form-item label="排序:" required>
+        <el-input v-model="form.sort" size="small" style="width: 250px;"></el-input><span style="font-size: 12px;color: orange;margin-left: 10px;">（带 * 的为必填项）</span>
       </el-form-item>
        <el-form-item label="大图:">
          <div style="display: flex;">
@@ -152,7 +153,7 @@ export default {
       dialogImageUrl:'',
       dialogVisible: false,
       isSetTop:'',
-      value8:1,
+      value8:3,
       timeList:[{label:'1天',id:1},{label:'2天',id:2},{label:'3天',id:3}]
     }
   },
@@ -251,7 +252,7 @@ export default {
       this.dialogImageUrl=''
       this.isAudio=''
       this.isStatus=1
-      this.value8=1
+      this.value8=3
     }else{
       let obj={
         togetherProductIds:'',

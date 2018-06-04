@@ -34,7 +34,7 @@
             </span>
             <span style="margin-left: 10px" v-else-if="item.which=='store' && upDataSaleGoodsResult.type ==='updata'">{{FreeUseProductNormalsResult.item.length>0 ? scope.row.basicStore : scope.row[item.which] }}</span>
             <span style="margin-left: 10px" v-else>{{scope.row[item.which]}}</span>
-          </template>>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -145,7 +145,8 @@ this.salePrice0=this.popoverAlive.SSSnum.price
         isSetTop:this.popoverAlive.SSSnum.isSetTop,
         // normalStores:'',//试用库存
         tip:this.popoverAlive.SSSnum.tip,
-        freeUseDays:this.popoverAlive.SSSnum.freeUseDays
+        freeUseDays:this.popoverAlive.SSSnum.freeUseDays,
+        buyCount:this.popoverAlive.SSSnum.buyCount
         // startDate:,
         //endDate:'',
       }

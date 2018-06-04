@@ -10,7 +10,8 @@
             style="width: 100%"
             ref="multipleTable"
             tooltip-effect="light"
-            @selection-change="handleSelectionChange">
+            @selection-change="handleSelectionChange"
+            :header-cell-style="{'color':'#000000','fontWeight':'600'}">
             <el-table-column
               type="selection"
               width="30">
@@ -23,7 +24,8 @@
               show-overflow-tooltip>
               <template slot-scope="scope">
                 <span style="margin-left: 10px" v-if="item.which==='ct'">{{ scope.row[item.which] | changeTime}}</span>
-                <span style="margin-left: 10px" v-else-if="item.which==='Time'">{{ scope.row.startTime | changeTime}}--{{ scope.row.endTime | changeTime}}</span>
+                <span style="margin-left: 10px" v-else-if="item.which==='Time' && scope.row.validType =='1'">{{  scope.row.startTime | changeTime }}至{{scope.row.endTime | changeTime}}</span>
+                <span style="margin-left: 10px" v-else-if="item.which==='Time' && scope.row.validType =='2'">{{ scope.row.validPeriodDays }}天</span>
                 <span style="margin-left: 10px" v-else-if="item.which==='isAudit'">{{ scope.row[item.which]===0 ? '待审核' : '已审核'}}</span>
                 <span style="margin-left: 10px" v-else-if="item.which==='creatorType'">{{ scope.row[item.which]===0 ? '平台' : scope.row.sellerName}}</span>
                 <span style="margin-left: 10px" v-else-if="item.which==='price'">{{ scope.row[item.which]/100}}</span>
@@ -67,7 +69,8 @@
             v-loading="loading"
             :data="CouponListResult.rows"
             style="width: 100%"
-            tooltip-effect="light">
+            tooltip-effect="light"
+            :header-cell-style="{'color':'#000000','fontWeight':'600'}">
             <el-table-column
               v-for="(item,index) in dataListTwo"
               :label="item.name"
@@ -76,7 +79,8 @@
               show-overflow-tooltip>
               <template slot-scope="scope">
                 <span style="margin-left: 10px" v-if="item.which==='ct'">{{ scope.row.ct | changeTime}}</span>
-                <span style="margin-left: 10px" v-else-if="item.which==='Time'">{{ scope.row.startTime | changeTime}}--{{ scope.row.endTime | changeTime}}</span>
+                <span style="margin-left: 10px" v-else-if="item.which==='Time' && scope.row.validType =='1'">{{  scope.row.startTime | changeTime }}--{{scope.row.endTime | changeTime}}</span>
+                <span style="margin-left: 10px" v-else-if="item.which==='Time' && scope.row.validType =='2'">{{ scope.row.validPeriodDays }}</span>
                 <span style="margin-left: 10px" v-else-if="item.which==='isAudit'">{{ scope.row[item.which]===0 ? '待审核' : '已审核'}}</span>
                 <span style="margin-left: 10px" v-else-if="item.which==='auditTime'">{{ scope.row[item.which] | changeTime}}</span>
                 <span style="margin-left: 10px" v-else-if="item.which==='creatorType'">{{ scope.row[item.which]===0 ? '平台' : scope.row.sellerName}}</span>
@@ -190,11 +194,11 @@ export default {
           name:'产品', width:'140', which:'productName'
         },{
           name:'券总数量', width:'70', which:'num'
-        },/*{
+        },{
           name:'已领数量', width:'70', which:'receivedNum'
         },{
           name:'已使用', width:'70', which:'useNum'
-        },*/{
+        },{
           name:'限领数量', width:'70', which:'limitReceived'
         },{
           name:'状态', width:'80', which:'isAudit'

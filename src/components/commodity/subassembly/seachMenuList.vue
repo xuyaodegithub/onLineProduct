@@ -1,6 +1,6 @@
 <template>
   <div id="MuneList">
-    <el-button type="success" plain size="small" icon="el-icon-plus" @click="addNewMune(1,'new')" style="margin:10px 20px 10px 0;float: right;">新增菜单</el-button>
+    <el-button type="success" plain size="small" icon="el-icon-plus" @click="addNewMune(1,'new')" style="margin:10px 0 10px 20px;float: left;">新增菜单</el-button>
     <div class="seach-list">
       <el-table
         style="width: 100%;border-right: none"

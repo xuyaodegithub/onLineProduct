@@ -5,8 +5,10 @@
         <el-input v-model="isName" size="small" ></el-input>
       </el-form-item>
       <el-form-item label="产品名称:">
-        <el-input v-model="CouponWithGoodsResult.productName" size="small" disabled style="width: 350px;" v-if="msg.type==='create'"></el-input>
-        <el-input v-model="isProductName" size="small" disabled style="width: 350px;" v-else></el-input>
+        <p style="width: auto;display: inline-block;text-indent: 10px;margin-right: 20px;"  v-if="msg.type==='create'">{{CouponWithGoodsResult.productName}}</p>
+        <p style="width: auto;display: inline-block;text-indent: 10px"  v-else>{{isProductName}}</p>
+        <!--<el-input v-model="CouponWithGoodsResult.productName" size="small" disabled style="width: 350px;" v-if="msg.type==='create'"></el-input>-->
+        <!--<el-input v-model="isProductName" size="small" disabled style="width: 350px;" v-else></el-input>-->
         <el-button type="success" round @click="choseGoods()" size="mini" v-if="msg.type=='create'">选择产品</el-button>
       </el-form-item>
       <el-form-item label="礼包图片:">
@@ -14,7 +16,7 @@
           <img :src="dialogImageUrl" alt="" style="height: 78px;width: 78px;" class="valign" v-if="dialogImageUrl">
           <el-upload
             class="upload-demo"
-            action="apis/admin/buildblocks/uploadImage"
+            action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
             name="img"
             :show-file-list="false"
             :on-success="upSuccessfirst">

@@ -30,7 +30,7 @@
                 pluginsPath="/static/kindeditor/plugins/"
                 :loadStyleMode="false"
                 @on-content-change="onContentChange"></editor>-->
-        <div class="edit_container">
+        <div class="edit_container" style="height: 500px;overflow-y: auto">
           <quill-editor v-model="infoForm.a_content"
                         ref="myQuillEditor"
                         class="editer"
@@ -44,7 +44,7 @@
                  pluginsPath="/static/kindeditor/plugins/"
                  :loadStyleMode="false"
                  @on-content-change="onContentChange2"></editor>-->
-         <div class="edit_container">
+         <div class="edit_container"  style="max-height: 500px;overflow-y: auto;">
            <quill-editor v-model="infoForm.b_content"
                          ref="myQuillEditor"
                          class="editer"
@@ -53,7 +53,7 @@
          </div>
        </el-form-item>
       <el-form-item>
-        <el-button type="primary" plain @click="saveProduct()" size="small">确定</el-button>
+        <el-button type="primary" plain @click="saveProduct()" size="small" style="margin-top: 20px;">确定</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -89,7 +89,7 @@
             ImageExtend: {
               loading: true,
               name: 'img',
-              action: 'apis/admin/buildblocks/uploadImage',
+              action: 'http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage',
               response: (res) => {
                 return 'http://ol-quan2017.oss-cn-shanghai.aliyuncs.com/'+res.result
               }
@@ -163,18 +163,6 @@
       upSuccessfirst(response, file, fileList){
         this.dialogImageUrl='http://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
       },
-      onContentChange (val) {
-        this.editorText = val
-      },
-      onContentChange2 (val) {
-        this.editorText2 = val
-      },
-      afterChange () {
-
-      },
-      filterImage(url){
-      alert(url)
-      },
       onEditorReady(editor) {
       },
 
@@ -207,6 +195,17 @@
     .el-button{
       margin-left: 10%;
       width:100px;
+    }
+    .ql-toolbar.ql-snow{
+      position: absolute;
+      z-index:1000;
+      background: #ffffff;
+      top:0;
+    }
+    .ql-toolbar.ql-snow + .ql-container.ql-snow{
+      margin-top:100px;
+      overflow: auto;
+      min-height:200px;
     }
   }
   #SaleNewTwo div.el-upload--picture-card{

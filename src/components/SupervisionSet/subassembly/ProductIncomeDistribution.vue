@@ -1,8 +1,8 @@
 <template>
   <div id="ProductIncomeD">
-    <p id="toindex">
+    <!--<p id="toindex">
       <router-link to="index">首页</router-link> &gt; 产品收益配置
-    </p>
+    </p>-->
     <el-tabs v-model="activeName2" type="card" @tab-click="handleClick">
       <el-tab-pane label="普通产品" name="first">
         <div class="first">
@@ -253,6 +253,7 @@
   }
 
   #ProductIncomeD {
+    background: #ffffff;
     .first, .second {
       display: flex;
       flex-wrap: wrap;

@@ -3,8 +3,8 @@
  */
 const  editor = {//定义入参
   //域名
-  axiosUrl:'http://test-admin.olquan.cn',//测试
-  //axiosUrl:'http://ol-h5-admin.olquan.cn',//正式
+  // axiosUrl:'http://test-admin.olquan.cn',//测试
+  axiosUrl:'http://ol-h5-admin.olquan.cn',//正式
   //品牌管理、根据id获取
   getByIdMM:{
     id:null
@@ -256,11 +256,11 @@ const  editor = {//定义入参
   },
   //创建优惠券
   createCouponMM:{
-    endTime:'', expireRemind:'',limitLevel:'', limitReceived:'', num:'', price:'', startTime:'',title:'',type:'',productIds:'',isAudit:'',togetherProductIds:'',productType:'',isPublic:''
+    validPeriodDays:'',validType:'',endTime:'', expireRemind:'',limitLevel:'', limitReceived:'', num:'', price:'', startTime:'',title:'',type:'',productIds:'',isAudit:'',togetherProductIds:'',productType:'',isPublic:''
   },
   //修改优惠券
   upDataCouponMM:{
-    id:'', num:'',title:'',endTime:'', startTime:'', expireRemind:'',limitLevel:'', limitReceived:'', price:'',type:'',productIds:'',togetherProductIds:'',productType:'',isPublic:''
+    validType:'',validPeriodDays:'',id:'', num:'',title:'',endTime:'', startTime:'', expireRemind:'',limitLevel:'', limitReceived:'', price:'',type:'',productIds:'',togetherProductIds:'',productType:'',isPublic:'',isAudit:''
   },
   //删除优惠券
   deleteCouponMM:{
@@ -299,7 +299,7 @@ const  editor = {//定义入参
   },
   //供应商创建优惠券
   StoreCreteYHQMM:{
-    endTime:'',limitReceived:'',num:'',price:'',productIds:'',togetherProductIds:'',productType:'',sellerId:'',startTime:'',title:'',type:'',id:'',isPublic:''
+    validType:'',validPeriodDays:'',endTime:'',limitReceived:'',num:'',price:'',productIds:'',togetherProductIds:'',productType:'',sellerId:'',startTime:'',title:'',type:'',id:'',isPublic:''
   },
   //供应商删除优惠券
   StoreDeleteYHQMM:{

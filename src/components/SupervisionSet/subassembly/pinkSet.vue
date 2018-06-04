@@ -17,7 +17,11 @@
       <v-fourted></v-fourted>
       </el-tab-pane>
     </el-tabs>
-
+    <transition name="slide-fade">
+      <div class="alertshow" v-if="popoverAlive.openOrClose" v-drag>
+        <v-popover></v-popover>
+      </div>
+    </transition>
   </div>
 
 </template>
@@ -25,6 +29,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import { mapActions } from 'vuex'
+  import vPopover from '../../popover/popover.vue'
   import vFirst from '../pinkSet/pinkPageSet.vue'
   import vSecond from '../pinkSet/pinkgiftIndex.vue'
   import vThreed from '../pinkSet/openPriceSet.vue'
@@ -52,7 +57,7 @@
     ])
   },
   components:{
-    vFirst,vSecond,vThreed,vFourted
+    vFirst,vSecond,vThreed,vFourted,vPopover
   },
     mounted(){
 
@@ -74,16 +79,8 @@
 </script>
 
 <style scoped>
-  #toindex{
-    font: 16px/36px "微软雅黑";
-    background:none;
-    border:0;
-    margin:0;
-    color: #333;
-    font-weight: 600;
-    text-indent:0;
-    overflow: hidden;
-    margin-bottom: 15px;
+  #smalltitle{
+    background: #ffffff;
   }
   .alertshow{
     position: fixed;

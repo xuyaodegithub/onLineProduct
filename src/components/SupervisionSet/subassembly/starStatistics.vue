@@ -1,8 +1,8 @@
 <template>
   <div id="smalltitle">
-    <p id="toindex">
+   <!-- <p id="toindex">
       <router-link to="index">首页</router-link> &gt;明细督导统计
-    </p>
+    </p>-->
     <div class="footer-list">
       <keep-alive>
         <component :is="title" v-on:to-change="changeTitle" :msg="seachMsg"></component>

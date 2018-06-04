@@ -561,7 +561,10 @@ const servers={
     },
     //删除礼包
     storeGiftBagDeleteActions({commit,dispatch,state,rootState},data){
-      api.deletePpApi(rootState.editor.axiosUrl+'/admin/storeGiftBag/delete',qs.stringify(data)).then(res=>{
+      let obj={
+        id:data.id
+      }
+      api.deletePpApi(rootState.editor.axiosUrl+'/admin/storeGiftBag/delete',qs.stringify(obj)).then(res=>{
         // console.log(res)
         if(res=='success'){
           Message({
@@ -569,7 +572,11 @@ const servers={
             message:'操作成功',
             type: 'success'
           });
-          dispatch('storeGiftBagListActions',{  page:1,rows:10 })
+          if(data.type==='pink'){
+            dispatch('storeGiftBagListActions',{  page:1,rows:10,filter_I_type:1 })
+          }else{
+            dispatch('storeGiftBagListActions',{  page:1,rows:10,filter_I_type:2 })
+          }
         }
       }).catch(
         (error) => {

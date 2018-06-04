@@ -686,6 +686,8 @@ const mutations = {//mutations内是改变state内的值得作用
     state.editor.createCouponMM.togetherProductIds=data.togetherProductIds
     state.editor.createCouponMM.isAudit=data.isAudit
     state.editor.createCouponMM.isPublic=data.isPublic
+    state.editor.createCouponMM.validPeriodDays=data.validPeriodDays
+    state.editor.createCouponMM.validType=data.validType
   },
 //修改优惠券
   [types.SET_UPDATA_COUPON](state,data){
@@ -703,6 +705,9 @@ const mutations = {//mutations内是改变state内的值得作用
     state.editor.upDataCouponMM.togetherProductIds=data.togetherProductIds
     state.editor.upDataCouponMM.productType=data.productType
     state.editor.upDataCouponMM.isPublic=data.isPublic
+    state.editor.upDataCouponMM.validPeriodDays=data.validPeriodDays
+    state.editor.upDataCouponMM.validType=data.validType
+    state.editor.upDataCouponMM.isAudit=data.isAudit
   },
   //删除优惠券
   [types.SET_DELETE_COUPONMM] (state,id) {
@@ -807,6 +812,8 @@ const mutations = {//mutations内是改变state内的值得作用
     state.editor.StoreCreteYHQMM.startTime=data.startTime
     state.editor.StoreCreteYHQMM.id=data.id
     state.editor.StoreCreteYHQMM.isPublic=data.isPublic
+    state.editor.StoreCreteYHQMM.validType=data.validType
+    state.editor.StoreCreteYHQMM.validPeriodDays=data.validPeriodDays
   },
   //供应商删除优惠券
   [types.SET_STORE_DELETE_YHQ] (state,data) {

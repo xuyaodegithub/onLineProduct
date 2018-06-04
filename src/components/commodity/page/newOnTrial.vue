@@ -5,7 +5,7 @@
     <!--</div>-->
     <el-form ref="form" :model="form" label-width="100px">
       <el-form-item label="产品名称:">
-        <p style="width: 60%;display: inline-block;text-indent: 10px">{{CouponWithGoodsResult.productName}}</p>
+        <p style="width: auto;display: inline-block;text-indent: 10px">{{CouponWithGoodsResult.productName}}</p>
         <el-button type="success" size="mini" round style="margin-left: 15px;" @click="popoverAlert(['VchoseGoods','one'])" v-if="upDataSaleGoodsResult.type ==='add'">选择产品</el-button>
       </el-form-item>
       <el-form-item label="描述:">
@@ -51,13 +51,13 @@
            <el-button type="success" size="mini"  style="margin-left: 15px;width: 60px;" @click="changePromise(changeAll)">批量</el-button>
          </p>
        </el-form-item>
-      <el-form-item label="试用销售时间:">
-        <el-input v-model="tryTime" size="small"></el-input>
+      <el-form-item label="试用时间:" required>
+        <el-input v-model="tryTime" size="small"></el-input><span style="font-size: 12px;color: orange;margin-left: 10px;">（试用周期，关系到退款时间）</span>
       </el-form-item>
-      <el-form-item label="试用类型:">
+      <el-form-item label="试用类型:" required>
         <el-radio-group v-model="typeTrial"><!--:disabled="classWh === '1'"-->
           <el-radio :label=1 style="width: auto;">普通试用</el-radio>
-          <el-radio :label=2 style="width: auto;">新品首发</el-radio>
+          <!--<el-radio :label=2 style="width: auto;">新品首发</el-radio>-->
           <el-radio :label=3 style="width: auto;">整点抢</el-radio>
           <!--<el-radio :label=4 style="width: auto;">试海外</el-radio>-->
         </el-radio-group>
@@ -146,8 +146,8 @@
            <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
          </el-upload>
       </el-form-item>
-      <el-form-item label="排序:">
-        <el-input v-model="form.sort" size="small"></el-input>
+      <el-form-item label="排序:" required>
+        <el-input v-model="form.sort" size="small"></el-input><span style="font-size: 12px;color: orange;margin-left: 10px;">（带 * 的为必填项）</span>
       </el-form-item>
       <el-form-item label="是否置顶:">
         <el-radio-group v-model="isSetTop"><!--:disabled="classWh === '1'"-->
@@ -434,6 +434,7 @@ export default {
         data.productName=this.upDataSaleGoodsResult.item.productName
         data.productId=this.upDataSaleGoodsResult.item.productId
         data.id=this.upDataSaleGoodsResult.item.id
+        data.buyCount=this.upDataSaleGoodsResult.item.buyCount
         if(this.FreeUseProductNormalsResult.item.length>0){
           data.salePrices=/*JSON.stringify(this.BondMoney)*/this.BondMoney.toString()
           data.normalIds=this.changePriceApp(this.FreeUseProductNormalsResult.item,10)

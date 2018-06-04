@@ -1,7 +1,7 @@
 <template>
   <div id="smalltitle">
     <p id="toindex">
-      <router-link to="index">首页</router-link> &gt; 特卖商品管理
+      <!--<router-link to="index">首页</router-link> &gt; 特卖商品管理-->
       <el-button type="success" round size="mini" icon="el-icon-plus" style="margin-top: 10px" @click="addGoods()" v-if="title=='SeachList'">新增产品</el-button>
       <el-button type="success" size="mini" round style="margin-top: 10px" icon="el-icon-back" @click="title='SeachList'" v-else>返回</el-button>
     </p>

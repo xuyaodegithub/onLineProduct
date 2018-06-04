@@ -3,16 +3,16 @@
     <div class="popover-head">
       <span class="title">活动链接</span><i v-on:click="popoverAlert()" class="el-icon-close"></i>
     </div>
-    <div class="popover-main">
-      <p>{{this.$store.state.result.activeId}}</p>
+    <div class="popover-main" v-html="activeIdResult">
+      <!--<p>{{this.$store.state.result.activeId}}</p>-->
     </div>
   </div>
 </template>
 
 <style scoped>
   .demo{
-    width: 500px;
-    height: 120px;
+    /*width: 500px;*/
+    /*height: 120px;*/
     background: #F0FAFF;
     margin-left: -300px;
     margin-top: -220px;
@@ -44,8 +44,9 @@
   }
   .popover-main{
     padding: 20px 12.5px;
-    padding-bottom: 0px;
+    padding-bottom: 15px;
     width: calc(100% - 25px);
+    line-height: 24px;
   }
   .popover-main .el-input{
     width:200px;
@@ -69,7 +70,7 @@
     },
     computed: {
       ...mapGetters([
-        'popoverAlive','addCommodityResult'
+        'popoverAlive','addCommodityResult','activeIdResult'
       ])
     },
     methods: {

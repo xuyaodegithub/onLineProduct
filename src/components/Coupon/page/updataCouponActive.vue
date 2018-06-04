@@ -8,7 +8,7 @@
         class="upload-demo"
         ref="uploadfirst"
         name="img"
-        action="/apis/admin/buildblocks/uploadImage"
+        action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
         :on-success="upSuccessfirst"
         :on-error="upErre"
         :file-list="fileList"

@@ -516,10 +516,11 @@ export default {
           this.input='http://ol-h5-preview.olquan.cn/index/newIndex'
           this.addType(10)
         }else if(key===3){
-          this.input='http://ol-site.olquan.com/weixin/member/openStore'
+          this.input='http://ol-h5-preview.olquan.cn/supervisor/buyPink'
+//          this.input='http://ol-h5.olquan.cn/supervisor/buyPink'
           this.addType(11)
         }else if(key===32){
-          this.input='http://ol-site.olquan.com/weixin/member/renewConfirmOrder'
+          this.input='http://ol-site.olquan.cn/weixin/member/renewConfirmOrder'
           this.addType(19)
         }else if(key===4){
           this.input='http://www.ins-box.com/channelcps?channelCode=966262c61960ed971942347b443c7743&to=http://www.ins-box.com/pagecontent?pageContentId=100044'
@@ -582,14 +583,14 @@ export default {
             this.radio2=''
           }*/
         }else if(key===15){
-          this.input='http://ol-site.olquan.com/weixin/auth?view=/weixin/globalShopping/vm'
+          this.input='http://ol-site.olquan.cn/weixin/auth?view=/weixin/globalShopping/vm'
           this.addType(7)
         }else if(key===16){
-          this.input='http://ol-site.olquan.com/weixin/lifeHouse/lifeHouse?districtId=330185'
+          this.input='http://ol-site.olquan.cn/weixin/lifeHouse/lifeHouse?districtId=330185'
           this.addType(6)
         }else if(key===17){
           this.openOrclose=false
-          this.input='http://ol-site.olquan.com/weixin/product/product?brandCode='
+          this.input='http://ol-site.olquan.cn/weixin/product/product?brandCode='
           this.addType(17)
           this.popoverAlert('VclassSell')
         }else if(key===19){
@@ -613,19 +614,19 @@ export default {
           }*/
 
         }else if(key===21){
-          this.input='http://ol-site.olquan.com/ol/weixin/index/indexRecommendBrand'
+          this.input='http://ol-site.olquan.cn/ol/weixin/index/indexRecommendBrand'
           this.addType(3)
         }else if(key===22){
-          this.input='http://ol-site.olquan.com/weixin/limitBuy/limitBuy'
+          this.input='http://ol-site.olquan.cn/weixin/limitBuy/limitBuy'
           this.addType(4)
         }else if(key===23){
-          this.input='http://ol-site.olquan.com/weixin/lifeHouse/lifeHouse'
+          this.input='http://ol-site.olquan.cn/weixin/lifeHouse/lifeHouse'
           this.addType(5)
         }else if(key===26){
-          this.input='http://ol-site.olquan.com/weixin/auth?view=http://ol-site.olquan.com/weixin/lifeHouse/lifeHouse?districtId=330104'
+          this.input='http://ol-site.olquan.cn/weixin/auth?view=http://ol-site.olquan.cn/weixin/lifeHouse/lifeHouse?districtId=330104'
           this.addType(8)
         }else if(key===27){
-          this.input='http://ol-site.olquan.com/weixin/product/product?isNew=1'
+          this.input='http://ol-site.olquan.cn/weixin/product/product?isNew=1'
           this.addType(9)
         }else if(key===29){
           //this.input='http://ol-h5-preview.olquan.cn/activity/newact?id='+this.activeChangeResult.obj.id+'&memberId=778040'
@@ -634,7 +635,7 @@ export default {
          // this.popoverAlert('VactiveLianJian')
           this.listActiveActions()
         }else if(key===30){
-          this.input='http://ol-site.olquan.com/weixin/member/coffersRecharge'
+          this.input='http://ol-site.olquan.cn/weixin/member/coffersRecharge'
           this.addType(12)
         }else if(key===31){
           this.input='#'
@@ -687,7 +688,7 @@ export default {
        // let arr=this.listActiveResult
         this.listActiveResult.result.forEach(function(val,index){
           if(val.name===key){
-            that.input='http://ol-site.olquan.com/weixin/auth?view=http://ol-h5-preview.olquan.cn/activity/newact?id='+that.listActiveResult.result[index].id
+            that.input='http://ol-site.olquan.cn/weixin/auth?view=http://ol-h5-preview.olquan.cn/activity/newact?id='+that.listActiveResult.result[index].id
             if (that.commodityResult.contents.length>0) {
               //if(this.radio2){}
               that.$set(that.commodityResult.contents[that.num],'url',that.input)

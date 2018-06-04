@@ -144,6 +144,7 @@
         sortOrder:'asc'
       }
       this.freeUseProductListActions(obj)
+      this.$store.commit('SET_PAGE_ROWS',obj)
     },
     activated(){
 
@@ -155,11 +156,13 @@
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
         this.msg.rows=val
+        this.$store.commit('SET_PAGE_ROWS',this.msg)
         this.freeUseProductListActions(this.msg)
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
         this.msg.page=val
+        this.$store.commit('SET_PAGE_ROWS',this.msg)
         this.freeUseProductListActions(this.msg)
       },
       wactch(key,row){

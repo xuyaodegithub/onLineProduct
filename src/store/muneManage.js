@@ -20,6 +20,8 @@ import { Message } from 'element-ui';
 const muneManage={
   state:{
     editor:{
+      //分页
+      pages:{},
       //新增、修改菜单
       menuSaveNewMM:{
         id:'',
@@ -41,7 +43,8 @@ const muneManage={
         page:'',
         rows:'',
         sortOrder:'asc',
-        filter_I_status:''
+        filter_I_status:'',
+        filter_S_dailyStartTime:''
       },
       //创建试用商品
       addFreeUseProductMM:{
@@ -64,7 +67,9 @@ const muneManage={
         type:'',
         endDate:'',
         startDate:'',
-        isOverSeasProduct:''
+        isOverSeasProduct:'',
+        freeUseDays:'',
+        buyCount:''
       },
       //试用规格
       FreeUseProductNormalsMM:{
@@ -100,6 +105,10 @@ const muneManage={
     }
   },
   mutations:{
+    //set分页
+    SET_PAGE_ROWS(state,data){
+        state.editor.pages=data
+    },
     //清除数据
     //新增、修改菜单
     MENU_SAVE_NEW(state,data){
@@ -137,6 +146,7 @@ const muneManage={
       state.editor.freeUseProductListMM.filter_I_type=data.filter_I_type
       state.editor.freeUseProductListMM.sortOrder=data.sortOrder
       state.editor.freeUseProductListMM.filter_I_status=data.filter_I_status
+      state.editor.freeUseProductListMM.filter_S_dailyStartTime=data.filter_S_dailyStartTime
     },
     GET_FREEUSE_PRODUCT_LIST(state,res){
       state.page.freeUseProductListResult=res.data
@@ -163,6 +173,8 @@ const muneManage={
       state.editor.addFreeUseProductMM.endDate=data.endDate
       state.editor.addFreeUseProductMM.indexImage=data.indexImage
       state.editor.addFreeUseProductMM.isOverSeasProduct=data.isOverSeasProduct
+      state.editor.addFreeUseProductMM.freeUseDays=data.freeUseDays
+      state.editor.addFreeUseProductMM.buyCount=data.buyCount
 
     },
 //试用规格
@@ -262,7 +274,7 @@ const muneManage={
       }).then(function (res) {
         if(res.data=='success'){
           dispatch('getCountryActions')
-          dispatch('freeUseProductListActions',{page:1,rows:10,sortField:'sort',sortOrder:'asc'})
+          dispatch('freeUseProductListActions',state.editor.pages)
           Message({
             showClose: true,
             message: '操作成功',

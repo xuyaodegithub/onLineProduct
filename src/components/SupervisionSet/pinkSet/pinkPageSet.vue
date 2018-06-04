@@ -1,5 +1,5 @@
 <template>
-  <div class="seach-list" id="superFirst">
+  <div class="seach-list" id="superFirstPink">
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="转发标题:">
         <el-input v-model="isName" size="small" ></el-input>
@@ -12,7 +12,7 @@
           <img :src="dialogImageUrl" alt="" style="height: 78px;width: 78px;" class="valign" v-if="dialogImageUrl">
           <el-upload
             class="upload-demo"
-            action="apis/admin/buildblocks/uploadImage"
+            action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
             name="img"
             :show-file-list="false"
             :on-success="upSuccessfirst">
@@ -21,7 +21,7 @@
         </div>
       </el-form-item><!--"http://test-admin.olquan.cn/doUploadWithWaterMarkToOss2?waterMark=defaultWaterMark"-->
       <el-form-item label="开通内容:">
-        <div class="edit_container">
+        <div class="edit_container"  style="max-height: 500px;overflow-y: auto;">
           <quill-editor v-model="infoForm.a_content"
                         ref="myQuillEditor"
                         class="editer"
@@ -30,7 +30,7 @@
         </div>
       </el-form-item>
        <el-form-item label="邀请内容:">
-         <div class="edit_container">
+         <div class="edit_container"  style="max-height: 500px;overflow-y: auto;">
            <quill-editor v-model="infoForm.b_content"
                          ref="myQuillEditor"
                          class="editer"
@@ -39,7 +39,7 @@
          </div>
        </el-form-item>
       <el-form-item>
-        <el-button type="primary" plain @click="saveProduct()" size="small">确定</el-button>
+        <el-button type="primary" plain @click="saveProduct()" size="small"  style="margin-top: 20px;">确定</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -75,7 +75,7 @@
             ImageExtend: {
               loading: true,
               name: 'img',
-              action: 'apis/admin/buildblocks/uploadImage',
+              action: 'http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage',
               response: (res) => {
                 return 'http://ol-quan2017.oss-cn-shanghai.aliyuncs.com/'+res.result
               }
@@ -150,8 +150,8 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  #superFirst{
+<style lang="scss">
+  #superFirstPink{
     margin-top:16px;
     padding-left:15px;
     .el-input{
@@ -175,6 +175,17 @@
     .el-button{
       margin-left: 10%;
       width:100px;
+    }
+    .ql-toolbar.ql-snow{
+      position: absolute;
+      z-index:1000;
+      background: #ffffff;
+      top:0;
+    }
+    .ql-toolbar.ql-snow + .ql-container.ql-snow{
+      margin-top:100px;
+      overflow: auto;
+      min-height:150px;
     }
   }
   #SaleNewTwo div.el-upload--picture-card{

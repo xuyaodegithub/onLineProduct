@@ -19,7 +19,7 @@ export default {
   /*color: #2c3e50;*/
   /*margin-top: 60px;*/
   font-size: 12px;
-  width:1102px;
+  min-width:1102px;
   margin:0 auto;
   padding:20px 0 20px 20px;
 }
