@@ -1,8 +1,8 @@
 <template>
   <div id="smalltitle">
     <div class="seach-list">
-      <el-button  type="danger" icon="el-icon-delete" plain @click="toggleSelection(multipleSelection)" size="small" style="width: 100px;float: right;margin-right: 40px">批量删除</el-button>
-      <el-button  type="warning" icon="el-icon-sort" plain @click="ToAdoblemore(multipleSelection)" size="small" style="width: 100px;float: right;margin-right: 40px">批量上下架</el-button>
+      <el-button  type="danger" icon="el-icon-delete" plain @click="toggleSelection(multipleSelection)" size="small" style="float: right;margin-right: 40px">批量删除</el-button>
+      <el-button  type="warning" icon="el-icon-sort" plain @click="ToAdoblemore(multipleSelection)" size="small" style="float: right;margin-right: 40px">批量上下架</el-button>
       <el-table
         v-loading="loading"
         :data="freeUseProductListResult.rows"
