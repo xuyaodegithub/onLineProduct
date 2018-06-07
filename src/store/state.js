@@ -3,7 +3,7 @@
  */
 const  editor = {//定义入参
   //域名
-  // axiosUrl:'http://test-admin.olquan.cn',//测试
+  //axiosUrl:'http://test-admin.olquan.cn',//测试
   axiosUrl:'http://ol-h5-admin.olquan.cn',//正式
   //品牌管理、根据id获取
   getByIdMM:{
@@ -247,7 +247,7 @@ const  editor = {//定义入参
   },
   CouponwithLsitMM : {
     conponActivityId:'',
-    filter_S_title:'',
+    filter_S_title_contains:'',
     limitLevels:'',
     page:'',
     rows:'',

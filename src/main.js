@@ -52,7 +52,17 @@ Vue.filter('changeTime',function(val){
       month='0'+month
     }
     //console.log(year+'-'+month+'-'+day+' '+hour+':'+min+':'+sec)
-    return year+'-'+month+'-'+day+' '+hour+':'+min+':'+sec
+    // return year+'-'+month+'-'+day+' '+hour+':'+min+':'+sec
+    if(month<10){
+      month='0'+month
+    }
+    if(day<10){
+      day='0'+day
+    }
+    if(hour<10){
+      hour='0'+hour
+    }
+    return year+'-'+month+'-'+day +' '+hour+'点'
   }else{
     return ''
   }
