@@ -473,7 +473,7 @@
         obj.type=2
         obj.productId=row.id
         obj.indexId=20
-        obj.url='http://ol-site.olquan.cn/weixin/product/newProductDetail?productId='+row.id
+        obj.url='https://ol-site.olquan.cn/weixin/product/newProductDetail?productId='+row.id
         obj.image=this.commodityResult.contents[this.ImgnumKeyResult].image
         obj.width=this.commodityResult.contents[this.ImgnumKeyResult].width
         obj.height=this.commodityResult.contents[this.ImgnumKeyResult].height

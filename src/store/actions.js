@@ -8,7 +8,7 @@ import * as types from './type';
 import { Message } from 'element-ui';
 //import { Loading } from 'element-ui';
 import api from './api'
-var num=1
+var num=0
 var textCs=''
 var textCsTow=''
 var textCsYHQ=''

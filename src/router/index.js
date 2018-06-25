@@ -15,8 +15,11 @@ import supervisionIndex from '@/components/SupervisionSet/subassembly/supervisio
 import pinkSet from '@/components/SupervisionSet/subassembly/pinkSet.vue'
 import starStatistics from '@/components/SupervisionSet/subassembly/starStatistics.vue'
 import ProductIncomeDistribution from '@/components/SupervisionSet/subassembly/ProductIncomeDistribution.vue'
+//发现后台
 
 Vue.use(Router)
+import find from '@/components/SupervisionSet/subassembly/findNumber.vue'
+import findMsg from '@/components/SupervisionSet/subassembly/findMsg.vue'
 
 export default new Router({
   routes: [
@@ -82,6 +85,14 @@ export default new Router({
       path: '/ProductIncomeDistribution',
       name:"ProductIncomeDistribution",
       component:ProductIncomeDistribution
+    },{
+      path: '/find',
+      name:"find",
+      component:find
+    },{
+      path: '/findMsg',
+      name:"findMsg",
+      component:findMsg
     }
   ]
 })

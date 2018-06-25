@@ -38,6 +38,7 @@ const servers={
         commission:'',//佣金无规格要传
         commissiones:'',//佣金集合
         costPrices:'',//成本价集合
+        costPrice:'',//成本价
         desc:'',//描述
         image:'',//产品主图链接
         indexImage:'',//大图
@@ -189,6 +190,7 @@ const servers={
       state.editor.productNewMM.commission=data.commission
       state.editor.productNewMM.commissiones=data.commissiones
       state.editor.productNewMM.costPrices=data.costPrices
+      state.editor.productNewMM.costPrice=data.costPrice
       state.editor.productNewMM.desc=data.desc
       state.editor.productNewMM.indexImage=data.indexImage
       state.editor.productNewMM.isRecommend=data.isRecommend

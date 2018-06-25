@@ -180,6 +180,7 @@ export default {
   data () {
     return {
       tryTime:'',
+//      isTypeTrial:false,
       tryDay:[{title:'1天',val:1},{title:'2天',val:2},{title:'3天',val:3}],
       timerList:[
         {timer:'00:00'}, {timer:'01:00'}, {timer:'02:00'}, {timer:'03:00'}, {timer:'04:00'}, {timer:'05:00'}, {timer:'06:00'}, {timer:'07:00'},
@@ -404,6 +405,7 @@ export default {
         //endDate:'',
       }
        if(this.typeTrial==3){
+//        this.isTypeTrial=true
         data.startDate=this.value6[0]
         data.endDate=this.value6[1]
          if(this.everyNum){
@@ -411,11 +413,19 @@ export default {
           data.dayLimitCount=this.everyNum
          }else{
            this.activeNum=false
+
          }
         data.dailyStartDate=this.value9
          data.isOverSeasProduct=this.isOutCountry
          data.countryId=this.value8
-      }
+      }else{
+//         this.isTypeTrial=false
+         this.$message({
+           message:'商品大图不可为空',
+           type:'warning'
+         })
+         return
+       }
       if(this.upDataSaleGoodsResult.type==='add'){
         data.productName=this.CouponWithGoodsResult.productName
         data.productId=this.CouponWithGoodsResult.productIds
@@ -490,10 +500,10 @@ export default {
       }
     },
     upSuccessfirst(response, file, fileList){
-      this.dialogImageUrl='http://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
+      this.dialogImageUrl='https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
     },
     upSuccessfirst2(response, file, fileList){
-      this.dialogImageUrl2='http://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
+      this.dialogImageUrl2='https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
     },
     addCountry(){
       this.popoverAlert('addCountry')
