@@ -719,7 +719,7 @@
       addGoodsList() {
         if (this.commodityResult.name) {
           if (this.commodityResult.contents.length > 0) {
-            this.popoverAlert('vAddGoods')
+            this.popoverAlert(['vAddGoods','active'])
           } else {
             this.$message({
               message: '请先上传图片',

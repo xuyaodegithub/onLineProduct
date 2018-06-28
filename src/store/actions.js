@@ -14,8 +14,8 @@ var textCsTow=''
 var textCsYHQ=''
 if(num===0){
   textCs='/apis'
-  textCsTow=/*'/apis'*/'http://test-admin.olquan.cn'
-  textCsYHQ='http://test-admin.olquan.cn'
+  textCsTow=/*'/apis'*/'http://test-admin-h5.olquan.cn'
+  textCsYHQ='http://test-admin-h5.olquan.cn'
 }else{
   textCs='http://api-admin.olquan.cn'
   //textCsTow='http://106.15.49.17:8888/'

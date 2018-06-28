@@ -69,7 +69,8 @@ const muneManage={
         startDate:'',
         isOverSeasProduct:'',
         freeUseDays:'',
-        buyCount:''
+        buyCount:'',
+        promotionAward:''
       },
       //试用规格
       FreeUseProductNormalsMM:{
@@ -175,6 +176,7 @@ const muneManage={
       state.editor.addFreeUseProductMM.isOverSeasProduct=data.isOverSeasProduct
       state.editor.addFreeUseProductMM.freeUseDays=data.freeUseDays
       state.editor.addFreeUseProductMM.buyCount=data.buyCount
+      state.editor.addFreeUseProductMM.promotionAward=data.filter_S_promotionAward
 
     },
 //试用规格

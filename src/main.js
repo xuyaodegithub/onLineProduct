@@ -17,6 +17,28 @@ import 'quill/dist/quill.bubble.css'
 Vue.prototype.$http = axios
 Vue.use(vueQuillEditor)
 Vue.use(ElementUI)
+//cookie
+Vue.prototype.$Getcookie=function getCookie(argument) {
+  var arrCookie = document.cookie.split(";");
+  for (var i = 0; i < arrCookie.length; i++) {
+    var arr = arrCookie[i].split("="); //从 = 的位置 分割每对cookie
+
+    if (arr[0].replace(/(^\s*)/g, "")==argument) { //如果前面是 userId 就是找到了
+      return arr[1]; //将后面的值赋给 userId ，跳出循环
+      break;
+    }
+  }
+};
+//设置cookie
+Vue.prototype.$Setcookie=function setCookie(name, value) {
+  var exp = new Date();
+  exp.setTime(exp.getTime() + 3 * 24 * 60 * 60 * 1000); //3天过期
+  document.cookie=name + "=" + value + ";expires=" + exp.toGMTString() + ";path=/";
+  //console.log(document.cookie)
+  return true;
+};
+
+
 
 Vue.config.productionTip = false
 

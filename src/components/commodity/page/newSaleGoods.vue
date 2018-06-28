@@ -352,7 +352,7 @@
           data.indexImage = this.dialogImageUrl
           this.imgShow = true
         } else {
-          this.imgShow = false
+          this.imgShow = true
         }
         if (this.upDataSaleGoodsResult.type === 'add') {
           data.productName = this.CouponWithGoodsResult.productName//产品名称
