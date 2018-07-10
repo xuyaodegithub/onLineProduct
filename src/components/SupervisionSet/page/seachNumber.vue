@@ -31,7 +31,7 @@
           <span v-else>{{scope.row[item.which]}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" :min-width="500">
+      <el-table-column label="操作" :min-width="550">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -90,9 +90,9 @@
         dataList: [
           {title: '账号昵称', width: '120', which: 'name'},
           {title: '头像', width: '120', which: 'logo'},
-          {title: '帐号说明', width: '240', which: 'desc'},
-          {title: '发现数量', width: '120', which: 'totalFindCount'},
-          {title: '是否禁用', width: '120', which: 'status'},
+          {title: '帐号说明', width: '230', which: 'desc'},
+          {title: '发现数量', width: '90', which: 'totalFindCount'},
+          {title: '是否禁用', width: '100', which: 'status'},
 //          {title:'账号昵称',width:'100',which:'isN'},
         ],
       }

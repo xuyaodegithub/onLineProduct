@@ -13,8 +13,15 @@
         <el-radio :label=0 style="width: auto;">否</el-radio>
         <el-radio :label=1 style="width: auto;">是</el-radio>
       </el-radio-group>-->
+      <label>类型:</label>
+       <el-radio-group v-model="type"><!--:disabled="classWh === '1'"-->
+        <el-radio :label=4 style="width: auto;">全部</el-radio>
+        <el-radio :label=1 style="width: auto;">今日</el-radio>
+        <el-radio :label=2 style="width: auto;">明日</el-radio>
+        <el-radio :label=3 style="width: auto;">热门</el-radio>
+      </el-radio-group>
       <label>状态:</label>
-       <el-radio-group v-model="status"><!--:disabled="classWh === '1'"-->
+      <el-radio-group v-model="status"><!--:disabled="classWh === '1'"-->
         <el-radio :label=3 style="width: auto;">全部</el-radio>
         <el-radio :label=2 style="width: auto;">下架</el-radio>
         <el-radio :label=1 style="width: auto;">上架</el-radio>
@@ -51,6 +58,7 @@
       Gtitle:'',
       isAudio:'',
       status:'',
+      type:4,
       seachMsg:{
         filter_S_productName_contains:'',
         filter_I_isRecommend:'',
@@ -61,6 +69,7 @@
         sortOrder:'asc',
         filter_I_isStick:'',
         startTime:'',
+        type:''
       },
       date1:''
     }
@@ -101,6 +110,9 @@
       }*/
       if(this.status!==3){
         obj.filter_I_status=this.status
+      }
+      if(this.type!==4){
+        obj.type=this.type
       }
       this.seachMsg=obj
       this.plusProductListActions(obj)

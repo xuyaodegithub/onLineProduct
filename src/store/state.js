@@ -220,7 +220,8 @@ const  editor = {//定义入参
     filter_I_sellerId:'',
     filter_I_status:'',
     sortOrder:'',
-    startTime:''
+    startTime:'',
+    type:''
   },
   //获取更多试用商品列表
   freeUseListMM: {

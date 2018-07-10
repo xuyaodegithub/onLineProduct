@@ -8,7 +8,7 @@
         <!--<el-input v-model="isHeader" placeholder="请输入昵称" size="mini"></el-input>-->
         <el-upload
           class="upload-demo"
-          action="apis/admin/buildblocks/uploadImage"
+          action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
           :show-file-list="false"
           name="img"
           :on-success="upSuccessfirst">
@@ -19,7 +19,7 @@
           </div>
         </el-upload>
       </el-form-item>
-      <el-form-item label="账号说明:">
+      <el-form-item label="账号备注:">
         <el-input placeholder="请输入昵称" size="mini" style="width: 300px;" :maxlength="30" v-model="isMsg"></el-input>
         <span style="font-size: 12px;color: orange;">（30个字符）</span>
       </el-form-item>

@@ -1,31 +1,31 @@
 <template>
   <div id="newGift1">
     <el-form ref="form" :model="form" label-width="100px">
-      <el-form-item label="粉领价格:">
+      <el-form-item label="店主价格:">
         <el-input v-model="isPrice" size="small"></el-input>
       </el-form-item>
       <el-form-item label="收益设置:">
         <div class="priceSet" style="padding: 20px 0;">
-          <p><label>联创:</label>
-            <el-input v-model="isMoreStar" size="small"></el-input>
-          </p>
-          <p><label>联创:</label>
-            <el-input v-model="isStar" size="small"></el-input>
-          </p>
+          <!--<p><label>联创:</label>-->
+            <!--<el-input v-model="isMoreStar" size="small"></el-input>-->
+          <!--</p>-->
+          <!--<p><label>联创:</label>-->
+            <!--<el-input v-model="isStar" size="small"></el-input>-->
+          <!--</p>-->
           <p><label>城市合伙人:</label>
             <el-input v-model="isWeStar" size="small"></el-input>
           </p>
           <!--<p><label>明星督导:</label> <el-input v-model="isStar" size="small" ></el-input></p>-->
-          <p><label>高级督导:</label>
+          <p><label>总监:</label>
             <el-input v-model="isSoHighPrice" size="small"></el-input>
           </p>
-          <p><label>高级督导:</label>
+          <p><label>总监:</label>
             <el-input v-model="isHighPrice" size="small"></el-input>
           </p>
-          <p><label>督导:</label>
+          <p><label>经理:</label>
             <el-input v-model="isDuDao" size="small"></el-input>
           </p>
-          <p><label>粉领:</label>
+          <p><label>店主:</label>
             <el-input v-model="isPink" size="small"></el-input>
             <label>返还类型:</label>
             <el-radio-group v-model="isType">

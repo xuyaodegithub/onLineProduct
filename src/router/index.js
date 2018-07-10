@@ -20,6 +20,7 @@ import ProductIncomeDistribution from '@/components/SupervisionSet/subassembly/P
 Vue.use(Router)
 import find from '@/components/SupervisionSet/subassembly/findNumber.vue'
 import findMsg from '@/components/SupervisionSet/subassembly/findMsg.vue'
+import bossBuy from '@/components/SupervisionSet/subassembly/bossBuy.vue'
 
 export default new Router({
   routes: [
@@ -93,6 +94,10 @@ export default new Router({
       path: '/findMsg',
       name:"findMsg",
       component:findMsg
+    },{
+      path: '/bossBuy',
+      name:"bossBuy",
+      component:bossBuy
     }
   ]
 })

@@ -581,6 +581,7 @@ const mutations = {//mutations内是改变state内的值得作用
     state.editor.productlistMM.sortOrder=data.sortOrder
     state.editor.productlistMM.filter_I_isStick=data.filter_I_isStick
     state.editor.productlistMM.startTime=data.startTime
+    state.editor.productlistMM.type=data.type
   },
   [types.GET_PRODUCT_LIST] (state,res) {
     state.result.productlistResult=res.data

@@ -20,7 +20,7 @@
         </div>
         <el-upload
           class="upload-demo"
-          action="apis/admin/buildblocks/uploadImage"
+          action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
           :show-file-list="false"
           name="img"
           multiple
@@ -43,12 +43,13 @@
         </div>
         <el-upload
           class="upload-demo"
-          action="apis/admin/buildblocks/uploadImage"
+          action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
           :show-file-list="false"
           name="img"
+          :before-upload="beforupload"
           :on-success="upSuccessfirst2">
           <div style="margin: 10px 0 0px 10px;">
-            <el-button size="small" type="primary">点击上传</el-button>
+            <el-button size="small" type="primary"  :loading="upshow">{{upshow ? '正在上传中' : '点击上传'}}</el-button>
           </div>
         </el-upload>
       </el-form-item>
@@ -74,7 +75,9 @@
       </el-form-item>
     </el-form>
     <el-button type="primary" plain size="small" style="margin:50px 100px 50px;" @click="addMsg()">确认提交</el-button>
-
+    <!--<div v-if="upshow" style="position: fixed;top:0;background-color: #000000;opacity: 0.3;text-align: center;height: 100%;width: 100%;">-->
+      <!--<i class="el-icon-loading" style="font-size: 50px;color: #ffffff;position: absolute;top: 50%;margin-top: -50px;"></i>-->
+    <!--</div>-->
   </div>
 
 </template>
@@ -97,7 +100,8 @@
         isClass: 1,
         isSetTop: 1,
         isSort: '',
-        isLength:0
+        isLength:0,
+        upshow:false
       }
     },
     computed: {
@@ -149,14 +153,14 @@
         this.$store.commit('Coupon_With_Goods', obj)
       } else {
         this.dialogImageUrl=[]
-        this.$http.get('http://test-admin.olquan.cn/admin/find/getById', {
+        this.$http.get(this.$store.state.editor.axiosUrl+'/admin/find/getById', {
           params: {id: this.msgData.item.id}
         }).then(res => {
 //          res.data.result.fileDtos.forEach((val, key) => {
 //            this.dialogImageUrl.push(val.linkUrl)
 //          })
           this.dialogImageUrl=res.data.result.fileDtos
-          this.isLength=res.data.result.fileDtos.length
+          this.isLength=res.data.result.fileDtos ? res.data.result.fileDtos.length : 0
           this.isClass = res.data.result.fileDtos[0].type
           this.dialogImageUrl2 = res.data.result.fileDtos
         })
@@ -199,7 +203,11 @@
         }
 
       },
+      beforupload(file){
+        this.upshow=true
+      },
       upSuccessfirst2(response, file, fileList) {
+        this.upshow=false
         this.dialogImageUrl2=[]
         this.newVideo=[]
         this.dialogImageUrl2.push({linkUrl:'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result})

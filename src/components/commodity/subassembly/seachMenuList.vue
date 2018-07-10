@@ -242,7 +242,7 @@
 </script>
 
 <style lang="scss">
-  #MuneList .el-button--mini,#smalltitle .el-button--mini.is-round{
+  #MuneList .el-button--mini,#MuneList .el-button--mini.is-round{
     margin:0;
     padding:5px;
     font-size: 12px;

@@ -7,11 +7,11 @@ var proxyConfig = require('./proxyConfig')
 
 module.exports = {
   dev: {
-
+    // env: require('./dev.env'),
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable:{},/*,proxyConfig.proxy*/
+    proxyTable:{},/*proxyConfig.proxy,*/
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

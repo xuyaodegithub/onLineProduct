@@ -144,7 +144,8 @@ const servers = {
         starSupervisorScore: '',
         storePlusCommissionRate: '',
         supervisorPlusCommissionRate: '',
-        supervisorScore: ''
+        supervisorScore: '',
+        managementCost: ''
       },
 
 
@@ -183,7 +184,14 @@ const servers = {
         filter_S_title:'',
         filter_S_accountName:''
       },
-
+      //申请列表
+      applySupervisorListMM:{
+        accountNo:'',
+        endTime:'',
+        startTime:'',
+        page:'',
+        rows:''
+      }
     },
     page: {
       //产品规格
@@ -218,7 +226,9 @@ const servers = {
       //发现列表
       findMsgListResult:{result:{}},
       //根据id获取发现信息
-      findOnlyIdResult: ''
+      findOnlyIdResult: '',
+      //申请列表
+      applySupervisorList:[]
     }
   },
   mutations: {
@@ -386,6 +396,7 @@ const servers = {
       state.editor.setProductCommissionInfoMM.storePlusCommissionRate = data.storePlusCommissionRate
       state.editor.setProductCommissionInfoMM.supervisorPlusCommissionRate = data.supervisorPlusCommissionRate
       state.editor.setProductCommissionInfoMM.supervisorScore = data.supervisorScore
+      state.editor.setProductCommissionInfoMM.managementCost = data.managementCost
     },
 
 
@@ -437,7 +448,17 @@ const servers = {
     GET_FIND_ONLY_ID(state, res) {
       state.page.findOnlyIdResult = res.data
     },
-
+    //申请列表
+    SET_APPLY_SUPERVISOR(state,data){
+      state.editor.applySupervisorListMM.page=data.page
+      state.editor.applySupervisorListMM.rows=data.rows
+      state.editor.applySupervisorListMM.startTime=data.startTime
+      state.editor.applySupervisorListMM.endTime=data.endTime
+      state.editor.applySupervisorListMM.accountNo=data.accountNo
+    },
+    GET_APPLY_SUPERVISOR(state,res){
+      state.page.applySupervisorList=res.data.result
+    },
 
   },
   getters: {
@@ -495,6 +516,10 @@ const servers = {
     //根据id获取发现信息
     findOnlyIdResult: state => {
       return state.page.findOnlyIdResult
+    },
+    //申请列表
+    applySupervisorList: state => {
+      return state.page.applySupervisorList
     }
   },
   actions: {
@@ -530,7 +555,7 @@ const servers = {
         data: qs.stringify(state.editor[funUrl[2]])
       }).then(function (res) {
         // console.log(res)
-        dispatch('plusProductListActions', {page: 1, rows: 10, sortField: 'sort', sortOrder: 'asc'})
+        dispatch('plusProductListActions', rootState.editor.productlistMM)
         if (res.data == 'success' || res.data.code == 0) {
           Message({
             showClose: true,
@@ -588,7 +613,7 @@ const servers = {
             message: '操作成功',
             type: 'success'
           });
-          dispatch('plusProductListActions', {page: 1, rows: 10, sortField: 'sort', sortOrder: 'asc'})
+          dispatch('plusProductListActions', rootState.editor.productlistMM)
         }
       }).catch(
         (error) => {
@@ -611,7 +636,7 @@ const servers = {
             message: '操作成功',
             type: 'success'
           });
-          dispatch('plusProductListActions', {page: 1, rows: 10, sortField: 'sort', sortOrder: 'asc'})
+          dispatch('plusProductListActions', rootState.editor.productlistMM)
         }
       }).catch(
         (error) => {
@@ -897,6 +922,11 @@ const servers = {
           })
         }
       })
+    },
+    //申请列表
+    applySupervisorListActions({commit, dispatch, state, rootState}, data) {
+      commit('SET_APPLY_SUPERVISOR', data)
+      dispatch('GoodsMsgGet', ['/admin/memberInvite/applySupervisorList', 'GET_APPLY_SUPERVISOR', 'applySupervisorListMM'])
     },
 
   }

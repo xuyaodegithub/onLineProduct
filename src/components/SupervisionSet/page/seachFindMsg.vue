@@ -24,8 +24,8 @@
           <!--</span>-->
           <span v-if="item.which==='isStick'">
             <!--{{scope.row[item.which] === 0 ? '已禁用' : '未禁用'}}-->
-            <el-button type="info" plain size="mini" v-if="!scope.row[item.which]" @click="changeStutas(scope.row,1)">置顶</el-button>
-            <el-button type="info" plain size="mini" v-else @click="changeStutas(scope.row,2)">取消置顶</el-button>
+            <el-button type="info" plain size="mini" v-if="!scope.row[item.which]" @click="changeStutas(scope.row,1)" class="te">置顶</el-button>
+            <el-button type="info" plain size="mini" v-else @click="changeStutas(scope.row,2)" class="te">取消置顶</el-button>
           </span>
           <!--<span v-else-if="item.which==='isNum'">-->
           <!--<el-button type="info" plain size="mini">查看文章</el-button>-->
@@ -33,7 +33,7 @@
           <span v-else>{{scope.row[item.which]}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" :min-width="450">
+      <el-table-column label="操作" :min-width="250">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -85,7 +85,7 @@
         dataList: [
           {title: '标题', width: '200', which: 'title'},
           {title: '发布帐号', width: '250', which: 'accountName'},
-          {title: '关联产品', width: '260', which: 'productName'},
+          {title: '关联产品', width: '350', which: 'productName'},
           {title: '置顶', width: '120', which: 'isStick'},
 //          {title: '是否禁用', width: '120', which: 'isStutas'},
 //          {title:'账号昵称',width:'100',which:'isN'},
@@ -187,7 +187,7 @@
   #SaleNewone.seach-list {
     margin-top: 16px;
     padding-left: 30px;
-   .el-table .el-button--mini,.el-table .el-button--mini.is-round {
+   .el-table .el-button--mini.te {
       padding: 4px 5px;
     }
   }

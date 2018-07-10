@@ -72,10 +72,6 @@
         <el-input v-model="tryTime" size="small"></el-input>
         <span style="font-size: 12px;color: orange;margin-left: 10px;">（试用周期，关系到退款时间）</span>
       </el-form-item>
-      <el-form-item label="推广奖励:" required>
-        <el-input v-model="promotionAward" size="small"></el-input>
-        <span style="font-size: 12px;color: orange;margin-left: 10px;">（单位元）</span>
-      </el-form-item>
       <el-form-item label="试用类型:" required>
         <el-radio-group v-model="typeTrial"><!--:disabled="classWh === '1'"-->
           <el-radio :label=1 style="width: auto;">普通试用</el-radio>
@@ -159,7 +155,7 @@
           :show-file-list="false"
           name="img"
           :on-success="upSuccessfirst"
-          action="apis/admin/buildblocks/uploadImage">
+          action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage">
           <div style="margin: 10px 0 0px 10px;">
             <img :src="dialogImageUrl" alt="" style="height: 84px;width: 213px;" class="valign" v-if="dialogImageUrl">
             <el-button size="mini" plain>点击上传</el-button>
@@ -167,6 +163,10 @@
           </div>
           <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
         </el-upload>
+      </el-form-item>
+      <el-form-item label="推广奖励:" required v-if="typeTrial!==3">
+        <el-input v-model="promotionAward" size="small"></el-input>
+        <span style="font-size: 12px;color: orange;margin-left: 10px;">（单位元）</span>
       </el-form-item>
       <el-form-item label="排序:" required>
         <el-input v-model="form.sort" size="small"></el-input>
@@ -429,7 +429,7 @@
           // normalStores:'',//试用库存
           tip: this.form.trip,
           freeUseDays: this.tryTime,
-          filter_S_promotionAward:this.promotionAward
+//          filter_S_promotionAward:this.promotionAward
           // startDate:,
           //endDate:'',
         }
@@ -449,13 +449,14 @@
           data.countryId = this.value8
         } else {
 //         this.isTypeTrial=false
-//          if(!data.indexImage){
-//            this.$message({
-//              message: '商品大图不可为空',
-//              type: 'warning'
-//            })
-//            return
-//          }
+          data.filter_S_promotionAward=this.promotionAward
+          if(!data.indexImage){
+            this.$message({
+              message: '商品大图不可为空',
+              type: 'warning'
+            })
+            return
+          }
         }
         if (this.upDataSaleGoodsResult.type === 'add') {
           data.productName = this.CouponWithGoodsResult.productName
