@@ -225,10 +225,14 @@ const  editor = {//定义入参
   },
   //获取更多试用商品列表
   freeUseListMM: {
+    filter_I_type:'',
     filter_S_productName_contains:'',
+    sortField:'',
     page:'',
     rows:'',
-    sortField:''
+    sortOrder:'asc',
+    filter_I_status:'',
+    filter_S_dailyStartTime:''
   },
   //获取积分试用产品列表
   scoreBuyListMM: {

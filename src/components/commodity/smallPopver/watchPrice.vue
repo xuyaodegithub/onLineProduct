@@ -74,7 +74,7 @@ export default {
           return [{
             normalStr: '无规格',
             salePriceView: this.popoverAlive.SSSnum.price,
-            costPriceView: this.popoverAlive.SSSnum.costPrice,
+            costPriceView: this.popoverAlive.SSSnum.costPriceView,
             marketPriceView: this.popoverAlive.SSSnum.marketPrice
           }]
         }
@@ -150,6 +150,7 @@ this.activePrice=this.popoverAlive.SSSnum.price
         data.normalIds=this.changePriceApp(this.PproductgetByIdResult.item,7)
         //data.salePrices=this.changePriceApp(this.PproductgetByIdResult.item,3)
         data.costPrices=this.changePriceApp(this.PproductgetByIdResult.item,4)
+        data.costPrice = this.upDataSaleGoodsResult.item.costPrice
         data.normalStrs=this.changePriceApp(this.PproductgetByIdResult.item,6)
         data.marketePrices=this.changePriceApp(this.PproductgetByIdResult.item,10)
       }else{

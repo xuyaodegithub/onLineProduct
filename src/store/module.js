@@ -114,6 +114,7 @@ const servers = {
         selfCommissionType: '',
         storeCommission: '',
         storeCommissionType: '',
+        managementCost: '',
       },
       //审核明星督导
       setMemberLevelMM: {
@@ -190,7 +191,13 @@ const servers = {
         endTime:'',
         startTime:'',
         page:'',
-        rows:''
+        rows:'',
+        filter_I_sendStatus:''
+      },
+      //申请导入
+      sendImportMM:{
+        ids:'',
+        sendStatus:''
       }
     },
     page: {
@@ -353,6 +360,7 @@ const servers = {
       state.editor.setCommissionMM.storeCommission = data.storeCommission
       state.editor.setCommissionMM.storeCommissionType = data.storeCommissionType
       state.editor.setCommissionMM.price = data.price
+      state.editor.setCommissionMM.managementCost = data.managementCost
     },
     //明星督导统计
     GET_CANUPTOSTAR_RESULT(state, res) {
@@ -455,10 +463,16 @@ const servers = {
       state.editor.applySupervisorListMM.startTime=data.startTime
       state.editor.applySupervisorListMM.endTime=data.endTime
       state.editor.applySupervisorListMM.accountNo=data.accountNo
+      state.editor.applySupervisorListMM.filter_I_sendStatus=data.filter_I_sendStatus
     },
     GET_APPLY_SUPERVISOR(state,res){
       state.page.applySupervisorList=res.data.result
     },
+    //申请导入
+    SET_SEND_IMPORT(state,data){
+      state.editor.sendImportMM.ids=data.ids
+      state.editor.sendImportMM.sendStatus=data.sendStatus
+    }
 
   },
   getters: {
@@ -576,6 +590,11 @@ const servers = {
           type: 'warning'
         });
       })
+    },
+    //特卖排序
+    plusProductSortSetActions({dispatch, state, commit, rootState}, data){
+        commit('PLUS_PRODUCT_PUSH',data)
+        dispatch('GoodsMsgPost',['/admin/plus/product/updateSort','','productNewMM'])
     },
     //特卖置顶
     ProductDoStickActions({dispatch, state, commit, rootState}, data) {
@@ -907,7 +926,7 @@ const servers = {
     },
     //删除某个文件
     deleteOnlyfileIdActions({commit, dispatch, state, rootState}, data) {
-      axios.get('/admin/find/deleteFile', {
+      axios.get(rootState.editor.axiosUrl+'/admin/find/deleteFile', {
         params:{fileId: data.fileId}
       }).then(res => {
         if (res.data.code === 0) {
@@ -927,6 +946,29 @@ const servers = {
     applySupervisorListActions({commit, dispatch, state, rootState}, data) {
       commit('SET_APPLY_SUPERVISOR', data)
       dispatch('GoodsMsgGet', ['/admin/memberInvite/applySupervisorList', 'GET_APPLY_SUPERVISOR', 'applySupervisorListMM'])
+    },
+    //申请导入
+    sendImportActions({commit, dispatch, state, rootState}, data) {
+      commit('SET_SEND_IMPORT', data)
+      api.deletePpApi(rootState.editor.axiosUrl + '/admin/memberInvite/sendImport', qs.stringify(state.editor.sendImportMM)).then(res => {
+        console.log(res)
+        if (res.code === 0) {
+          Message({
+            showClose: true,
+            message: '导入成功',
+            type: 'success'
+          });
+         dispatch('applySupervisorListActions',state.editor.applySupervisorListMM)
+        }
+      }).catch(
+        (error) => {
+          Message({
+            showClose: true,
+            message: '操作失败',
+            type: 'warning'
+          });
+        }
+      )
     },
 
   }

@@ -108,12 +108,13 @@
     </div>
     </div>
     <div v-else>
-      <VclassListpintuan v-if="radio2==='拼团商品'"></VclassListpintuan>
-      <!--<VclassListjifen v-else-if="radio2==='积分试用商品'"></VclassListjifen>-->
-      <VclassListmore v-else-if="radio2==='更多试用商品' || radio2==='积分试用商品'"></VclassListmore>
+      <!--<VclassListpintuan v-if="radio2==='拼团商品'"></VclassListpintuan>-->
+      <VclassListjifen v-if="radio2==='专享商品'"></VclassListjifen>
+      <VclassListmore v-else-if="radio2==='试用商品' || radio2==='更多试用商品'"></VclassListmore>
       <div  v-else-if="radio2==='普通商品'">
         <el-table
           v-loading="loading"
+          @row-click="addGoodsclass"
           :height="250"
           ref="multipleTable"
           :data="getDataListResulr.rows"
@@ -159,7 +160,7 @@
           </el-table-column>
         </el-table>
         <div style="margin: 20px 0 0 10px;">
-          <el-button type="primary" plain size="mini" @click="toggleSelection(getDataListResulr.rows)">批量选择</el-button>
+          <!--<el-button type="primary" plain size="mini" @click="toggleSelection(getDataListResulr.rows)">批量选择</el-button>-->
           <el-button type="primary" plain size="mini" @click="morePull(multipleSelection)">批量添加</el-button>
         </div>
       </div>
@@ -181,7 +182,7 @@
 <style lang="scss" scoped>
   .demo{
     width: 800px;
-    height: 490px;
+    height: auto;
     background: #F0FAFF;
     margin-left: -300px;
     margin-top: -250px;
@@ -190,6 +191,7 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     overflow: hidden;
     color: #333333;
+    padding-bottom: 15px;
   }
   .popover-head{
     width: 100%;
@@ -286,10 +288,10 @@
         options: [{
           value: '1',
           label: '普通商品'
-        }, {
+        }/*, {
           value: '2',
           label: '拼团商品'
-        }, {
+        }*/, {
           value: '3',
           label: '专享商品'
         }, {
@@ -355,19 +357,29 @@
         let keynum=0
         if(rows.length>0){
           for(let i=0;i<rows.length;i++){
-            if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(rows[i])) === -1){
-           // if(this.commodityResult.contents[this.addDataNumResult].dataList.indexOf(rows[i]) === -1){
-              let obj=rows[i]
-//              if(this.radio2==='普通商品'){
-                obj.type=1
-              obj.productId=rows[i].id
-//              }else if(this.radio2==='拼团商品'){
-//                obj.type=11
-//                obj.together=rows[i].id
-//              }else if(this.radio2==='积分试用商品'){
-//                obj.type=8
-//              }else if(this.radio2==='更多试用商品'){
-//                obj.type=4
+            let obj={}
+            obj.productName=rows[i].productName
+            obj.productId=rows[i].productId
+            obj.image=rows[i].image
+            obj.type=2
+            obj.productType=1
+            obj.productId=rows[i].id
+            obj.marketPriceView=rows[i].marketPriceView
+            obj.salePriceView=rows[i].salePriceView
+            if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(obj)) === -1){
+               /* obj.type=21
+                obj.productType=9
+                obj.marketPriceView=rows[i].marketPrice
+                obj.salePriceView=rows[i].price
+                obj.commission=rows[i].commission*/
+//                obj.productId=rows[i].id
+//              }else{
+               /* obj.type=2
+                obj.productType=4
+//                obj.marketPriceView=rows[i].marketPrice
+                obj.salePriceView=rows[i].price*/
+//                obj.commission=rows[i].commission
+//                obj.productId=rows[i].id
 //              }
               this.commodityResult.contents[this.addDataNumResult].dataList.push(obj)
             }else{
@@ -392,6 +404,60 @@
             type: 'warning'
           });
         }
+      },
+      addGoodsclass(rows){
+        let keynum=0
+        let obj={}
+        obj.productName=rows.productName
+        obj.productId=rows.productId
+        obj.image=rows.image
+        obj.type=2
+        obj.productType=1
+        obj.productId=rows.id
+        obj.marketPriceView=rows.marketPriceView
+        obj.salePriceView=rows.salePriceView
+            if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(obj)) === -1){
+              // if(this.commodityResult.contents[this.addDataNumResult].dataList.indexOf(rows[i]) === -1){
+//              let obj={}
+//              obj.productName=rows.productName
+//              obj.productId=rows.productId
+//              obj.image=rows.image
+//              obj.type=2
+//              obj.productType=1
+//              obj.productId=rows.id
+//              obj.marketPriceView=rows.marketPriceView
+//              obj.salePriceView=rows.salePriceView
+//              }else if(this.radio2==='拼团商品'){
+//                obj.type=11
+//                obj.together=rows[i].id
+//              }else if(this.radio2==='积分试用商品'){
+//                obj.type=8
+//              }else if(this.radio2==='更多试用商品'){
+//                obj.type=4
+//              }
+              this.commodityResult.contents[this.addDataNumResult].dataList.push(obj)
+            }else{
+              keynum+=1
+            }
+//          }
+          if(keynum>0){
+            this.$message({
+              message:'重复商品已过滤',
+              type:'success'
+            })
+          }else{
+            this.$message({
+              message:'添加成功',
+              type:'success'
+            })
+          }
+          this.$store.commit('GET_CLASS_DATA_LIST',this.commodityResult.contents[this.addDataNumResult].dataList)
+//        }else{
+//          this.$message({
+//            message: '请先选择商品',
+//            type: 'warning'
+//          });
+//        }
       },
       toggleSelection(rows) {
         if (rows) {
@@ -445,14 +511,15 @@
         }
         if(this.radio2==='普通商品'){
           this.getDataListActions(data)
-        }else if(this.radio2==='拼团商品'){
-          this.productlistActions(data)
-        }else if(this.radio2==='积分试用商品'){
+        }else if(this.radio2==='专享商品'){
+          this.plusProductListActions(data)
+        }else /*if(this.radio2==='试用商品' || this.radio2==='更多试用商品' )*/{
+          data.filter_I_type=1
           //this.scoreBuyListActions(data)
           this.freeUseListActions(data)
-        }else{
+        }/*else{
           this.freeUseListActions(data)
-        }
+        }*/
 
       },
       handleSizeChange(val) {

@@ -78,9 +78,9 @@
           }/*, {
             name: '会员ID', width: '120', which: 'memberId'
           }*/, {
-            name: '高级督导数量', width: '120', which: 'highSupervisorCount'
+            name: '总监数量', width: '120', which: 'highSupervisorCount'
           }, {
-            name: '粉领数量', width: '120', which: 'storeCount'
+            name: '店主数量', width: '120', which: 'storeCount'
           }, {
             name: '总收益', width: '160', which: 'supervisorAmount'
           }

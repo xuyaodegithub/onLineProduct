@@ -34,6 +34,8 @@
   //试用产品
   import OnTrialwatchPrice from '../commodity/smallPopver/OnTrialwatchPrice.vue'
   import addCountry from '../commodity/smallPopver/addCountry.vue'
+  import addActive from '../SupervisionSet/page/addActive.vue'
+  import addYhqActive from './addYhqActive.vue'
   export default {
     data() {
       return {
@@ -42,7 +44,7 @@
     },
     components:{
      vBalance,vAddSubass,vAddGoods,Vdetail,VaddBackground,VactiveDress,VclassSell,VactiveLianJian,
-      VchoseGoods,VwithYHQ,VChoseGoodsStore,WatchPrice,OnTrialwatchPrice,addCountry
+      VchoseGoods,VwithYHQ,VChoseGoodsStore,WatchPrice,OnTrialwatchPrice,addCountry,addActive,addYhqActive
 
     },
     methods: {

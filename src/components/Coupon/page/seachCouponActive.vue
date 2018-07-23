@@ -18,7 +18,7 @@
             <span style="margin-left: 10px" v-else>{{ scope.row[item.which]}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="380">
+        <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
               size="mini"

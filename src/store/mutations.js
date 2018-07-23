@@ -592,6 +592,10 @@ const mutations = {//mutations内是改变state内的值得作用
     state.editor.freeUseListMM.page=data.page
     state.editor.freeUseListMM.rows=data.rows
     state.editor.freeUseListMM.sortField=data.sortField
+    state.editor.freeUseListMM.filter_I_type=data.filter_I_type
+    state.editor.freeUseListMM.filter_I_status=data.filter_I_status
+    state.editor.freeUseListMM.filter_S_dailyStartTime=data.filter_S_dailyStartTime
+    state.editor.freeUseListMM.sortOrder=data.filter_S_dailyStartTime
   },
   [types.GET_FREEUSE_LIST] (state,res) {
     state.result.freeUseListResult=res.data

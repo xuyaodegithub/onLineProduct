@@ -4,7 +4,8 @@
       v-loading="loading"
       :height="250"
       ref="multipleTable"
-      :data="scoreBuyListResult.rows"
+      @row-click="addGoodsclass"
+      :data="plusProductListResult.rows"
       tooltip-effect="light"
       style="width: 100%"
       @selection-change="handleSelectionChange"
@@ -61,7 +62,7 @@
       </el-table-column>
     </el-table>
     <div style="margin: 20px 0 0 10px;">
-      <el-button type="primary" plain size="mini" @click="toggleSelection(scoreBuyListResult.rows)">批量选择</el-button>
+      <!--<el-button type="primary" plain size="mini" @click="toggleSelection(scoreBuyListResult.rows)">批量选择</el-button>-->
       <el-button type="primary" plain size="mini" @click="morePull(multipleSelection)">批量添加</el-button>
     </div>
   </div>
@@ -200,7 +201,7 @@
     },
     computed:{
       ...mapGetters([
-       'addDataNumResult','commodityResult','getDataListResulr','loading','productlistResult','freeUseListResult','scoreBuyListResult','radiosResult'
+       'plusProductListResult','addDataNumResult','commodityResult','getDataListResulr','loading','productlistResult','freeUseListResult','scoreBuyListResult','radiosResult'
       ]),
     },
     methods: {
@@ -211,19 +212,17 @@
         let keynum=0
         if(rows.length>0){
           for(let i=0;i<rows.length;i++){
-            if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(rows[i])) === -1){
+            let obj={}
+            obj.productName=rows[i].productName
+            obj.productId=rows[i].productId
+            obj.image=rows[i].image
+            obj.type=21
+            obj.productType=9
+            obj.marketPriceView=rows[i].marketPrice
+            obj.salePriceView=rows[i].price
+            obj.commission=rows[i].commission
+            if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(obj)) === -1){
            // if(this.commodityResult.contents[this.addDataNumResult].dataList.indexOf(rows[i]) === -1){
-              let obj=rows[i]
-//              if(this.radio2==='普通商品'){
-//                obj.type=1
-//                //obj.togetherId=
-//              }else if(this.radio2==='拼团商品'){
-//                obj.type=11
-//              }else if(this.radio2==='积分试用商品'){
-                obj.type=8
-//              }else if(this.radio2==='更多试用商品'){
-//                obj.type=4
-//              }
               this.commodityResult.contents[this.addDataNumResult].dataList.push(obj)
             }else{
               keynum+=1
@@ -259,7 +258,36 @@
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
-      }
+      },
+      addGoodsclass(rows){
+        let keynum=0
+        let obj={}
+        obj.productName=rows.productName
+        obj.productId=rows.productId
+        obj.image=rows.image
+        obj.type=21
+        obj.productType=9
+        obj.marketPriceView=rows.marketPrice
+        obj.salePriceView=rows.price
+        obj.commission=rows.commission
+        if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(obj)) === -1){
+          this.commodityResult.contents[this.addDataNumResult].dataList.push(obj)
+        }else{
+          keynum+=1
+        }
+        if(keynum>0){
+          this.$message({
+            message:'重复商品已过滤',
+            type:'success'
+          })
+        }else{
+          this.$message({
+            message:'添加成功',
+            type:'success'
+          })
+        }
+        this.$store.commit('GET_CLASS_DATA_LIST',this.commodityResult.contents[this.addDataNumResult].dataList)
+      },
     }
   };
 </script>

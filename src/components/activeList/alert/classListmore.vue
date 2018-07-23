@@ -4,6 +4,7 @@
       v-loading="loading"
       :height="250"
       ref="multipleTable"
+      @row-click="addGoodsclass"
       :data="freeUseListResult.rows"
       tooltip-effect="light"
       style="width: 100%"
@@ -68,7 +69,7 @@
       </el-table-column>
     </el-table>
     <div style="margin: 20px 0 0 10px;">
-      <el-button type="primary" plain size="mini" @click="toggleSelection(freeUseListResult.rows)">批量选择</el-button>
+      <!--<el-button type="primary" plain size="mini" @click="toggleSelection(freeUseListResult.rows)">批量选择</el-button>-->
       <el-button type="primary" plain size="mini" @click="morePull(multipleSelection)">批量添加</el-button>
     </div>
   </div>
@@ -217,18 +218,14 @@
         let keynum=0
         if(rows.length>0){
           for(let i=0;i<rows.length;i++){
-            if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(rows[i])) === -1){
-           // if(this.commodityResult.contents[this.addDataNumResult].dataList.indexOf(rows[i]) === -1){
-              let obj=rows[i]
-//              if(this.radio2==='普通商品'){
-//                obj.type=1
-//              }else if(this.radio2==='拼团商品'){
-//                obj.type=11
-//              }else if(this.radio2==='积分试用商品'){
-//                obj.type=8
-//              }else if(this.radio2==='更多试用商品'){
-                obj.type=4
-//              }
+            let obj={}
+            obj.productName=rows[i].productName
+            obj.productId=rows[i].productId
+            obj.image=rows[i].image
+            obj.type=2
+            obj.productType=4
+            obj.salePriceView=rows[i].price
+            if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(obj)) === -1){
               this.commodityResult.contents[this.addDataNumResult].dataList.push(obj)
             }else{
               keynum+=1
@@ -252,6 +249,33 @@
             type: 'warning'
           });
         }
+      },
+      addGoodsclass(rows){
+        let keynum=0
+        let obj={}
+        obj.productId=rows.productId
+        obj.productName=rows.productName
+        obj.image=rows.image
+        obj.type=2
+        obj.productType=4
+        obj.salePriceView=rows.price
+        if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(obj)) === -1){
+          this.commodityResult.contents[this.addDataNumResult].dataList.push(obj)
+        }else{
+          keynum+=1
+        }
+        if(keynum>0){
+          this.$message({
+            message:'重复商品已过滤',
+            type:'success'
+          })
+        }else{
+          this.$message({
+            message:'添加成功',
+            type:'success'
+          })
+        }
+        this.$store.commit('GET_CLASS_DATA_LIST',this.commodityResult.contents[this.addDataNumResult].dataList)
       },
       toggleSelection(rows) {
         if (rows) {

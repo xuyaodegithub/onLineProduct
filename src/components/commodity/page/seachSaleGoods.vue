@@ -28,7 +28,7 @@
             <span style="margin-left: 10px" v-else-if="item.which==='isRecommend'">{{scope.row[item.which]=='0' ? '否' : '是'}}</span>
             <span style="margin-left: 10px" v-else-if="item.which==='status'">{{scope.row[item.which]=='1' ? '上架' : '下架'}}</span>
             <span style="margin-left: 10px" v-else-if="item.which==='sort'">
-                  <el-input placeholder="请输入佣金" :value="scope.row.sort" size="mini" style="width: 90%;" @blur="changeSort($event,scope.row)" @change="changeValue"></el-input>
+                  <el-input placeholder="请输入" :value="scope.row.sort" size="mini" style="width: 90%;" @blur="changeSort($event,scope.row)" @change="changeValue"></el-input>
             </span>
             <span style="margin-left: 10px" v-else-if="item.which==='isStick'">
                  <el-button plain size="mini" @click="ToSetUp(scope.$index,scope.row)">{{scope.row[item.which]==0 ? '置顶' : '取消置顶'}}</el-button>
@@ -163,7 +163,7 @@
     },
     methods: {
       ...mapActions([
-        'popoverAlert','plusProductListActions','deleteProductSave','plusProductSaveActions','batchdeleteProductSave','ProductDoStickActions','plusDoAuditActions'
+        'plusProductSortSetActions','popoverAlert','plusProductListActions','deleteProductSave','plusProductSaveActions','batchdeleteProductSave','ProductDoStickActions','plusDoAuditActions'
       ]),
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
@@ -208,9 +208,9 @@
         let data={
           id:row.id,
           sort:e.target.value,
-          startDate:row.startDate,
-          isStick:row.isStick,
-          plusDate:row.plusDate
+//          startDate:row.startDate,
+//          isStick:row.isStick,
+//          plusDate:row.plusDate
 //        desc:row.desc,//描述
 //        image:row.image,//产品主图链接
 //        indexImage:row.indexImage,//大图
@@ -239,11 +239,7 @@
 //        data.commission=this.form.namePrice
 //      }
         if(this.MsgSort){
-          this.plusProductSaveActions(data)
-//          this.$message({
-//            message:'操作成功',
-//            type:'success'
-//          })
+          this.plusProductSortSetActions(data)
           this.MsgSort=false
         }
       },
