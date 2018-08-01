@@ -94,7 +94,7 @@ export default {
         message:'上传成功',
         type: 'success'
       })
-      this.input2=response.result
+      this.input2=/*'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/'+*/ response.result
     },
     upErre (response, file, fileList) {
       this.$message({

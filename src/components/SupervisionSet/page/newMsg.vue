@@ -163,7 +163,7 @@
 //          })
           this.dialogImageUrl=res.data.result.fileDtos
           this.isLength=res.data.result.fileDtos ? res.data.result.fileDtos.length : 0
-          this.isClass = res.data.result.fileDtos[0].type
+          this.isClass = res.data.result.fileDtos.length > 0 ? res.data.result.fileDtos[0].type : ''
           this.dialogImageUrl2 = res.data.result.fileDtos
         })
         this.isName = this.msgData.item.title
@@ -252,7 +252,7 @@
           productType: this.CouponWithGoodsResult.productType,
           sort: this.isSort,
           title: this.isName,
-          type: this.isClass
+          type: this.isClass,
         }
         if(this.isClass===1){
           obj.linkUrls=this.newImg.join(',')
@@ -261,6 +261,7 @@
         }
         if (this.msgData.type === 'add') {
 //          alert(this.msgData.item.id)
+          obj.isAudit=0
           obj.accountId = this.msgData.id
 //          console.log(this.CouponWithGoodsResult)
 //          console.log(obj)

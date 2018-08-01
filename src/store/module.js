@@ -33,7 +33,6 @@ const servers = {
         id: '',
         ids: '',
         status: ''
-
       },
       //新增、修改特卖产品
       productNewMM: {
@@ -122,31 +121,12 @@ const servers = {
       },
       //设置产品收益配置信息
       setProductCommissionInfoMM: {
-        brandPartnerCommission: '',
-        cityPartnerCommission: '',
-        highSupervisorMoreScore: '',
-        highSupervisorPlusCommissionRate: '',
-        highSupervisorPlusMoreCommissionRate: '',
-        highSupervisorScore: '',
-        isPhysicalStoreGetCommission: '',
-        oneGoldenScore: '',
-        oneStoreScore: '',
-        oneWhiteScore: '',
-        plusCommissionRate: '',
-        productCommissionScale: '',
-        productDreamPartnerCommission: '',
-        productWealthPartnerCommission: '',
-        selfGoldenScore: '',
-        selfStoreScore: '',
-        selfWhiteScore: '',
-        starSupervisorMoreScore: '',
-        starSupervisorPlusCommissionRate: '',
-        starSupervisorPlusMoreCommissionRate: '',
-        starSupervisorScore: '',
-        storePlusCommissionRate: '',
-        supervisorPlusCommissionRate: '',
-        supervisorScore: '',
-        managementCost: ''
+        brandPartnerCommission: '', cityPartnerCommission: '', highSupervisorMoreScore: '', highSupervisorPlusCommissionRate: '',
+        highSupervisorPlusMoreCommissionRate: '', highSupervisorScore: '', isPhysicalStoreGetCommission: '', oneGoldenScore: '',
+        oneStoreScore: '', oneWhiteScore: '', plusCommissionRate: '', productCommissionScale: '', productDreamPartnerCommission: '',
+        productWealthPartnerCommission: '', selfGoldenScore: '', selfStoreScore: '', selfWhiteScore: '', starSupervisorMoreScore: '',
+        starSupervisorPlusCommissionRate: '', starSupervisorPlusMoreCommissionRate: '', starSupervisorScore: '', storePlusCommissionRate: '',
+        supervisorPlusCommissionRate: '', supervisorScore: '', managementCost: ''
       },
 
 
@@ -157,7 +137,8 @@ const servers = {
         name: '',
         status: '',
         desc: '',
-        type: ''
+        type: '',
+        autoId:''
       },
       //新增发现文章
       findSaveMsgMM: {
@@ -171,7 +152,8 @@ const servers = {
         sort: '',
         title: '',
         type: '',
-        id:''
+        id:'',
+        isAudit:''
       },
       //根据id获取发现信息
       findOnlyIdMM: {
@@ -183,7 +165,8 @@ const servers = {
         page:'',
         rows:'',
         filter_S_title:'',
-        filter_S_accountName:''
+        filter_S_accountName:'',
+        filter_I_isAudit:'',
       },
       //申请列表
       applySupervisorListMM:{
@@ -192,12 +175,17 @@ const servers = {
         startTime:'',
         page:'',
         rows:'',
-        filter_I_sendStatus:''
+        filter_I_sendStatus:'',
+        filter_I_status:''
       },
       //申请导入
       sendImportMM:{
         ids:'',
         sendStatus:''
+      },
+      //会员列表
+      accountNoMM:{
+        page:'',rows:'',filter_S_accountNo:''
       }
     },
     page: {
@@ -235,7 +223,9 @@ const servers = {
       //根据id获取发现信息
       findOnlyIdResult: '',
       //申请列表
-      applySupervisorList:[]
+      applySupervisorList:[],
+      //会员列表
+      accountNoListResult:[]
     }
   },
   mutations: {
@@ -420,17 +410,21 @@ const servers = {
       state.editor.findAccountSaveMM.status = data.status
       state.editor.findAccountSaveMM.desc = data.desc
       state.editor.findAccountSaveMM.type = data.type
+      state.editor.findAccountSaveMM.autoId = data.autoId
     },
     GET_FIND_ACCOUNT_SAVE(state, res) {
       state.page.findAccountSaveResult = res.data
     },
     //发现列表
     SET_FIND_MSG_LIST(state, data) {
-      state.editor.findTotalListMM.filter_L_accountId = data.filter_L_accountId
+      if(data.filter_L_accountId){
+        state.editor.findTotalListMM.filter_L_accountId = data.filter_L_accountId
+      }
       state.editor.findTotalListMM.page = data.page
       state.editor.findTotalListMM.rows = data.rows
       state.editor.findTotalListMM.filter_S_title = data.filter_S_title
       state.editor.findTotalListMM.filter_S_accountName = data.filter_S_accountName
+      state.editor.findTotalListMM.filter_I_isAudit = data.filter_I_isAudit
     },
     GET_FIND_MSG_LIST(state, res) {
       state.page.findMsgListResult = res.data
@@ -448,6 +442,7 @@ const servers = {
       state.editor.findSaveMsgMM.productName = data.productName
       state.editor.findSaveMsgMM.accountId = data.accountId
       state.editor.findSaveMsgMM.id=data.id
+      state.editor.findSaveMsgMM.isAudit=data.isAudit
     },
     //根据id获取发现信息
     SET_FIND_ONLY_ID(state, data) {
@@ -464,6 +459,7 @@ const servers = {
       state.editor.applySupervisorListMM.endTime=data.endTime
       state.editor.applySupervisorListMM.accountNo=data.accountNo
       state.editor.applySupervisorListMM.filter_I_sendStatus=data.filter_I_sendStatus
+      state.editor.applySupervisorListMM.filter_I_status=data.filter_I_status
     },
     GET_APPLY_SUPERVISOR(state,res){
       state.page.applySupervisorList=res.data.result
@@ -472,8 +468,16 @@ const servers = {
     SET_SEND_IMPORT(state,data){
       state.editor.sendImportMM.ids=data.ids
       state.editor.sendImportMM.sendStatus=data.sendStatus
+    },
+    //会员列表
+    SET_ACCOUNT_NO(state,data){
+      state.editor.accountNoMM.page=data.page
+      state.editor.accountNoMM.rows=data.rows
+      state.editor.accountNoMM.filter_S_accountNo=data.filter_S_accountNo
+    },
+    GET_ACCOUNT_NO(state,res) {
+      state.page.accountNoListResult=res.data
     }
-
   },
   getters: {
     //产品库产品规格
@@ -534,6 +538,10 @@ const servers = {
     //申请列表
     applySupervisorList: state => {
       return state.page.applySupervisorList
+    },
+    //会员列表
+    accountNoListResult:state =>{
+      return state.page.accountNoListResult
     }
   },
   actions: {
@@ -970,7 +978,34 @@ const servers = {
         }
       )
     },
-
+    //会员列表
+    accountNoActions({commit, dispatch, state, rootState},data){
+      commit('SET_ACCOUNT_NO',data)
+      dispatch('GoodsMsgGet',['/admin/member/list','GET_ACCOUNT_NO','accountNoMM'])
+    },
+    //会员发现账号删除
+    huiyuandeleteActions({commit, dispatch, state, rootState}, data) {
+      commit('DELETE_PRODUCT', data)
+      api.deletePpApi(rootState.editor.axiosUrl + '/admin/findAccount/delete', qs.stringify(state.editor.deleteProductNormalsMM)).then(res => {
+        console.log(res)
+        if (res.code === 0) {
+          Message({
+            showClose: true,
+            message: '删除成功',
+            type: 'success'
+          });
+          dispatch('findAccountActions',state.editor.storeGiftBagListMM)
+        }
+      }).catch(
+        (error) => {
+          Message({
+            showClose: true,
+            message: '操作失败',
+            type: 'warning'
+          });
+        }
+      )
+    },
   }
 }
 

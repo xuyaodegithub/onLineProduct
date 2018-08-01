@@ -89,7 +89,7 @@ export default {
         message:'上传成功',
         type: 'success'
       })
-      this.shareImg=response.result
+      this.shareImg=/*'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/'+*/ response.result
     },
     upErre (response, file, fileList) {
       this.$message({

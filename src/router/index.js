@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store/index'
 import HelloWorld from '@/components/activeList/subassembly/huodong.vue'
 //优惠券
 import CouponActive from '@/components/Coupon/subassembly/CouponActiveIndex.vue'
@@ -15,6 +16,7 @@ import supervisionIndex from '@/components/SupervisionSet/subassembly/supervisio
 import pinkSet from '@/components/SupervisionSet/subassembly/pinkSet.vue'
 import starStatistics from '@/components/SupervisionSet/subassembly/starStatistics.vue'
 import ProductIncomeDistribution from '@/components/SupervisionSet/subassembly/ProductIncomeDistribution.vue'
+import findToWatch from '@/components/SupervisionSet/subassembly/findToWatch.vue'
 //发现后台
 
 Vue.use(Router)
@@ -22,7 +24,7 @@ import find from '@/components/SupervisionSet/subassembly/findNumber.vue'
 import findMsg from '@/components/SupervisionSet/subassembly/findMsg.vue'
 import bossBuy from '@/components/SupervisionSet/subassembly/bossBuy.vue'
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -98,6 +100,15 @@ export default new Router({
       path: '/bossBuy',
       name:"bossBuy",
       component:bossBuy
+    },{
+      path: '/findToWatch',
+      name:"findToWatch",
+      component:findToWatch
     }
   ]
 })
+router.beforeEach((to,from,next)=> {
+ // console.log(store.state.editor.axiosUrl)
+  next()
+})
+export default router
