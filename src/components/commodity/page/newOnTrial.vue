@@ -77,7 +77,7 @@
           <el-radio :label=1 style="width: auto;">普通试用</el-radio>
           <!--<el-radio :label=2 style="width: auto;">新品首发</el-radio>-->
           <el-radio :label=3 style="width: auto;">整点抢</el-radio>
-          <!--<el-radio :label=4 style="width: auto;">试海外</el-radio>-->
+          <el-radio :label=4 style="width: auto;">付邮试</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="添加场次:" v-if="typeTrial==3">
@@ -178,11 +178,21 @@
           <el-radio :label=0 style="width: auto;">否</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="审核状态:">
+      <el-form-item label="上下架状态:">
         <el-radio-group v-model="isStatus"><!--:disabled="classWh === '1'"-->
           <el-radio :label=1 style="width: auto;">上架</el-radio>
           <el-radio :label=0 style="width: auto;">下架</el-radio>
         </el-radio-group>
+      </el-form-item>
+      <el-form-item label="上架时间:" v-if="isStatus===1">
+        <el-date-picker
+          size="mini"
+          v-model="isUpTime"
+          type="datetime"
+          format="yyyy-MM-dd-HH"
+          value-format="yyyy-MM-dd-HH"
+          placeholder="选择日期时间">
+        </el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" plain @click="saveProduct()" size="small" v-if="upDataSaleGoodsResult.type==='add'">
@@ -259,6 +269,7 @@
         isAudio: '',
         dialogImageUrl: '',
         dialogImageUrl2: '',
+        isUpTime:''
       }
     },
     computed: {
@@ -359,6 +370,7 @@
         this.isStatus = 1
         this.tryTime = '',
         this.promotionAward=''
+        this.isUpTime=''
       } else {
         let obj = {
           togetherProductIds: '',

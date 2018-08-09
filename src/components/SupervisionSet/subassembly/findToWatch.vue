@@ -90,17 +90,22 @@
           <span class="title">发现详情</span><i v-on:click="closeAlert" class="el-icon-close"></i>
         </div>
         <div class="main">
-          <el-carousel :autoplay="false" height="460px" v-if="isClass===1">
-            <el-carousel-item v-for="(item,index) in dialogImageUrl" :key="index">
-              <img :src="item.linkUrl" alt="" style="display:block;height: 100%;margin: 0 auto;">
-            </el-carousel-item>
-          </el-carousel>
+          <!--<el-carousel :autoplay="false" height="460px" v-if="isClass===1">-->
+            <!--<el-carousel-item v-for="(item,index) in dialogImageUrl" :key="index">-->
+              <!--<img :src="item.linkUrl" alt="" style="display:block;height: 100%;margin: 0 auto;">-->
+            <!--</el-carousel-item>-->
+          <!--</el-carousel>-->
+          <div v-if="isClass===1" style="display: flex;flex-wrap: wrap;padding:15px;">
+            <div  v-for="(item,index) in dialogImageUrl" :key="index" style="width: 160px;height: 160px;margin-right: 10px;">
+              <img :src="item.linkUrl" alt="" style="display: block;width: 100%;height: 100%;">
+            </div>
+          </div>
           <div v-else-if="isClass===2">
-            <video id="playVideo" :src="dialogImageUrl[0].linkUrl"  controls  @click="toplay()" ref="video" class="cu" width="800" height="460">
+            <video id="playVideo" :src="dialogImageUrl[0].linkUrl"  controls  @click="toplay()" ref="video" class="cu" width="800" height="510">
               <source :src="dialogImageUrl[0].linkUrl" type="video/mp4">
               <source :src="dialogImageUrl[0].linkUrl" type="video/ogg">
               <source :src="dialogImageUrl[0].linkUrl" type="video/webm">
-              您的浏览器不支持 video 标签。
+              您的浏览器不支持 video 标签。请换成新版游览器
             </video>
           </div>
           <div style="line-height: 460px;font-size: 24px;color: orange;text-align: center" v-else-if="isClass===3">
@@ -145,13 +150,6 @@
         {isTitle:'产品名',width:'250',which:'productName'},
 
       ],
-      dataResult:[
-        {isName:'小胖',isTitle:'小胖专用',isStatus:0,isContent:'此处省略三百字',isImg:'https://img14.360buyimg.com/n5/jfs/t19396/175/95617801/216799/65279e9d/5a5c7622N31780b66.jpg',isProductName:'小胖专用牙刷216358563'},
-        {isName:'小鲜肉',isTitle:'小鲜肉专用',isStatus:1,isContent:'此处省略三百字',isImg:'https://img14.360buyimg.com/n5/jfs/t19396/175/95617801/216799/65279e9d/5a5c7622N31780b66.jpg',isProductName:'小鲜肉专用牙刷216358563'},
-        {isName:'丫头娜娜',isTitle:'丫头娜娜专用',isStatus:2,isContent:'此处省略三百字',isImg:'https://img14.360buyimg.com/n5/jfs/t19396/175/95617801/216799/65279e9d/5a5c7622N31780b66.jpg',isProductName:'丫头娜娜专用牙刷216358563'},
-        {isName:'糊糊',isTitle:'糊糊专用',isStatus:0,isContent:'此处省略三百字',isImg:'https://img14.360buyimg.com/n5/jfs/t19396/175/95617801/216799/65279e9d/5a5c7622N31780b66.jpg',isProductName:'糊糊专用牙刷216358563'},
-        {isName:'蚂蚁',isTitle:'蚂蚁专用',isStatus:1,isContent:'此处省略三百字',isImg:'https://img14.360buyimg.com/n5/jfs/t19396/175/95617801/216799/65279e9d/5a5c7622N31780b66.jpg',isProductName:'蚂蚁专用牙刷216358563'},
-      ]
     }
   },
   watch:{
@@ -179,6 +177,8 @@
 'popoverAlert','findMsgListActions','findSaveMsgActions','deleteOnlyIdActions'
     ]),
     seachGoodsList(){
+      this.currentPage5=1
+      this.rows=10
         this.getdataFindList()
     },
     handleSelectionChange(val) {
@@ -250,6 +250,7 @@
         params: {id: val.id}
       }).then(res => {
         if(res.data.code===0){
+          console.log(1111)
           this.dialogImageUrl=res.data.result.fileDtos
 //        this.isLength=res.data.result.fileDtos ? res.data.result.fileDtos.length : 0
           this.isClass = res.data.result.fileDtos.length>0 ? res.data.result.fileDtos[0].type : ''
@@ -321,7 +322,7 @@
     margin-top: -250px;
     margin-left: -400px;
     width:800px;
-    height:500px;
+    height:550px;
     background: #F0FAFF;
     border-radius: 5px;
     border: 1px solid #90CCE8;

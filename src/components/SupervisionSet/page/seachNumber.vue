@@ -63,9 +63,9 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage5"
+        :current-page="msg.page"
         :page-sizes="[10, 20, 30, 50]"
-        :page-size="rows"
+        :page-size="msg.rows"
         layout="total, sizes, prev, pager, next, jumper"
         :total="findMsgResult.result.total">
       </el-pagination>
@@ -132,11 +132,13 @@
       handleSizeChange (val) {
 //        console.log(`每页 ${val} 条`)
         this.msg.rows=val
+        this.msg.filter_I_type=1
         this.findAccountActions(this.msg)
       },
       handleCurrentChange (val) {
 //        console.log(`当前页: ${val}`)
         this.msg.page=val
+        this.msg.filter_I_type=1
         this.findAccountActions(this.msg)
 
       },

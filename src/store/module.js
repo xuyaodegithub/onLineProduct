@@ -185,7 +185,7 @@ const servers = {
       },
       //会员列表
       accountNoMM:{
-        page:'',rows:'',filter_S_accountNo:''
+        page:'',rows:'',filter_S_accountNo_contains:''
       }
     },
     page: {
@@ -473,7 +473,7 @@ const servers = {
     SET_ACCOUNT_NO(state,data){
       state.editor.accountNoMM.page=data.page
       state.editor.accountNoMM.rows=data.rows
-      state.editor.accountNoMM.filter_S_accountNo=data.filter_S_accountNo
+      state.editor.accountNoMM.filter_S_accountNo_contains=data.filter_S_accountNo_contains
     },
     GET_ACCOUNT_NO(state,res) {
       state.page.accountNoListResult=res.data
@@ -548,6 +548,7 @@ const servers = {
     //get获取封装
     GoodsMsgGet({dispatch, state, commit, rootState}, funUrl) {
       axios.defaults.baseURL = rootState.editor.axiosUrl;
+      commit('changeloading')
       axios({
         method: 'get',
         url: funUrl[0],
@@ -555,7 +556,7 @@ const servers = {
         params: state.editor[funUrl[2]]
       }).then(function (res) {
         //console.log(res)
-        // context.commit('changeloading')
+      commit('changeloading')
         if (res.data.length > 0) {
           commit(funUrl[1], res)
         } else {
@@ -563,6 +564,7 @@ const servers = {
         }
       })
         .catch(function (err) {
+          commit('changeloading')
           // context.commit('changeloading')
           //console.log(err)
         })
@@ -868,7 +870,34 @@ const servers = {
       )
     },
 
+//各种后续操作封装
+    savePostAsk ({dispatch, state, commit, rootState},funUrl) {
+      axios.defaults.baseURL =rootState.editor.axiosUrl;
+      axios({
+        method: 'post',
+        url:funUrl[0],
+        dataType: 'JSON',
+        data: qs.stringify(state.editor[funUrl[2]])
+      }).then(function(res){
+        if(res.data.code===0){
+          commit(funUrl[1],res)
+          Message({
+            message:'操作成功',
+            type:'success'
+          })
+          dispatch(funUrl[3],state.editor[funUrl[4]])
+        }else{
+          Message({
+            message:'操作失败',
+            type:'error'
+          })
+        }
+      })
+        .catch(function(err){
 
+
+        })
+    },
 //get封装
     findMsgGet ({dispatch, state, commit, rootState},funUrl) {
       axios.defaults.baseURL =rootState.editor.axiosUrl;
@@ -892,7 +921,7 @@ const servers = {
           dispatch('findMsgListActions',state.editor.findTotalListMM)
         }else{
           Message({
-            message:'操作失败',
+            message:res.data.message,
             type:'error'
           })
         }
@@ -967,6 +996,12 @@ const servers = {
             type: 'success'
           });
          dispatch('applySupervisorListActions',state.editor.applySupervisorListMM)
+        }else{
+          Message({
+            showClose: true,
+            message: res.message,
+            type: 'error'
+          });
         }
       }).catch(
         (error) => {

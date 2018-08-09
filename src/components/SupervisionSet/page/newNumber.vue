@@ -140,6 +140,7 @@
         this.isMsg=''
       }else if(this.msgData.type==='add' && this.msgData.numnew==='third'){
         this.isAccountNo=''
+        this.$store.commit('GET_ACCOUNT_NO',{data:[]})
       }else{
         this.isName=this.msgData.item.name
         this.dialogImageUrl=this.msgData.item.logo
@@ -147,7 +148,7 @@
       }
     },
     mounted() {
-      this.seachGoodsList()
+//      this.seachGoodsList()
     },
     methods: {
       ...mapActions([
@@ -183,7 +184,7 @@
         let data={
           page:this.currentPage5,
           rows:this.rows,
-          filter_S_accountNo:this.isAccountNo
+          filter_S_accountNo_contains:this.isAccountNo
         }
         this.accountNoActions(data)
       },

@@ -261,7 +261,7 @@
         }
         if (this.msgData.type === 'add') {
 //          alert(this.msgData.item.id)
-          obj.isAudit=0
+          obj.isAudit=1
           obj.accountId = this.msgData.id
 //          console.log(this.CouponWithGoodsResult)
 //          console.log(obj)

@@ -55,9 +55,9 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage5"
+        :current-page="msg.page"
         :page-sizes="[10, 20, 30, 50]"
-        :page-size="rows"
+        :page-size="msg.rows"
         layout="total, sizes, prev, pager, next, jumper"
         :total="findMsgResult.result.total">
       </el-pagination>
@@ -69,9 +69,9 @@
 <script>
   import { mapGetters } from 'vuex'
   import { mapActions } from 'vuex'
-
   export default {
     name: 'seachNumber',
+    props:['msg'],
     data () {
       return {
         isName:'',
@@ -112,6 +112,8 @@
     },
     mounted () {
 //      this.getSeachList()
+      this.currentPage5=1
+        this.rows=10
     },
     methods: {
       ...mapActions([
@@ -119,8 +121,9 @@
       ]),
       handleSizeChange (val) {
 //        console.log(`每页 ${val} 条`)
-        this.rows=val
-        this.getSeachList()
+        this.msg.rows=val
+        this.msg.filter_I_type=2
+        this.findAccountActions(this.msg)
       },
       deleteA(val){
         this.$confirm('确定要删除该条文章么？, 是否继续?', '提示', {
@@ -141,8 +144,9 @@
       },
       handleCurrentChange (val) {
 //        console.log(`当前页: ${val}`)
-        this.currentPage5=val
-        this.getSeachList()
+        this.msg.page=val
+        this.msg.filter_I_type=2
+        this.findAccountActions(this.msg)
       },
       changeStatus(item){
           let data={
@@ -152,11 +156,7 @@
         this.findAccountSaveActions(data)
       },
       getSeachList(){
-        let data={
-          page:this.currentPage5,
-          rows:this.rows,
-          filter_I_type:2
-        }
+        let data=this.msg
         this.findAccountActions(data)
       },
       toList(item){

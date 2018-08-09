@@ -8,6 +8,7 @@
         v-loading="loading"
         :data="findMsgListResult.result.rows"
         style="width: 100%"
+        :height="350"
         ref="multipleTable"
         :max-height="350"
         tooltip-effect="light"
