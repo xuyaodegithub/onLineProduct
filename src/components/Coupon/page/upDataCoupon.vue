@@ -40,7 +40,7 @@
     <p><label style="vertical-align: top">券总数量:</label><el-input type="text" v-model="input1" placeholder="请输入数量" size="small"></el-input>
     <span style="color:#999999; margin-left: 10px">已领{{YHQonlyResult.item.receivedNum}}</span>
     </p>
-    <p><label>每个ID限领数量:</label><el-input type="text" v-model="value" placeholder="请输入数量" size="small" :disabled="YHQonlyResult.Which==='second'"></el-input>
+    <p><label>每个ID限领数量:</label><el-input type="text" v-model="value" placeholder="请输入数量" size="small"></el-input><!--:disabled="YHQonlyResult.Which==='second'"-->
       <!--<el-select v-model="value" placeholder="请选择" size="small" disabled>
         <el-option
           v-for="item in options"
@@ -148,8 +148,10 @@ export default {
         num:this.input1,
         itemson:'update',
         Which:this.YHQonlyResult.Which,
-         isAudit:this.updata2
-        }
+         isAudit:this.updata2,
+        limitReceived:this.value
+
+    }
       console.log(this.YHQonlyResult.Which)
       if(this.YHQonlyResult.Which==='first'){
         obj.title=this.input
@@ -158,7 +160,6 @@ export default {
         obj.validType=this.radio2
         obj.expireRemind=this.updataThree.join(',')
         obj.limitLevel=this.updataTwo.join(',')
-        obj.limitReceived=this.value
         obj.price=this.input2*100
         obj.type=this.radio
         obj.productIds=this.CouponWithGoodsResult.productIds

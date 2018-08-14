@@ -18,6 +18,7 @@ import starStatistics from '@/components/SupervisionSet/subassembly/starStatisti
 import ProductIncomeDistribution from '@/components/SupervisionSet/subassembly/ProductIncomeDistribution.vue'
 import findToWatch from '@/components/SupervisionSet/subassembly/findToWatch.vue'
 //发现后台
+import indexchange from '@/components/otherPage/subassembly/indexchange.vue'
 
 Vue.use(Router)
 import find from '@/components/SupervisionSet/subassembly/findNumber.vue'
@@ -104,6 +105,10 @@ const router = new Router({
       path: '/findToWatch',
       name:"findToWatch",
       component:findToWatch
+    },{
+      path: '/indexchange',
+      name:"indexchange",
+      component:indexchange
     }
   ]
 })

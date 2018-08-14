@@ -184,13 +184,13 @@
           <el-radio :label=0 style="width: auto;">下架</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="上架时间:" v-if="isStatus===1">
+      <el-form-item label="上架时间:" v-if="isStatus===1 && typeTrial!==3">
         <el-date-picker
           size="mini"
           v-model="isUpTime"
           type="datetime"
-          format="yyyy-MM-dd-HH"
-          value-format="yyyy-MM-dd-HH"
+          format="yyyy-MM-dd HH:mm:ss"
+          value-format="yyyy-MM-dd HH:mm:ss"
           placeholder="选择日期时间">
         </el-date-picker>
       </el-form-item>
@@ -405,6 +405,7 @@
         this.isOutCountry = this.upDataSaleGoodsResult.item.isOverSeasProduct
         this.tryTime = this.upDataSaleGoodsResult.item.freeUseDays
         this.promotionAward=this.upDataSaleGoodsResult.item.promotionAward
+        this.isUpTime=this.upDataSaleGoodsResult.item.startDate
         let data = {
           freeUseProductId: this.upDataSaleGoodsResult.item.id,
           type: 1
@@ -461,6 +462,7 @@
           data.countryId = this.value8
         } else {
 //         this.isTypeTrial=false
+          data.startDate = this.isUpTime
           data.filter_S_promotionAward=this.promotionAward
           if(!data.indexImage){
             this.$message({

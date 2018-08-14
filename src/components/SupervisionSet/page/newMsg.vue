@@ -64,9 +64,9 @@
           <el-radio :label="0">否</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="排序:" label-width="100px">
-        <el-input v-model="isSort" placeholder="请输入内容" size="mini" style="width: 200px;"></el-input>
-      </el-form-item>
+      <!--<el-form-item label="排序:" label-width="100px">-->
+        <!--<el-input v-model="isSort" placeholder="请输入内容" size="mini" style="width: 200px;"></el-input>-->
+      <!--</el-form-item>-->
       <el-form-item label="关联产品:" label-width="100px">
         <el-input v-model="CouponWithGoodsResult.productName" placeholder="请输入内容" size="mini"
                   style="width: 400px;"></el-input>
@@ -140,7 +140,7 @@
         this.isMsg = ''
         this.isClass = 1
         this.isSetTop = 1
-        this.isSort = ''
+//        this.isSort = ''
         let obj = {
           togetherProductIds: '',
           productType: '',
@@ -171,7 +171,7 @@
         this.isMsg = this.msgData.item.content
 //        this.isClass = this.msgData.item.type//资源类型
         this.isSetTop = this.msgData.item.isStick
-        this.isSort = this.msgData.item.sort
+//        this.isSort = this.msgData.item.sort
         let obj = {
           togetherProductIds: '',
           productType: this.msgData.item.productType,
@@ -250,7 +250,7 @@
           productId: this.CouponWithGoodsResult.productIds,
           productName: this.CouponWithGoodsResult.productName,
           productType: this.CouponWithGoodsResult.productType,
-          sort: this.isSort,
+          sort: 0,
           title: this.isName,
           type: this.isClass,
         }
