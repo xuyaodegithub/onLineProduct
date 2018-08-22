@@ -13,7 +13,7 @@
         <el-radio :label="1" style="width: auto;">普通试用</el-radio>
         <!--<el-radio :label="2" style="width: auto;">新品首试</el-radio>-->
         <el-radio :label="3" style="width: auto;">整点抢</el-radio>
-        <!--<el-radio :label="4" style="width: auto;">试海外</el-radio>-->
+        <el-radio :label="5" style="width: auto;">付邮试</el-radio>
       </el-radio-group>
       <label>状态:</label><!--<el-input v-model="filter_I_status" placeholder="请输入产品名称" size="mini"></el-input>-->
       <el-radio-group v-model="isAudio"><!--:disabled="classWh === '1'"-->
@@ -112,7 +112,7 @@
         rows:10,
         sortOrder:'asc'
       }
-      if(this.value9){
+      if(this.status===3){
         obj.filter_S_dailyStartTime=this.value9
       }
       if(this.isAudio!==3){

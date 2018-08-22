@@ -1,8 +1,8 @@
 <template>
   <div class="demo incomingHistory">
-    <div class="popover-head">
-      <span class="title">新增数据</span><i v-on:click="popoverAlert()" class="el-icon-close"></i>
-    </div>
+    <!--<div class="popover-head">-->
+      <!--<span class="title">新增数据</span><i v-on:click="popoverAlert()" class="el-icon-close"></i>-->
+    <!--</div>-->
     <div class="popover-main">
       <div>
         <label>类型:</label>
@@ -32,8 +32,8 @@
       </div>
       <div>
         <label>跳转链接:</label>
-        <el-input v-model="url" placeholder="请输入内容" size="mini"></el-input>
-        <el-button size="mini" type="primary" style="margin-left: 15px;display: inline-block;" v-if="linkType===15 || linkType===16 || linkType===17" >关联产品</el-button>
+        <el-input v-model="url" placeholder="请输入内容" size="mini" :disabled="linkType !== 9"></el-input>
+        <el-button size="mini" type="primary" style="margin-left: 15px;display: inline-block;" v-if="linkType===15 || linkType===16 || linkType===17"  @click="toproduct()">关联产品</el-button>
       </div>
      <div>
        <label>标题:</label>
@@ -70,7 +70,7 @@
          <el-upload
            class="upload-demo"
            name="img"
-           action="http://test-admin-h5.olquan.cn/admin/buildblocks/uploadImage"
+           action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
            :on-success="upSuccessfirst"
            :show-file-list="false">
            <el-button size="mini" type="primary" style="margin-top: 30px;margin-left: 15px;" >点击上传</el-button>
@@ -85,37 +85,6 @@
 </template>
 
 <style lang="scss" scoped>
-  .demo{
-    width: 600px;
-    background: #F0FAFF;
-    margin-left: -300px;
-    margin-top: -240px;
-    border-radius: 5px;
-    border: 1px solid #90CCE8;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    overflow: hidden;
-    color: #333333;
-  }
-  .popover-head{
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    background: #F0FAFF;
-    font-size: 14px;
-    border-bottom: 1px solid #C5E2F0;
-  }
-  .popover-head i{
-    float: right;
-    color: #A1C1E2;
-    font-size: 12px;
-    margin-top: 13px;
-    margin-right: 12px;
-    cursor: pointer;
-  }
-  .popover-head .title{
-    margin-left: 15px;
-    font-weight: bold;
-  }
   .popover-main{
     padding: 15px 12.5px;
     width: calc(100% - 25px);
@@ -126,7 +95,7 @@
       margin-top: 0;
     }
     &>div{
-      margin-top: 20px;
+      margin-top: 40px;
     }
     label{
       display: inline-block;
@@ -137,12 +106,12 @@
   }
 
   .popover-main .el-input,.popover-main .el-select{
-    width:200px;
+    width:300px;
   }
   .popover-main > .el-button{
     width: 100px;
     display: block;
-    margin: 0 auto;
+    margin-left:250px;
     margin-top: 20px;
   }
   .el-button--mini, .el-button--mini.is-round{
@@ -159,6 +128,7 @@
   import { mapActions } from 'vuex'
   import { mapGetters } from 'vuex'
   export default {
+    props:['msg'],
     data() {
       return {
         type:'',
@@ -176,7 +146,7 @@
         ],
         options2: [
           {value: 3, label: '无'},
-          {value: 2, label: '升级店主'},
+          {value: 9, label: '活动'},
           {value: 10, label: '特卖 '},
           {value: 13, label: '试用中心'},
           {value: 15, label: '特卖详情'},
@@ -188,15 +158,33 @@
     components:{
 
     },
-    mounted(){
-      if(this.popoverAlive.SSSnum !==1){
-        this.type=this.popoverAlive.SSSnum.type
-        this.sort=this.popoverAlive.SSSnum.sort
-        this.linkType=this.popoverAlive.SSSnum.linkType
-        this.url=this.popoverAlive.SSSnum.url
-        this.title=this.popoverAlive.SSSnum.name
-        this.dialogImageUrl=this.popoverAlive.SSSnum.image
+    activated(){
+      if(this.msg.addOrup ==='add'){
+        this.type=''
+        this.sort=''
+        this.linkType=''
+        this.url=''
+        this.title=''
+        this.dialogImageUrl=''
+        this.backfirst()
+      }else{
+        this.type=this.msg.val.type
+        this.sort=this.msg.val.sort.toString()
+        this.linkType=this.msg.val.linkType
+        this.url=this.msg.val.url
+        this.title=this.msg.val.name
+        this.dialogImageUrl=this.msg.val.image
       }
+    },
+    watch:{
+      CouponWithGoodsResult: {
+        handler(newVal, oldVal) {
+          if(this.linkType===15 || this.linkType===16 || this.linkType===17){
+            this.url=newVal.toUrl
+          }
+        },
+        deep: true
+      },
     },
     computed:{
       ...mapGetters([
@@ -219,14 +207,14 @@
           name:this.title,
           image:this.dialogImageUrl
         }
-        if(this.popoverAlive.SSSnum===1){
+        if(this.msg.addOrup ==='add'){
 
         }else{
-          data.id=this.popoverAlive.SSSnum.id
+          data.id=this.msg.val.id
         }
         if(data.type &&  data.sort && data.linkType && data.url && data.name && data.image){
           this.addOrUpdataActions(data)
-          this.popoverAlert()
+          this.$emit('toParese',{title:'vSeach',item:{},type:''})
         }else{
           this.$message({
             message:'请把信息填写完整',
@@ -236,12 +224,38 @@
       },
       changeUrl(urlType){
         if(urlType===3)  this.url='#'
-        else if(urlType===2) this.url='https://ol-h5-preview.olquan.cn/supervisor/buyPink'
-        else if(urlType===10) this.url='https://ol-h5-preview.olquan.cn/index/pinkIndex'
-        else if(urlType===13) this.url='https://ol-h5-preview.olquan.cn/try/newCenter'
-        else if(urlType===15) this.url='https://ol-h5-preview.olquan.cn/demo/iscroll/id/'
+        else if(urlType===9) this.url=''
+        else if(urlType===10) this.url=this.$store.state.editor.axiosQian+'/index/pinkIndex'
+        else if(urlType===13) this.url=this.$store.state.editor.axiosQian+'/try/newCenter'
+        else this.url=''
+        this.backfirst()
+       /* else if(urlType===15) this.url='https://ol-h5-preview.olquan.cn/demo/iscroll/id/'
         else if(urlType===16) this.url='https://ol-h5-preview.olquan.cn/demo/iscroll/id/'
-        else if(urlType===17) this.url='https://ol-h5-preview.olquan.cn/demo/iscroll/id/'
+        else if(urlType===17) this.url='https://ol-h5-preview.olquan.cn/demo/iscroll/id/'*/
+      },
+      toproduct(){
+        if(this.linkType===15){
+          this.$store.commit('changeRadios', '专享商品')
+          this.popoverAlert(['vAddGoods', 'find'])
+        }else{
+          this.$store.commit('changeRadios', '试用商品')
+          this.popoverAlert(['vAddGoods', 'find'])
+        }
+      },
+      backfirst(){
+        let obj={
+          togetherProductIds:'',
+          productType:'',
+          productIds:'',
+          marketPriceView:'',
+          price:'',
+          productName:'',
+          costPriceView:'',//成本价
+          salePriceView:'',//销售价
+          image:'',//销售价,
+          toUrl:''
+        }
+        this.$store.commit('Coupon_With_Goods',obj)
       }
     }
   };

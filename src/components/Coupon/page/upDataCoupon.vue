@@ -52,7 +52,7 @@
       <span style="color:#999999; margin-left: 10px">单次只能领一次，使用之后可再次领取</span>
     </p>
     <p class="tep"><label>状态:</label>
-      <el-radio-group v-model="updata2" size="small" disabled>
+      <el-radio-group v-model="updata2" size="small">
         <el-radio :label="0">待审核</el-radio>
         <el-radio :label="1">已审核</el-radio>
       </el-radio-group>

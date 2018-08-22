@@ -11,7 +11,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable:{},/*proxyConfig.proxy,*/
+    proxyTable:proxyConfig.proxy,/*proxyConfig.proxy,*/
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -62,7 +62,7 @@ module.exports = {
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
-    // npm install --save-dev compression-webpack-plugin
+    // npm install --save-dev compression-webpack-plugin//可以开启gzip压缩，对打包优化也有很大的帮助
     productionGzip: false,
     productionGzipExtensions: ['js', 'css'],
 
