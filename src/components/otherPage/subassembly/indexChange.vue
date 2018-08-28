@@ -73,18 +73,19 @@
       },
       options: [
         {value: '', label: '全部'},
-        {value: '4', label: '店主特权轮播图'},
-        {value: '6', label: '试用中心轮播图'}
+        {value: 4, label: '店主特权轮播图'},
+        {value: 6, label: '试用中心轮播图'},
+        {value: 7, label: '店主特权广告图'},
         ],
       options2: [
         {value: '', label: '全部'},
-        {value: '3', label: '无'},
-        {value: '9', label: '活动'},
-        {value: '10', label: '特卖 '},
-        {value: '13', label: '试用中心'},
-        {value: '15', label: '特卖详情'},
-        {value: '16', label: '精品详情'},
-        {value: '17', label: '整点抢商品详情'}
+        {value: 3, label: '无'},
+        {value: 9, label: '活动'},
+        {value: 10, label: '特卖 '},
+        {value: 13, label: '试用中心'},
+        {value: 15, label: '特卖详情'},
+        {value: 16, label: '精品详情'},
+        {value: 17, label: '整点抢商品详情'}
         ],
       value: '',
       value2: ''

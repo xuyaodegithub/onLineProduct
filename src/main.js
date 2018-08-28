@@ -17,6 +17,7 @@ import 'quill/dist/quill.bubble.css'
 Vue.prototype.$http = axios
 Vue.use(vueQuillEditor)
 Vue.use(ElementUI)
+Vue.config.productionTip = false
 //cookie
 Vue.prototype.$Getcookie=function getCookie(argument) {
   var arrCookie = document.cookie.split(";");
@@ -38,9 +39,6 @@ Vue.prototype.$Setcookie=function setCookie(name, value) {
   return true;
 };
 
-
-
-Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 const vm = new Vue({

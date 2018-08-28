@@ -142,7 +142,8 @@
         dialogImageUrl:'',
         options: [
           {value: 4, label: '店主特权轮播图'},
-          {value: 6, label: '试用中心轮播图'}
+          {value: 6, label: '试用中心轮播图'},
+          {value: 7, label: '店主特权广告图'}
         ],
         options2: [
           {value: 3, label: '无'},

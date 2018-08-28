@@ -7,14 +7,16 @@ import qs from 'qs';
 import * as types from './type';
 import { Message } from 'element-ui';
 //import { Loading } from 'element-ui';
+import state from './state'
 import api from './api'
-var num=1
-var textCs=''
-var textCsTow=''
-var textCsYHQ=''
-if(num===0){
+
+// var num=0
+var textCs=state.editor.axiosUrl
+var textCsTow=state.editor.axiosUrl
+var textCsYHQ=state.editor.axiosUrl
+/*if(num===0){
   textCs='/apis'
-  textCsTow=/*'/apis'*/'http://test-admin-h5.olquan.cn'
+  textCsTow=/!*'/apis'*!/'http://test-admin-h5.olquan.cn'
   textCsYHQ='http://test-admin-h5.olquan.cn'
 }else{
   textCs='http://api-admin.olquan.cn'
@@ -22,7 +24,7 @@ if(num===0){
   textCsTow='http://ol-h5-admin.olquan.cn'
   textCsYHQ='http://ol-h5-admin.olquan.cn'
   //textCsTow=''
-}
+}*/
 const actions = {//actions,mutations内的方法只能有两个参数，一个是context一个是外部调用时传参，event事件对象参数除外
   //弹框修改属性
   popoverAlert(context,where,event){
