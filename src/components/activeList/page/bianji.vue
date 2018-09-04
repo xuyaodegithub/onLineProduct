@@ -223,6 +223,13 @@ export default {
         subassembly: this.addCommodityResult,
         background: this.backColorResult
       }
+      obj.subassembly.forEach((val,index) =>{
+        console.log(val.modelSampleCode)
+        if(val.modelSampleCode ==='catlist1'){
+          obj.subassembly.splice(index,1)
+          obj.subassembly.push(val)
+        }
+      })
       let data={
         id:this.activeChangeResult.obj.id,
         data:JSON.stringify(obj)
@@ -320,6 +327,7 @@ width: 12%;
     /*margin-left: 100px;*/
     flex:0.9;
     height:100%;
+    overflow-x: hidden;
     /*padding-right:40px;*/
   }
   #bianji .right > label{
