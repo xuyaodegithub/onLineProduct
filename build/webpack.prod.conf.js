@@ -1,4 +1,5 @@
 'use strict'
+//这个配置文件是webpack生产环境的核心配置文件
 const path = require('path')
 const utils = require('./utils')
 const webpack = require('webpack')

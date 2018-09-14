@@ -135,7 +135,7 @@
           <el-table-column
             label="价格">
             <template slot-scope="scope">
-              <span>{{ scope.row.salePrice }}</span>
+              <span>{{ scope.row.appPriceView }}</span>
             </template>
           </el-table-column>
           <el-table-column
@@ -359,7 +359,8 @@
           for(let i=0;i<rows.length;i++){
             let obj={}
             obj.productName=rows[i].productName
-            obj.productId=rows[i].productId
+//            obj.productId=rows[i].productId
+            obj.goldenBean=rows[i].commission ? rows[i].commission : 0
             obj.image=rows[i].image
             obj.type=2
             obj.productType=1
@@ -409,7 +410,9 @@
         let keynum=0
         let obj={}
         obj.productName=rows.productName
-        obj.productId=rows.productId
+//        obj.productId=rows.productId
+        obj.goldenBean=rows.commission ? rows.commission : 0
+//        obj.goldenBean=0
         obj.image=rows.image
         obj.type=2
         obj.productType=1

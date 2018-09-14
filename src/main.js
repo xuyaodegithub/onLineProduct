@@ -18,6 +18,7 @@ Vue.prototype.$http = axios
 Vue.use(vueQuillEditor)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+Vue.config.silent = true//取消 Vue 所有的日志与警告。
 //cookie
 Vue.prototype.$Getcookie=function getCookie(argument) {
   var arrCookie = document.cookie.split(";");
@@ -88,7 +89,8 @@ Vue.filter('changeTime',function(val){
   }
 });
 //拖拽
-Vue.directive('drag',function(event){
+Vue.directive('drag',function(event, binding){
+  // console.log(binding.value.color)//binding参数是绑定元素时设置的值、、绑定v-drag={...}
   var oDiv = event;
   oDiv.onmousedown = function(ev){
     if(ev.target.className=='popover-head'){

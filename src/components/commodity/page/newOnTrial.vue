@@ -165,8 +165,8 @@
         </el-upload>
       </el-form-item>
       <el-form-item label="推广奖励:" required v-if="typeTrial!==3">
-        <el-input v-model="promotionAward" size="small"></el-input>
-        <span style="font-size: 12px;color: orange;margin-left: 10px;">（单位元）</span>
+        <el-input v-model="promotionAward" size="small" type="number"></el-input>
+        <span style="font-size: 12px;color: orange;margin-left: 10px;">（单位金豆）</span>
       </el-form-item>
       <el-form-item label="排序:" required>
         <el-input v-model="form.sort" size="small"></el-input>
@@ -465,6 +465,13 @@
 //         this.isTypeTrial=false
           data.startDate = this.isUpTime
           console.log(data.startDate)
+          if(this.promotionAward<10 || this.promotionAward%10 !==0){
+            this.$message({
+              message: '推广奖励必须大于10且是10的倍数',
+              type: 'warning'
+            })
+            return
+          }
           data.filter_S_promotionAward=this.promotionAward
           if(!data.indexImage){
             this.$message({

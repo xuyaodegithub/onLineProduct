@@ -118,7 +118,7 @@
           <el-upload
             v-if="commodityResult.contents.length>0"
             class="upload-demo"
-            action="/apis/admin/buildblocks/uploadImage"
+            action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
             :show-file-list="false"
             name="img"
             :on-success="upSuccessfirstClass">
