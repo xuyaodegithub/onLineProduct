@@ -384,7 +384,7 @@
       upSuccessfirst(response, file, fileList) {
         let obj = {}
         let oImg = new Image()
-        oImg.src = 'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
+        oImg.src = 'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result + '?x-oss-process=style/zipig'
         let that = this
         //this.commodityResult.contents[this.num].image='http://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
         oImg.onload = function () {
@@ -394,7 +394,7 @@
           that.commodityResult.contents[that.num].height=oImg.height*/
           obj.width = oImg.width
           obj.height = oImg.height
-          obj.image = 'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
+          obj.image = 'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result + '?x-oss-process=style/zipig'
           obj.isTrue = false
           that.commodityResult.contents.push(obj)
         }
@@ -403,14 +403,14 @@
       upSuccessfirstClass(response, file, fileList) {
         let obj = {}
         let oImg = new Image()
-        oImg.src = 'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
+        oImg.src = 'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result + '?x-oss-process=style/zipig'
         let that = this
         oImg.onload = function () {
           console.log('宽:' + oImg.width + ',' + '高:' + oImg.height)
           obj.width = oImg.width
           obj.height = oImg.height
           obj.classMore = 'classBanner'
-          obj.image = 'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
+          obj.image = 'https://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result + '?x-oss-process=style/zipig'
 //          that.commodityResult.contents[that.num].classBannerImg=obj
           that.$set(that.commodityResult.contents[that.num],'classBannerImg',obj)
         }
