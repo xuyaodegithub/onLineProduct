@@ -811,7 +811,9 @@ const result = { //接收请求后的数据
     salePriceView:'',
     marketPriceView:'',
     image:'',
-    toUrl:''
+    toUrl:'',
+    rightId:'',
+    rightName:''
   },
 //供应商优惠券列表
   StoreYHQListResult:[],

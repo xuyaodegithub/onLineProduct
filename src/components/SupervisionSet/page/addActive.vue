@@ -146,7 +146,7 @@
     },
     computed:{
       ...mapGetters([
-      'loading','listActiveResult'
+      'loading','listActiveResult','popoverAlive','CouponWithGoodsResult'
       ]),
     },
     methods: {
@@ -182,14 +182,25 @@
           let obj={
             togetherProductIds:'',
             productType:12,
-            productIds:row.id,
+//            productIds:row.id,
             marketPriceView:'',
             price:'',
-            productName:row.name,
+//            productName:row.name,
             costPriceView:'',//成本价
             salePriceView:'',//销售价
-            image:''//销售价
+            image:'',//销售价
           }
+        if(this.popoverAlive.SSSnum==='right'){
+          obj.rightName=row.name
+          obj.rightId=row.id
+          obj.productName=this.CouponWithGoodsResult.productName
+          obj.productIds=this.CouponWithGoodsResult.productIds
+        }else{
+          obj.productName=row.name
+          obj.productIds=row.id
+          obj.rightName=this.CouponWithGoodsResult.rightName
+          obj.rightId=this.CouponWithGoodsResult.rightId
+        }
           this.$store.commit('Coupon_With_Goods',obj)
           this.popoverAlert()
       }

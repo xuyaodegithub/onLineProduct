@@ -108,7 +108,7 @@
     },
     computed: {
       ...mapGetters([
-        'CouponWithGoodsResult', 'CouponWithGoodsResult'
+        'CouponWithGoodsResult'
       ]),
 
     },

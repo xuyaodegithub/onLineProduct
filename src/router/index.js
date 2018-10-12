@@ -19,6 +19,8 @@ import ProductIncomeDistribution from '@/components/SupervisionSet/subassembly/P
 import findToWatch from '@/components/SupervisionSet/subassembly/findToWatch.vue'
 //发现后台
 import indexchange from '@/components/otherPage/subassembly/indexchange.vue'
+import indexImg from '@/components/otherPage/subassembly/indexLRimg.vue'
+import jindouSet from '@/components/otherPage/subassembly/jindouSet.vue'
 
 Vue.use(Router)
 import find from '@/components/SupervisionSet/subassembly/findNumber.vue'
@@ -58,57 +60,65 @@ const router = new Router({
       component:StoreCountDetial
     }*/,
     {
-      path: '/Coupon-countDetial',
+      path: '/Coupon-countDetial',//优惠券管理
       name:"StoreCountDetial",
       component:StoreCountDetial
     },{
-      path: '/Saleofgoods',
+      path: '/Saleofgoods',//特卖商品管理
       name:"Saleofgoods",
       component:Saleofgoods
     },{
-      path: '/seachMenuList',
+      path: '/seachMenuList',//菜单管理
       name:"seachMenuList",
       component:seachMenuList
     },{
-      path: '/OnTrialManage',
+      path: '/OnTrialManage',//试用商品管理
       name:"OnTrialManage",
       component:OnTrialManage
     },{
-      path: '/supervisionIndex',
+      path: '/supervisionIndex',//开通经理设置
       name:"supervisionIndex",
       component:supervisionIndex
     },{
-      path: '/pinkSet',
+      path: '/pinkSet',//vip设置
       name:"pinkSet",
       component:pinkSet
     },{
-      path: '/starStatistics',
+      path: '/starStatistics',//明细经理统计
       name:"starStatistics",
       component:starStatistics
     },{
-      path: '/ProductIncomeDistribution',
+      path: '/ProductIncomeDistribution',//产品配置
       name:"ProductIncomeDistribution",
       component:ProductIncomeDistribution
     },{
-      path: '/find',
+      path: '/find',//发现账号管理
       name:"find",
       component:find
     },{
-      path: '/findMsg',
+      path: '/findMsg',//发现总列表
       name:"findMsg",
       component:findMsg
     },{
-      path: '/bossBuy',
+      path: '/bossBuy',//总监申请列表
       name:"bossBuy",
       component:bossBuy
     },{
-      path: '/findToWatch',
+      path: '/findToWatch',//发现审核
       name:"findToWatch",
       component:findToWatch
     },{
-      path: '/indexchange',
+      path: '/indexchange',//首页轮播图
       name:"indexchange",
       component:indexchange
+    },{
+      path: '/indexImg',//欢乐送左右图
+      name:"indexImg",
+      component:indexImg
+    },{
+      path: '/jindouSet',//金豆配置
+      name:"jindouSet",
+      component:jindouSet
     }
   ]
 })

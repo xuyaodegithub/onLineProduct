@@ -204,7 +204,18 @@ const servers = {
         sort:'',
         type:'',
         url:''
-      }
+      },
+      getMemberTaskListInfoMM:{
+        firstFollowPublicAccountGoldBean:'',
+        firstLoginInAppGoldBean:'',
+        firstExchangeSNRCGoldBean:'',
+        firstOrderGoldBean:'',
+        openStoreGoldBean:'',
+        publicFindGoldBean:'',
+        shareGoldBean:'',
+        newMemberGoldBean:'',
+        orderGoldBean:''
+      },
     },
     page: {
       //产品规格
@@ -245,7 +256,9 @@ const servers = {
       //会员列表
       accountNoListResult:[],
       //轮播图列表
-      indexListLunResult:[]
+      indexListLunResult:[],
+      //金豆配置
+      getMemberTaskListInfoResult:{}
     }
   },
   mutations: {
@@ -518,6 +531,21 @@ const servers = {
       state.editor.addAndUpdataListMM.url=data.url
       state.editor.addAndUpdataListMM.image=data.image
       state.editor.addAndUpdataListMM.linkType=data.linkType
+    },
+    //金豆配置
+    SET_MEMBER_TASK_LISTINFO(state,data){
+      state.editor.getMemberTaskListInfoMM.firstExchangeSNRCGoldBean=data.firstExchangeSNRCGoldBean
+      state.editor.getMemberTaskListInfoMM.firstFollowPublicAccountGoldBean=data.firstFollowPublicAccountGoldBean
+      state.editor.getMemberTaskListInfoMM.firstLoginInAppGoldBean=data.firstLoginInAppGoldBean
+      state.editor.getMemberTaskListInfoMM.firstOrderGoldBean=data.firstOrderGoldBean
+      state.editor.getMemberTaskListInfoMM.newMemberGoldBean=data.newMemberGoldBean
+      state.editor.getMemberTaskListInfoMM.openStoreGoldBean=data.openStoreGoldBean
+      state.editor.getMemberTaskListInfoMM.orderGoldBean=data.orderGoldBean
+      state.editor.getMemberTaskListInfoMM.publicFindGoldBean=data.publicFindGoldBean
+      state.editor.getMemberTaskListInfoMM.shareGoldBean=data.shareGoldBean
+    },
+    GET_MEMBER_TASK_LISTINFO(state,res){
+      state.page.getMemberTaskListInfoResult=res.data.result
     }
   },
   getters: {
@@ -587,6 +615,10 @@ const servers = {
     //轮播图列表
     indexListLunResult:state =>{
       return state.page.indexListLunResult
+    },
+    //金豆配置
+    getMemberTaskListInfoResult: state => {
+      return state.page.getMemberTaskListInfoResult
     }
   },
   actions: {
@@ -601,8 +633,8 @@ const servers = {
         params: state.editor[funUrl[2]]
       }).then(function (res) {
         //console.log(res)
-      commit('changeloading')
-        if (res.data.length > 0) {
+        commit('changeloading')
+        if (res.data.length > 0 || res.data.code===0) {
           commit(funUrl[1], res)
         } else {
           commit(funUrl[1], res)
@@ -647,9 +679,9 @@ const servers = {
       })
     },
     //特卖排序
-    plusProductSortSetActions({dispatch, state, commit, rootState}, data){
-        commit('PLUS_PRODUCT_PUSH',data)
-        dispatch('GoodsMsgPost',['/admin/plus/product/updateSort','','productNewMM'])
+    plusProductSortSetActions({dispatch, state, commit, rootState}, data) {
+      commit('PLUS_PRODUCT_PUSH', data)
+      dispatch('GoodsMsgPost', ['/admin/plus/product/updateSort', '', 'productNewMM'])
     },
     //特卖置顶
     ProductDoStickActions({dispatch, state, commit, rootState}, data) {
@@ -916,61 +948,61 @@ const servers = {
     },
 
 //各种后续操作封装
-    savePostAsk ({dispatch, state, commit, rootState},funUrl) {
-      axios.defaults.baseURL =rootState.editor.axiosUrl;
+    savePostAsk({dispatch, state, commit, rootState}, funUrl) {
+      axios.defaults.baseURL = rootState.editor.axiosUrl;
       axios({
         method: 'post',
-        url:funUrl[0],
+        url: funUrl[0],
         dataType: 'JSON',
         data: qs.stringify(state.editor[funUrl[2]])
-      }).then(function(res){
-        if(res.data==='success'){
+      }).then(function (res) {
+        if (res.data === 'success' || res.data.code===0) {
           Message({
-            message:'操作成功',
-            type:'success'
+            message: '操作成功',
+            type: 'success'
           })
-          dispatch(funUrl[3],state.editor[funUrl[4]])
-        }else{
+          dispatch(funUrl[3], state.editor[funUrl[4]])
+        } else {
           Message({
-            message:'操作失败',
-            type:'error'
+            message: '操作失败',
+            type: 'error'
           })
         }
       })
-        .catch(function(err){
+        .catch(function (err) {
 
 
         })
     },
 //get封装
-    findMsgGet ({dispatch, state, commit, rootState},funUrl) {
-      axios.defaults.baseURL =rootState.editor.axiosUrl;
+    findMsgGet({dispatch, state, commit, rootState}, funUrl) {
+      axios.defaults.baseURL = rootState.editor.axiosUrl;
       axios({
         method: 'get',
-        url:funUrl[0],
+        url: funUrl[0],
         dataType: 'JSON',
         params: state.editor[funUrl[2]]
-      }).then(function(res){
+      }).then(function (res) {
         //console.log(res)
         // context.commit('changeloading')
-        if(res.data.code===0){
-          if(funUrl[1]){
-            commit(funUrl[1],res)
+        if (res.data.code === 0) {
+          if (funUrl[1]) {
+            commit(funUrl[1], res)
           }
           Message({
-            message:'操作成功',
-            type:'success'
+            message: '操作成功',
+            type: 'success'
           })
-          dispatch('findAccountActions',state.editor.storeGiftBagListMM)
-          dispatch('findMsgListActions',state.editor.findTotalListMM)
-        }else{
+          dispatch('findAccountActions', state.editor.storeGiftBagListMM)
+          dispatch('findMsgListActions', state.editor.findTotalListMM)
+        } else {
           Message({
-            message:res.data.message,
-            type:'error'
+            message: res.data.message,
+            type: 'error'
           })
         }
       })
-        .catch(function(err){
+        .catch(function (err) {
           // context.commit('changeloading')
           //console.log(err)
         })
@@ -1007,8 +1039,8 @@ const servers = {
     },
     //删除某个文件
     deleteOnlyfileIdActions({commit, dispatch, state, rootState}, data) {
-      axios.get(rootState.editor.axiosUrl+'/admin/find/deleteFile', {
-        params:{fileId: data.fileId}
+      axios.get(rootState.editor.axiosUrl + '/admin/find/deleteFile', {
+        params: {fileId: data.fileId}
       }).then(res => {
         if (res.data.code === 0) {
           Message({
@@ -1039,8 +1071,8 @@ const servers = {
             message: '导入成功',
             type: 'success'
           });
-         dispatch('applySupervisorListActions',state.editor.applySupervisorListMM)
-        }else{
+          dispatch('applySupervisorListActions', state.editor.applySupervisorListMM)
+        } else {
           Message({
             showClose: true,
             message: res.message,
@@ -1058,9 +1090,9 @@ const servers = {
       )
     },
     //会员列表
-    accountNoActions({commit, dispatch, state, rootState},data){
-      commit('SET_ACCOUNT_NO',data)
-      dispatch('GoodsMsgGet',['/admin/member/list','GET_ACCOUNT_NO','accountNoMM'])
+    accountNoActions({commit, dispatch, state, rootState}, data) {
+      commit('SET_ACCOUNT_NO', data)
+      dispatch('GoodsMsgGet', ['/admin/member/list', 'GET_ACCOUNT_NO', 'accountNoMM'])
     },
     //会员发现账号删除
     huiyuandeleteActions({commit, dispatch, state, rootState}, data) {
@@ -1073,7 +1105,7 @@ const servers = {
             message: '删除成功',
             type: 'success'
           });
-          dispatch('findAccountActions',state.editor.storeGiftBagListMM)
+          dispatch('findAccountActions', state.editor.storeGiftBagListMM)
         }
       }).catch(
         (error) => {
@@ -1086,20 +1118,29 @@ const servers = {
       )
     },
     //轮播图列表
-    indexListLunActions({commit, dispatch, state, rootState},data){
-      commit('SET_INDEX_LIST_LUN',data)
-      dispatch('GoodsMsgGet',['/admin/index/list','GET_INDEX_LIST_LUN','indexListLunMM'])
+    indexListLunActions({commit, dispatch, state, rootState}, data) {
+      commit('SET_INDEX_LIST_LUN', data)
+      dispatch('GoodsMsgGet', ['/admin/index/list', 'GET_INDEX_LIST_LUN', 'indexListLunMM'])
 
     },
     //删除轮播图
-    deleteindexLunActions({commit, dispatch, state, rootState},data){
-      commit('SET_FIND_ONLY_ID',data)
-      dispatch('savePostAsk',['/admin/index/delete','','findOnlyIdMM','indexListLunActions','indexListLunMM'])
+    deleteindexLunActions({commit, dispatch, state, rootState}, data) {
+      commit('SET_FIND_ONLY_ID', data)
+      dispatch('savePostAsk', ['/admin/index/delete', '', 'findOnlyIdMM', 'indexListLunActions', 'indexListLunMM'])
     },
     //新增修改
-    addOrUpdataActions({commit, dispatch, state, rootState},data){
-      commit('SET_ADDANDUPDATA_LIST',data)
-      dispatch('savePostAsk',['/admin/index/save','','addAndUpdataListMM','indexListLunActions','indexListLunMM'])
+    addOrUpdataActions({commit, dispatch, state, rootState}, data) {
+      commit('SET_ADDANDUPDATA_LIST', data)
+      dispatch('savePostAsk', ['/admin/index/save', '', 'addAndUpdataListMM', 'indexListLunActions', 'indexListLunMM'])
+    },
+    //金豆配置
+    getMemberTaskListInfoActions({commit, dispatch, state, rootState}, data) {
+      // commit('SET_MEMBER_TASK_LISTINFO', data)
+      dispatch('GoodsMsgGet', ['/admin/member/getMemberTaskListInfo', 'GET_MEMBER_TASK_LISTINFO', ''])
+    },
+    updataMemberTaskListInfoActions({commit, dispatch, state, rootState}, data) {
+      commit('SET_MEMBER_TASK_LISTINFO', data)
+      dispatch('savePostAsk',['/admin/member/updateMemberTaskGoldbean','','getMemberTaskListInfoMM','getMemberTaskListInfoActions',''])
     }
   }
 }

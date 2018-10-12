@@ -76,6 +76,7 @@
         {value: 4, label: '店主特权轮播图'},
         {value: 6, label: '试用中心轮播图'},
         {value: 7, label: '店主特权广告图'},
+        {value: 10, label: '欢乐送首页轮播图'},
         ],
       options2: [
         {value: '', label: '全部'},

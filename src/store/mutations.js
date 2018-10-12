@@ -776,6 +776,8 @@ const mutations = {//mutations内是改变state内的值得作用
     state.result.CouponWithGoodsResult.marketPriceView=data.marketPriceView
     state.result.CouponWithGoodsResult.image=data.image
     state.result.CouponWithGoodsResult.toUrl=data.toUrl
+    state.result.CouponWithGoodsResult.rightId=data.rightId
+    state.result.CouponWithGoodsResult.rightName=data.rightName
   },
   //供应商优惠券列表
   [types.SET_STORE_YHQLIST](state,data){

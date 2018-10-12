@@ -70,7 +70,7 @@
          <el-upload
            class="upload-demo"
            name="img"
-           action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
+           action="/apis/admin/buildblocks/uploadImage"
            :on-success="upSuccessfirst"
            :show-file-list="false">
            <el-button size="mini" type="primary" style="margin-top: 30px;margin-left: 15px;" >点击上传</el-button>
@@ -143,7 +143,8 @@
         options: [
           {value: 4, label: '店主特权轮播图'},
           {value: 6, label: '试用中心轮播图'},
-          {value: 7, label: '店主特权广告图'}
+          {value: 7, label: '店主特权广告图'},
+          {value: 10, label: '欢乐送首页轮播图'}
         ],
         options2: [
           {value: 3, label: '无'},

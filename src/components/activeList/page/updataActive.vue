@@ -1,6 +1,7 @@
 <template>
   <div id="newActive">
-    <p><label>活动名称:</label><el-input v-model="name" placeholder="请输入活动名称" size="small"></el-input></p>
+    <p><label>活动名称:</label><el-input v-model="name" placeholder="请输入活动名称" size="small"></el-input>
+      <span style="font-size: 12px;color: orange;margin-left: 10px;">（必填项）</span></p>
     <p><label>活动编号:</label><el-input v-model="code" placeholder="请输入活动编号" size="small"></el-input></p>
     <p><label>活动时间:</label><el-date-picker
       size="small"
@@ -12,8 +13,10 @@
       end-placeholder="结束日期"
       align="right">
     </el-date-picker>
+      <span style="font-size: 12px;color: orange;margin-left: 10px;">（必填项）</span>
     </p>
     <p><label>活动分享图片:</label><el-input v-model="shareImg" size="small" style="width: 400px;"></el-input>
+      <span style="font-size: 12px;color: orange;margin-left: 10px;">（必填项）</span>
       <el-upload
         class="upload-demo"
         ref="uploadfirst"
@@ -28,8 +31,10 @@
         <el-button style="margin-left: 10px;" size="mini" type="primary" @click="submitUploadfirst" plain>确认上传</el-button>
       </el-upload>
     </p>
-    <p><label>活动分享标题:</label><el-input v-model="shareTitle" placeholder="请输入活动标题" size="small"></el-input></p>
-    <p><label style="vertical-align: top">活动分享描述:</label><el-input type="textarea" v-model="memo" placeholder="请输入活动描述" size="small" style="font-size: 12px;"></el-input></p>
+    <p><label>活动分享标题:</label><el-input v-model="shareTitle" placeholder="请输入活动标题" size="small"></el-input>
+      <span style="font-size: 12px;color: orange;margin-left: 10px;">（必填项）</span></p>
+    <p><label style="vertical-align: top">活动分享描述:</label><el-input type="textarea" v-model="memo" placeholder="请输入活动描述" size="small" style="font-size: 12px;"></el-input>
+      <span style="font-size: 12px;color: orange;margin-left: 10px;">（必填项）</span></p>
     <p  class="tep"><label>活动类型:</label>
       <el-radio-group v-model="input4">
         <el-radio :label=1>微信</el-radio>
@@ -111,8 +116,14 @@ export default {
         type:this.input4,
         start:this.updata2
       }
-      console.log(this.activeChangeResult)
-     this.updateActiveActions(data)
+      if(this.value4Result.length>0 && data.memo && data.name && data.shareImg && data.shareTitle){
+        this.updateActiveActions(data)
+      }else{
+        this.$message({
+          message:'请把信息填写完整',
+          type:'warning'
+        })
+      }
     },
     dateformat(data) {
       if(data){

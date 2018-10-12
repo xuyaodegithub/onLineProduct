@@ -95,6 +95,7 @@
     changeType(val){
       if(val===4) return '店主特权轮播图';
       else if(val===6) return '试用中心轮播图';
+      else if(val===10) return '欢乐送首页轮播图';
       else return '店主特权广告图'
     },
       chnageStatus(val){
