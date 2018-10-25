@@ -144,7 +144,6 @@
         this.dialogImageUrl='http://ol-quan2017.oss-cn-shanghai.aliyuncs.com/' + response.result
       },
       onEditorReady(editor) {
-
       },
 
     }

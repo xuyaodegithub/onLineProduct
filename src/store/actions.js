@@ -6,7 +6,6 @@ import axios from 'axios'
 import qs from 'qs';
 import * as types from './type';
 import { Message } from 'element-ui';
-//import { Loading } from 'element-ui';
 import state from './state'
 import api from './api'
 

@@ -111,11 +111,11 @@ const router = new Router({
       path: '/indexchange',//首页轮播图
       name:"indexchange",
       component:() => import(/* webpackChunkName: "indexchange" */ '@/components/otherPage/subassembly/indexchange.vue')
-    },/*{
+    },{
       path: '/indexImg',//欢乐送左右图
       name:"indexImg",
-      component:indexImg
-    },*/{
+      component:() => import(/* webpackChunkName: "indexchange" */ '@/components/otherPage/subassembly/indexLRimg.vue')
+    },{
       path: '/jindouSet',//金豆配置
       name:"jindouSet",
       component:() => import(/* webpackChunkName: "jindouSet" */ '@/components/otherPage/subassembly/jindouSet.vue')

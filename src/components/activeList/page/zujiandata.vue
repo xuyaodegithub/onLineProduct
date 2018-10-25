@@ -1,6 +1,6 @@
 <template>
   <div id="zujianData">
-    <div v-if="commodityResult.modelSampleCode !=='catlist1'" class="banner">
+    <div v-if="commodityResult.modelSampleCode !=='catlist1' && commodityResult.modelSampleCode!=='productf5'" class="banner">
       <div class="banner-t">
         <p><label>组件名称:</label>
           <el-input v-model="commodityResult.name" placeholder="请输入内容" size="mini"></el-input>
@@ -30,7 +30,7 @@
             </li>
           </ul>
           <el-upload
-            action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
+            action="/apis/admin/buildblocks/uploadImage"
             name="img"
             :multiple=true
             :show-file-list=false
@@ -88,6 +88,30 @@
         </div>
       </div>
       <!--<p> <el-button type="primary" plain size="mini" @click="addimg()">修改图片</el-button></p>-->
+    </div>
+    <div class="productf5" v-else-if="commodityResult.modelSampleCode ==='productf5'" style="height: 100%;">
+      <div class="banner-t">
+        <p><label>组件名称:</label>
+          <el-input v-model="commodityResult.name" placeholder="请输入内容" size="mini"></el-input>
+        </p>
+        <p><label>组件类型:</label><span>产品等分（最多3等分）</span></p>
+        <p style="margin:0 0 10px 150px;">
+          <i class="el-icon-delete cu" style="margin-left: 5px" @click="DeleteP()"></i>
+          <i class="el-icon-caret-right cu" @click="moveLRP(1)"></i>
+          <i class="el-icon-caret-left cu" @click="moveLRP(2)"></i>
+        </p>
+      </div>
+      <div style="display: flex;margin-top: 30px;align-items: center;">
+        <label>已关联产品：</label>
+        <ul v-if="commodityResult.contents.length>0" style="display: flex;padding: 5px;" >
+          <li v-for="(item,index) in commodityResult.contents" style="margin:0 10px;width: 120px;text-align: center;" :class="{'activef5' : f5key===index}" @click="f5key=index" class="cu">
+            <img :src="item.image" alt="" style="width: 100%;">
+            <i class="over" style="display:block;margin-top: 15px;">{{item.productName}}</i>
+          </li>
+        </ul>
+        <el-button size="mini" type="primary"  plain @click="choseProductf5()" style="height: 36px;">关联产品</el-button>
+        <span style="font-size: 12px;color:orange;">&nbsp&nbsp&nbsp(产品最少关联2个，最多三个)</span>
+      </div>
     </div>
     <div id="goodChangeList" v-else>
       <div class="banner-t">
@@ -207,6 +231,7 @@
     name: 'huodong',
     data() {
       return {
+        f5key:0,
         classImg:'',
         DetailOrOther: true,
         openOrclose: true,
@@ -262,6 +287,7 @@
     watch: {
       commodityResult: {
         handler(curVal, oldVal) {
+          this.f5key = 0
           this.lineData = curVal.marginData
           if (curVal.name !== oldVal.name && curVal.modelSampleCode !== 'catlist1') {
             this.radio2 = ''
@@ -558,7 +584,7 @@
       },
       addPucter() {
         if (this.commodityResult.contents.length > 0) {
-          this.popoverAlert('vAddGoods')
+          this.popoverAlert(['vAddGoods','catlist1'])
         } else {
           this.$message({
             message: '请先创建分类',
@@ -799,6 +825,37 @@
       },
       CloseImg(){
           this.commodityResult.contents[this.addDataNumResult].classBannerImg={}
+      },
+      choseProductf5(){
+        this.popoverAlert(['vAddGoods','productf5'])
+      },
+      DeleteP(){
+        if(this.commodityResult.contents.length>0) this.commodityResult.contents.splice(this.f5key,1)
+        else this.$message({type:'warning',message:'请先关联商品'})
+      },
+      moveLRP(key){
+        const item=this.commodityResult.contents[this.f5key]
+        if(key===1){
+          if(this.f5key===this.commodityResult.contents.length-1){
+            this.commodityResult.contents.splice(this.f5key,1)
+            this.commodityResult.contents.unshift(item)
+            this.f5key=0
+          }else{
+            this.commodityResult.contents.splice(this.f5key,1)
+            this.commodityResult.contents.splice(this.f5key+1,0,item)
+            this.f5key++
+          }
+        }else{
+          if(this.f5key===0){
+            this.commodityResult.contents.splice(this.f5key,1)
+            this.commodityResult.contents.push(item)
+            this.f5key=this.commodityResult.contents.length-1
+          }else{
+            this.commodityResult.contents.splice(this.f5key,1)
+            this.commodityResult.contents.splice(this.f5key-1,0,item)
+            this.f5key--
+          }
+        }
       }
     }
   }
@@ -876,7 +933,7 @@
     height: 68px;
   }
 
-  #zujianData .img > p > i {
+  #zujianData .img > p > i ,.productf5 p i{
     float: right;
     font-size: 24px;
   }
@@ -941,5 +998,12 @@
 
   #zujianData .anchor-b .el-input {
     width: 380px;
+  }
+  .activef5{
+    border:1px solid red;
+    /*transform: scale(1.1,1.1);*/
+  }
+  .productf5 ul li{
+    /*transition: all 1s linear;*/
   }
 </style>

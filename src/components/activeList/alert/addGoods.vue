@@ -33,7 +33,7 @@
         <el-radio :label=0 style="width: auto;">待审核</el-radio>
         <el-radio :label=1 style="width: auto;">已通过</el-radio>
       </el-radio-group></p>
-      <P v-if="commodityResult.modelSampleCode !=='catlist1'"><label>商品类型:</label>
+      <P v-if="commodityResult.modelSampleCode !=='catlist1' && commodityResult.modelSampleCode !=='productf5'"><label>商品类型:</label>
         <el-select v-model="radiosResult" placeholder="请选择" size="mini" style="width: 160px;"  :disabled="radiosResult!=='积分试用商品'" v-if="radiosResult!=='积分试用商品' && radiosResult!=='试用商品'">
           <el-option
             v-for="item in options"
@@ -51,7 +51,7 @@
           </el-option>
         </el-select>
       </P>
-      <P v-if="commodityResult.modelSampleCode ==='catlist1'"><label>商品类型:</label>
+      <P v-if="commodityResult.modelSampleCode ==='catlist1' || commodityResult.modelSampleCode==='productf5'"><label>商品类型:</label>
         <el-select v-model="radio2" placeholder="请选择" size="mini" style="width: 160px;">
           <el-option
             v-for="item in options"
@@ -61,10 +61,20 @@
           </el-option>
         </el-select>
       </P>
-      <p style="margin: 0" v-if="commodityResult.modelSampleCode !=='catlist1'"><el-button type="primary" plain size="mini" style="" @click="seachData()">搜索</el-button></p>
-      <p style="margin: 0"  v-if="commodityResult.modelSampleCode ==='catlist1'"><el-button type="primary" plain size="mini" style="" @click="seachDataTwo()">搜索</el-button></p>
+      <!--<P v-if="commodityResult.modelSampleCode ==='productf5'"><label>商品类型:</label>
+        <el-select v-model="radio2" placeholder="请选择" size="mini" style="width: 160px;">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.label">
+          </el-option>
+        </el-select>
+      </P>-->
+      <p style="margin: 0" v-if="commodityResult.modelSampleCode !=='catlist1' && commodityResult.modelSampleCode !=='productf5'"><el-button type="primary" plain size="mini" style="" @click="seachData()">搜索</el-button></p>
+      <p style="margin: 0"  v-if="commodityResult.modelSampleCode ==='catlist1' || commodityResult.modelSampleCode ==='productf5'"><el-button type="primary" plain size="mini" style="" @click="seachDataTwo()">搜索</el-button></p>
     </div>
-    <div v-if="commodityResult.modelSampleCode !=='catlist1'">
+    <div v-if="commodityResult.modelSampleCode !=='catlist1' && commodityResult.modelSampleCode !=='productf5' ">
       <div v-if="radiosResult==='普通商品'">
         <el-table
           @row-click="addGoodsImg"
@@ -159,7 +169,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <div style="margin: 20px 0 0 10px;">
+        <div style="margin: 20px 0 0 10px;" v-if="commodityResult.modelSampleCode ==='catlist1'">
           <!--<el-button type="primary" plain size="mini" @click="toggleSelection(getDataListResulr.rows)">批量选择</el-button>-->
           <el-button type="primary" plain size="mini" @click="morePull(multipleSelection)">批量添加</el-button>
         </div>
@@ -323,24 +333,24 @@
     computed:{
       ...mapGetters([
        'radiosResult','ImgnumKeyResult','addDataNumResult','commodityResult','getDataListResulr','loading','productlistResult','freeUseListResult','scoreBuyListResult',
-        'plusProductListResult'
+        'plusProductListResult','popoverAlive'
       ]),
       objNum:function(){
-        if(this.commodityResult.modelSampleCode !=='catlist1' && this.radiosResult==='普通商品'){
+        if(this.commodityResult.modelSampleCode !=='catlist1' && this.commodityResult.modelSampleCode !=='productf5' && this.radiosResult==='普通商品'){
           return this.getDataListResulr.total
-        }else if(this.commodityResult.modelSampleCode !=='catlist1' && this.radiosResult==='拼团商品'){
+        }else if(this.commodityResult.modelSampleCode !=='catlist1' && this.commodityResult.modelSampleCode !=='productf5'&& this.radiosResult==='拼团商品'){
           return this.productlistResult.total
-        }else if(this.commodityResult.modelSampleCode !=='catlist1' && this.radiosResult==='专享商品'){
+        }else if(this.commodityResult.modelSampleCode !=='catlist1' && this.commodityResult.modelSampleCode !=='productf5' && this.radiosResult==='专享商品'){
           return this.plusProductListResult.total
-        }else if(this.commodityResult.modelSampleCode !=='catlist1' && this.radiosResult==='试用商品'){
+        }else if(this.commodityResult.modelSampleCode !=='catlist1' && this.commodityResult.modelSampleCode !=='productf5' && this.radiosResult==='试用商品'){
           return this.freeUseListResult.total
-        }else if(this.commodityResult.modelSampleCode ==='catlist1' && this.radio2==='普通商品'){
+        }else if((this.commodityResult.modelSampleCode ==='catlist1' || this.commodityResult.modelSampleCode ==='productf5') && this.radio2==='普通商品'){
           return this.getDataListResulr.total
-        }else if(this.commodityResult.modelSampleCode ==='catlist1' && this.radio2==='拼团商品'){
+        }else if((this.commodityResult.modelSampleCode ==='catlist1' || this.commodityResult.modelSampleCode ==='productf5') && this.radio2==='拼团商品'){
           return this.productlistResult.total
-        }else if(this.commodityResult.modelSampleCode ==='catlist1' && this.radio2==='专享商品'){
+        }else if((this.commodityResult.modelSampleCode ==='catlist1' || this.commodityResult.modelSampleCode ==='productf5') && this.radio2==='专享商品'){
           return this.plusProductListResult.total
-        }else if(this.commodityResult.modelSampleCode ==='catlist1' && this.radio2==='试用商品'){
+        }else if((this.commodityResult.modelSampleCode ==='catlist1' || this.commodityResult.modelSampleCode ==='productf5') && this.radio2==='试用商品'){
           return this.freeUseListResult.total
         }
       },
@@ -359,14 +369,13 @@
           for(let i=0;i<rows.length;i++){
             let obj={}
             obj.productName=rows[i].productName
-//            obj.productId=rows[i].productId
             obj.goldenBean=rows[i].commission ? rows[i].commission : 0
-            obj.image=rows[i].image
             obj.type=2
             obj.productType=1
             obj.productId=rows[i].id
             obj.marketPriceView=rows[i].marketPriceView
             obj.salePriceView=rows[i].salePriceView
+            obj.image=rows[i].image
             if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(obj)) === -1){
                /* obj.type=21
                 obj.productType=9
@@ -410,16 +419,29 @@
         let keynum=0
         let obj={}
         obj.productName=rows.productName
-//        obj.productId=rows.productId
         obj.goldenBean=rows.commission ? rows.commission : 0
-//        obj.goldenBean=0
-        obj.image=rows.image
         obj.type=2
         obj.productType=1
         obj.productId=rows.id
         obj.marketPriceView=rows.marketPriceView
         obj.salePriceView=rows.salePriceView
-            if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(obj)) === -1){
+        obj.image=rows.image
+        if(this.popoverAlive.SSSnum==='productf5'){
+          if(this.commodityResult.contents.length<3){
+            this.commodityResult.contents.push(obj)
+            this.$message({
+              type:'success',
+              message:'添加成功'
+            })
+          }else{
+            this.$message({
+              message:'最多三个产品',
+              type:'warning'
+            })
+          }
+          return
+        }
+        if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(obj)) === -1){
               // if(this.commodityResult.contents[this.addDataNumResult].dataList.indexOf(rows[i]) === -1){
 //              let obj={}
 //              obj.productName=rows.productName

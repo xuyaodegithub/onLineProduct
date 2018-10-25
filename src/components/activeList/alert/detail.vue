@@ -44,6 +44,14 @@
               <!--<img v-for="itemSon in item.contents" v-if="item.contents.length==4" style="width: 25%;"  :src='itemSon.image'/>-->
               <!--<img v-for="itemSon in item.contents" v-if="item.contents.length==5" style="width: 20%;"  :src='itemSon.image'/>-->
           </div>
+          <div v-if="item.modelSampleCode=='productf5'" class="img">
+              <div v-for="(itemSon,index) in item.contents" v-if="item.contents.length===2" style="flex: 1;">
+                <img :src="itemSon.image" alt="">
+              </div>
+            <div v-for="(itemSon,index) in item.contents" v-if="item.contents.length===3" style="flex:1;">
+              <img :src="itemSon.image" alt="">
+            </div>
+          </div>
         </div>
 
         <!--分类-->

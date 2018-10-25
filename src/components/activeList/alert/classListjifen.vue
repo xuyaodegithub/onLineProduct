@@ -61,7 +61,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <div style="margin: 20px 0 0 10px;">
+    <div style="margin: 20px 0 0 10px;"  v-if="commodityResult.modelSampleCode ==='catlist1'">
       <!--<el-button type="primary" plain size="mini" @click="toggleSelection(scoreBuyListResult.rows)">批量选择</el-button>-->
       <el-button type="primary" plain size="mini" @click="morePull(multipleSelection)">批量添加</el-button>
     </div>
@@ -201,7 +201,7 @@
     },
     computed:{
       ...mapGetters([
-       'plusProductListResult','addDataNumResult','commodityResult','getDataListResulr','loading','productlistResult','freeUseListResult','scoreBuyListResult','radiosResult'
+      'popoverAlive','plusProductListResult','addDataNumResult','commodityResult','getDataListResulr','loading','productlistResult','freeUseListResult','scoreBuyListResult','radiosResult'
       ]),
     },
     methods: {
@@ -269,7 +269,22 @@
         obj.productType=9
         obj.marketPriceView=rows.marketPrice
         obj.salePriceView=rows.price
-        obj.commission=rows.commission
+        obj.commission=rows.commission ? rows.commission : 0
+        if(this.popoverAlive.SSSnum==='productf5'){
+          if(this.commodityResult.contents.length<3){
+            this.commodityResult.contents.push(obj)
+            this.$message({
+              type:'success',
+              message:'添加成功'
+            })
+          }else{
+            this.$message({
+              message:'最多三个产品',
+              type:'warning'
+            })
+          }
+          return
+        }
         if(JSON.stringify(this.commodityResult.contents[this.addDataNumResult].dataList).indexOf(JSON.stringify(obj)) === -1){
           this.commodityResult.contents[this.addDataNumResult].dataList.push(obj)
         }else{

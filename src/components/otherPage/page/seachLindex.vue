@@ -154,16 +154,6 @@
         });
       });
     },
-    getListSome(){
-      let data={
-        filter_I_type:this.msg.type,
-        filter_I_linkType:this.msg.linkType,
-        page:this.msg.page,
-        rows:this.msg.rows,
-        sortField:'sort'
-      }
-      this.indexListLunActions(data)
-    },
   }
 }
 </script>

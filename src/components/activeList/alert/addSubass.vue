@@ -13,6 +13,7 @@
           <el-checkbox label="BANNER"></el-checkbox>
           <el-checkbox label="等分（最多5等分）"></el-checkbox>
           <el-checkbox label="滑动的"></el-checkbox>
+          <el-checkbox label="产品等分(最多3等分)"></el-checkbox>
           <el-checkbox label="产品列表"></el-checkbox>
         </el-checkbox-group>
       </p>
@@ -127,27 +128,31 @@
                 type:'warning'
               })
             }
-          }
-          if(item=='轮播图'){
+          } else if(item=='轮播图'){
             let obj={}
             obj.name = that.input ? that.input : item
             obj.modelSampleCode = 'advertisingFigure'
             obj.marginData=''
             obj.contents=[]
             arr.push(obj)
-          }
-          if(item=="等分（最多5等分）" || item=='BANNER'){
+          } else if(item=="等分（最多5等分）" || item=='BANNER'){
             let obj={};
             obj.name = that.input ? that.input : item
             obj.modelSampleCode="f5"
             obj.marginData=''
             obj.contents=[]
             arr.push(obj)
-          }
-          if(item=="滑动的"){
+          } else if(item=="滑动的"){
             let obj={}
             obj.name = that.input ? that.input : item
             obj.modelSampleCode="titleproducttouch"
+            obj.marginData=''
+            obj.contents=[]
+            arr.push(obj)
+          } else{
+            let obj={};
+            obj.name = that.input ? that.input : item
+            obj.modelSampleCode="productf5"
             obj.marginData=''
             obj.contents=[]
             arr.push(obj)
