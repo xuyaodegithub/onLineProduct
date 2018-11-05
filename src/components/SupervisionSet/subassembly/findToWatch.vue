@@ -127,7 +127,6 @@
   import vFirst from '../pinkSet/bossList.vue'
   import vSecond from '../pinkSet/wantbossList.vue'
  // import vFirst from '../page/first.vue'
-  var  XLSX= require('xlsx')
   export default {
   name: 'findWatch',
   data () {

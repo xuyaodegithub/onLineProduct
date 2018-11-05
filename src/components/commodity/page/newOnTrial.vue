@@ -456,9 +456,10 @@
             data.dayLimitCount = this.everyNum
           } else {
             this.activeNum = false
-
           }
-          data.dailyStartDate = this.value9
+          if(this.value9) data.dailyStartDate = this.value9
+          else  this.activeNum = false
+          // data.dailyStartDate = this.value9
           data.isOverSeasProduct = this.isOutCountry
           data.countryId = this.value8
         } else {

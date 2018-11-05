@@ -24,7 +24,7 @@
                 <el-upload
                   class="upload-demo"
                   name="img"
-                  action="/apis/admin/buildblocks/uploadImage"
+                  action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
                   :on-success="upSuccessfirst"
                   :show-file-list="false">
                   <el-button size="mini" type="primary" style="margin-left: 15px;" >点击上传</el-button>
