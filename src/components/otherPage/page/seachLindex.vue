@@ -24,7 +24,17 @@
             <img :src="scope.row[item.which]" alt="" style="width: 78px;height: 78px;display: inline-block;">
           </span>
           <span style="margin-left: 10px" v-else-if="item.which==='type'">{{scope.row[item.which] | changeType}}</span>
+
+          <!--<span style="margin-left: 10px" v-else-if="item.which==='type' && scope.row[item.which] === 6 ">试用中心轮播图</span>-->
+          <!--<span style="margin-left: 10px" v-else-if="item.which==='type' && scope.row[item.which] === 7 ">店主特权广告图</span>-->
           <span style="margin-left: 10px" v-else-if="item.which==='linkType'">{{scope.row[item.which] | chnageStatus}}</span>
+          <!--<span style="margin-left: 10px" v-else-if="item.which==='linkType' && scope.row[item.which] === 2">升级店主</span>-->
+          <!--<span style="margin-left: 10px" v-else-if="item.which==='linkType' && scope.row[item.which] === 10">特卖</span>-->
+          <!--<span style="margin-left: 10px" v-else-if="item.which==='linkType' && scope.row[item.which] === 9">活动</span>-->
+          <!--<span style="margin-left: 10px" v-else-if="item.which==='linkType' && scope.row[item.which] === 13">试用中心</span>-->
+          <!--<span style="margin-left: 10px" v-else-if="item.which==='linkType' && scope.row[item.which] === 15">特卖详情</span>-->
+          <!--<span style="margin-left: 10px" v-else-if="item.which==='linkType' && scope.row[item.which] === 16">精品详情</span>-->
+          <!--<span style="margin-left: 10px" v-else-if="item.which==='linkType' && scope.row[item.which] === 17">整点抢详情</span>-->
           <span style="margin-left: 10px" v-else-if="item.which==='isRecommend'">{{scope.row[item.which] === 0 ? '否' : '是' }}</span>
           <span style="margin-left: 10px" v-else-if="item.which==='index'">{{scope.$index+1}}</span>
           <span style="margin-left: 10px" v-else>{{scope.row[item.which]}}</span>

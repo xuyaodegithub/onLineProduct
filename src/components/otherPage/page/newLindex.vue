@@ -39,6 +39,30 @@
        <label>标题:</label>
        <el-input v-model="title" placeholder="请输入内容" size="mini"></el-input>
      </div>
+      <!--<div>-->
+        <!--<label>价格:</label>-->
+        <!--<el-input v-model="price" placeholder="请输入内容" size="mini"></el-input>-->
+      <!--</div>-->
+     <!--<div>
+       <label>是否推荐至首页(品牌团):</label>
+       <el-radio-group v-model="isAudio">&lt;!&ndash;:disabled="classWh === '1'"&ndash;&gt;
+         <el-radio :label=0 style="width: auto;">否</el-radio>
+         <el-radio :label=1 style="width: auto;">是</el-radio>
+       </el-radio-group>
+     </div>-->
+     <!--<div>
+       <label>日期:</label>
+       <el-date-picker
+         size="mini"
+         v-model="dataTime"
+         type="daterange"
+         range-separator="至"
+         start-placeholder="开始日期"
+         end-placeholder="结束日期"
+         format="yyyy-MM-dd"
+         value-format="yyyy-MM-dd">
+       </el-date-picker>
+     </div>-->
      <div style="display: flex">
        <label>图片</label>
        <div style="display: flex">

@@ -74,10 +74,10 @@
       </el-form-item>
       <el-form-item label="试用类型:" required>
         <el-radio-group v-model="typeTrial"><!--:disabled="classWh === '1'"-->
-          <el-radio :label=1 style="width: auto;">普通试用</el-radio>
+          <el-radio :label="1" style="width: auto;">普通试用</el-radio>
           <!--<el-radio :label=2 style="width: auto;">新品首发</el-radio>-->
-          <el-radio :label=3 style="width: auto;">整点抢</el-radio>
-          <el-radio :label=5 style="width: auto;">付邮试</el-radio>
+          <el-radio :label="3" style="width: auto;">整点抢</el-radio>
+          <el-radio :label="5" style="width: auto;">付邮试</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="添加场次:" v-if="typeTrial==3">
@@ -186,12 +186,25 @@
       </el-form-item>
       <el-form-item label="上架时间:" v-if="isStatus===1 && typeTrial!==3">
         <el-date-picker
+          @change="setEndTime()"
+          style="width: 300px"
           size="mini"
           v-model="isUpTime"
           type="datetime"
           format="yyyy-MM-dd HH:mm:ss"
-          value-format="yyyy-MM-dd HH:mm:ss"
           placeholder="选择日期时间">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="下架时间:" v-if="isStatus===1 && typeTrial!==3">
+        <el-date-picker
+          style="width: 300px"
+          size="mini"
+          :disabled="!isUpTime"
+          v-model="isDownTime"
+          type="datetime"
+          format="yyyy-MM-dd"
+          placeholder="选择日期时间"
+          :picker-options="pickerOptions1">
         </el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -225,7 +238,7 @@
           {timer: '22:00'}, {timer: '23:00'},
         ],
         changeNum: true,
-        typeTrial: '',
+        typeTrial: 1,
         changeAll: '',
         backTitle: 'seachOnTrialGoods',
         isStatus: '',
@@ -269,7 +282,13 @@
         isAudio: '',
         dialogImageUrl: '',
         dialogImageUrl2: '',
-        isUpTime:''
+        isUpTime:'',
+        pickerOptions1: {
+          disabledDate:time=> {
+            return time.getTime() > this.isUpTime.getTime()+8640000000-86400000
+          }
+        },
+        isDownTime:''
       }
     },
     computed: {
@@ -365,12 +384,13 @@
         this.isOutCountry = ''
         this.value9 = ''
         this.everyNum = ''
-        this.typeTrial = ''
+        this.typeTrial = 1
         this.isSetTop = 1
         this.isStatus = 1
         this.tryTime = '',
         this.promotionAward=''
         this.isUpTime=''
+        this.isDownTime=''
       } else {
         let obj = {
           togetherProductIds: '',
@@ -405,7 +425,8 @@
         this.isOutCountry = this.upDataSaleGoodsResult.item.isOverSeasProduct
         this.tryTime = this.upDataSaleGoodsResult.item.freeUseDays
         this.promotionAward=this.upDataSaleGoodsResult.item.promotionAward
-        this.isUpTime=this.changeTime(new Date(this.upDataSaleGoodsResult.item.startTime))
+        this.isUpTime=new Date(this.upDataSaleGoodsResult.item.startTime)
+        this.isDownTime=new Date(this.upDataSaleGoodsResult.item.endTime)
         console.log(this.isUpTime)
         let data = {
           freeUseProductId: this.upDataSaleGoodsResult.item.id,
@@ -425,6 +446,12 @@
       ...mapActions([
         'popoverAlert', 'addFreeUseProductActions', 'FreeUseProductNormalsActions', 'AddNewCountryActions', 'getCountryActions'
       ]),
+      setEndTime(){
+//        console.log()
+        this.isDownTime=new Date(this.isUpTime.getTime()+1209600000)
+//        console.log(this.isUpTime+'-------'+this.isDownTime)
+//        console.log(this.isUpTime.getTime()+'-------'+this.isDownTime.getTime())
+      },
       saveProduct() {
         let data = {
           sort: this.form.sort,
@@ -456,15 +483,25 @@
             data.dayLimitCount = this.everyNum
           } else {
             this.activeNum = false
+
           }
-          if(this.value9) data.dailyStartDate = this.value9
-          else  this.activeNum = false
-          // data.dailyStartDate = this.value9
+          if(this.value9){
+            data.dailyStartDate = this.value9
+          }else  this.activeNum = false
           data.isOverSeasProduct = this.isOutCountry
           data.countryId = this.value8
         } else {
 //         this.isTypeTrial=false
-          data.startDate = this.isUpTime
+          console.log(this.isUpTime)
+          data.startDate = this.changeTime(this.isUpTime.getTime())
+          data.endDate = this.changeTime(this.isDownTime.getTime(),2)
+          if(!data.startDate || !data.endDate){
+            this.$message({
+              message:'上下架时间不可为空',
+              type:'warning'
+            })
+            return
+          }
           console.log(data.startDate)
           if(this.promotionAward<10 || this.promotionAward%10 !==0){
             this.$message({
@@ -617,8 +654,8 @@
         }
         this.$store.commit('Coupon_With_Goods', obj)
       },
-      changeTime(val){
-        let data=val
+      changeTime(val,num){
+        let data=new Date(val)
         let year=data.getFullYear()
         let month=data.getMonth()+1
         let day= data.getDate()
@@ -645,7 +682,11 @@
         if(sec<10){
           sec='0'+sec
         }
-        return year+'-'+month+'-'+day +' '+hour+':'+min+':'+sec
+        if(num){
+          return year+'-'+month+'-'+day
+        }else{
+          return year+'-'+month+'-'+day +' '+hour+':'+min+':'+sec
+        }
       }
 
     }

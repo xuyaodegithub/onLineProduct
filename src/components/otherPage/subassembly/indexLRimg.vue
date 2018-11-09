@@ -18,8 +18,8 @@
           </div>
           <div class="popover-main">
             <div style="display: flex">
-              <label>图片</label>
-              <div style="display: flex;padding: 20px;align-items: center;">
+              <div style="display: flex;padding: 20px;align-items: center;padding-left: 0;">
+                <label style="padding-right: 20px;">图片</label>
                 <img :src="dialogImageUrl" alt="" v-if="dialogImageUrl" style="width: 200px;height: 150px;">
                 <el-upload
                   class="upload-demo"

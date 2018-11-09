@@ -34,6 +34,11 @@
               type="primary"
               icon="el-icon-edit"
               @click="upData(scope.row)" plain>查看分类下的banner图</el-button>
+            <!--<el-button-->
+              <!--size="mini"-->
+              <!--type="danger"-->
+              <!--icon="el-icon-delete"-->
+              <!--@click="deleteProduct(scope.row)" plain>删除</el-button>-->
           </template>
         </el-table-column>
       </el-table>

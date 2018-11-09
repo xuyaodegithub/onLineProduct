@@ -30,7 +30,7 @@
             </li>
           </ul>
           <el-upload
-            action="/apis/admin/buildblocks/uploadImage"
+            action="http://ol-h5-admin.olquan.cn/admin/buildblocks/uploadImage"
             name="img"
             :multiple=true
             :show-file-list=false
@@ -95,7 +95,7 @@
           <el-input v-model="commodityResult.name" placeholder="请输入内容" size="mini"></el-input>
         </p>
         <p><label>组件类型:</label><span>产品等分（最多3等分）</span></p>
-        <p style="margin:0 0 10px 150px;">
+        <p style="margin:0 0 10px 60px;">
           <i class="el-icon-delete cu" style="margin-left: 5px" @click="DeleteP()"></i>
           <i class="el-icon-caret-right cu" @click="moveLRP(1)"></i>
           <i class="el-icon-caret-left cu" @click="moveLRP(2)"></i>
@@ -287,7 +287,6 @@
     watch: {
       commodityResult: {
         handler(curVal, oldVal) {
-          this.f5key = 0
           this.lineData = curVal.marginData
           if (curVal.name !== oldVal.name && curVal.modelSampleCode !== 'catlist1') {
             this.radio2 = ''
@@ -305,6 +304,9 @@
             this.marginPruct = curVal.marginData ? curVal.marginData : ''
             this.$store.commit('GET_ADD_DATA_NUM', 0)
             this.$store.commit('GET_CLASS_DATA_LIST', curVal.contents[0].dataList)
+          }
+          if(curVal.modelSampleCode === 'productf5' && curVal.contents.length !== oldVal.contents.length){
+            this.f5key=0
           }
         },
         deep: true
@@ -844,6 +846,7 @@
             this.commodityResult.contents.splice(this.f5key,1)
             this.commodityResult.contents.splice(this.f5key+1,0,item)
             this.f5key++
+            console.log(this.f5key)
           }
         }else{
           if(this.f5key===0){
