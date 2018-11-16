@@ -31,3 +31,16 @@ textarea{resize:none;}/*禁止多行文本输入框的拖动*/
 .cu{cursor:pointer;}
 
 .ind2{text-indent:2em}
+.flex{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.over2{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

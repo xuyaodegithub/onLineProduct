@@ -561,12 +561,29 @@
       },
       addGoodsImg(row,event,column){
         //console.log(JSON.stringify(row))
+        if(this.popoverAlive.SSSnum==='find'){
+          let obj={
+            togetherProductIds:'',
+            productType:1,
+            productIds:row.id,
+            marketPriceView:'',
+            price:'',
+            productName:row.productName,
+            costPriceView:'',//成本价
+            salePriceView:'',//销售价
+            image:'',//销售价,
+            toUrl:this.$store.state.editor.axiosQian+'/demo/iscroll/id/'+ row.id+'?isShare=0&type=1'
+          }
+          this.$store.commit('Coupon_With_Goods',obj)
+          this.popoverAlert()
+          return
+        }
         let obj={}
         obj.type=2
         obj.productType=1
         obj.productId=row.id
         obj.indexId=20
-        obj.url='https://ol-site.olquan.cn/weixin/product/newProductDetail?productId='+row.id
+        obj.url=this.$store.state.editor.axiosQian+'/demo/iscroll/id/'+ row.id+'?isShare=0&type=1'
         obj.image=this.commodityResult.contents[this.ImgnumKeyResult].image
         obj.width=this.commodityResult.contents[this.ImgnumKeyResult].width
         obj.height=this.commodityResult.contents[this.ImgnumKeyResult].height

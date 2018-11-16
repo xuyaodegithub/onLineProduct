@@ -190,7 +190,6 @@
             salePriceView:'',//销售价
             image:'',//销售价
             toUrl:this.$store.state.editor.axiosQian+'/demo/iscroll/id/'+ row.productId+'?isShare=0&type=4'
-
             }
           this.$store.commit('Coupon_With_Goods',obj)
           this.popoverAlert()

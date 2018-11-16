@@ -33,7 +33,7 @@
       <div>
         <label>跳转链接:</label>
         <el-input v-model="url" placeholder="请输入内容" size="mini" :disabled="linkType !== 9"></el-input>
-        <el-button size="mini" type="primary" style="margin-left: 15px;display: inline-block;" v-if="linkType===15 || linkType===16 || linkType===17"  @click="toproduct()">关联产品</el-button>
+        <el-button size="mini" type="primary" style="margin-left: 15px;display: inline-block;" v-if="linkType===15 || linkType===16 || linkType===17 || linkType===18"  @click="toproduct()">关联产品</el-button>
       </div>
      <div>
        <label>标题:</label>
@@ -153,7 +153,8 @@
           {value: 13, label: '试用中心'},
           {value: 15, label: '特卖详情'},
           {value: 16, label: '精品详情'},
-          {value: 17, label: '整点抢商品详情'}
+          {value: 17, label: '整点抢商品详情'},
+          {value: 18, label: '普通商品详情'},
         ]
       };
     },
@@ -181,7 +182,7 @@
     watch:{
       CouponWithGoodsResult: {
         handler(newVal, oldVal) {
-          if(this.linkType===15 || this.linkType===16 || this.linkType===17){
+          if(this.linkType===15 || this.linkType===16 || this.linkType===17 || this.linkType===18){
             this.url=newVal.toUrl
           }
         },
@@ -238,6 +239,9 @@
       toproduct(){
         if(this.linkType===15){
           this.$store.commit('changeRadios', '专享商品')
+          this.popoverAlert(['vAddGoods', 'find'])
+        }else if(this.linkType===18){
+          this.$store.commit('changeRadios', '普通商品')
           this.popoverAlert(['vAddGoods', 'find'])
         }else{
           this.$store.commit('changeRadios', '试用商品')

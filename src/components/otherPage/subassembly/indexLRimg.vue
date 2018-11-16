@@ -96,7 +96,9 @@
       options2: [
         {value: 3, label: '无'},
         {value: 9, label: '活动'},
-        {value: 10, label: '特卖 '}
+        {value: 10, label: '特卖 '},
+        {value: 13, label: '试用首页 '},
+        {value: 18, label: '发现首页'}
 //        {value: 13, label: '试用中心'}
       ],
       url:''
@@ -162,6 +164,7 @@
       }
       else if(urlType===10) this.url=this.$store.state.editor.axiosQian+'/index/pinkIndex'
       else if(urlType===13) this.url=this.$store.state.editor.axiosQian+'/try/newCenter'
+      else if(urlType===18) this.url=this.$store.state.editor.axiosQian+'/index/findIndex'
       else this.url=''
     },
     changeUrl(urls){

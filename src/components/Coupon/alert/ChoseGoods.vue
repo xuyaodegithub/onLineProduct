@@ -193,10 +193,10 @@
         options: [{
           value: '1',
           label: '普通产品'
-        }, {
+        }/*, {
           value: '2',
           label: '拼团产品'
-        }, {
+        }*/, {
           value: '3',
           label: '专享产品'
         }],
@@ -289,7 +289,7 @@
           }else{
             let obj={
               togetherProductIds:'',
-              productType:3,
+              productType:9,
               productIds:row.productId,
               price:row.price,
               productName:row.productName

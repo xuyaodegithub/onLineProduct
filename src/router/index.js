@@ -119,6 +119,10 @@ const router = new Router({
       path: '/jindouSet',//金豆配置
       name:"jindouSet",
       component:() => import(/* webpackChunkName: "jindouSet" */ '@/components/otherPage/subassembly/jindouSet.vue')
+    },{
+      path: '/SourceMage',//素材管理配置
+      name:"SourceMage",
+      component:() => import(/* webpackChunkName: "SourceMage" */ '@/components/putOutNews/subassembly/SourceMannage.vue')
     }
   ]
 })
