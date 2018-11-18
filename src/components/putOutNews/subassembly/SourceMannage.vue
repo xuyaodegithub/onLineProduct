@@ -27,7 +27,7 @@
         <el-upload
           class="upload-demo"
           name="file"
-          action="/apis/admin/weixin/messageSend/addMaterial"
+          action="http://test-admin-h5.olquan.cn/admin/weixin/messageSend/addMaterial"
           :on-success="upSuccessfirst"
           :show-file-list="false">
           <span style="font-size: 12px;color: #777777;">(大小不超过5M，已开启图片水印)</span>
@@ -38,7 +38,7 @@
     </div>
     <div style="margin-top: 30px;">
       <keep-alive>
-        <component :is="isTitle" :picDataList="picList.item" :newsList="dataList.item" v-on:toParese="changeTitle" :type="addOrupdata" :oneDetial="detialMsg"></component>
+        <component :is="isTitle" :picDataList="picList" :newsList="dataList.item" v-on:toParese="changeTitle" :type="addOrupdata" :oneDetial="detialMsg"></component>
       </keep-alive>
     </div>
     <div class="block" v-if="isTitle==='seachList' || isTitle==='picList'">
@@ -66,6 +66,7 @@
   name: 'newsMannage',
   data () {
     return {
+      baseUrl:this.$store.state.editor.axiosUrl,
       isSeach:'',
       isTitle:'seachList',
       dataList:[],
@@ -151,7 +152,7 @@
     handleSizeChange(val) {
 //      console.log(`每页 ${val} 条`);
       this.rows=val
-      if(isTitle==='picList'){
+      if(this.isTitle==='picList'){
         this.getNewsList(2)
       }else{
         this.getNewsList(1)
@@ -161,7 +162,7 @@
     handleCurrentChange(val) {
 //      console.log(`当前页: ${val}`);
       this.page=val
-      if(isTitle==='picList'){
+      if(this.isTitle==='picList'){
         this.getNewsList(2)
       }else{
         this.getNewsList(1)
@@ -171,12 +172,24 @@
     deleteThis(){},
     changeTitle(val){
       console.log(val)
+      if(val.type==='updataImg'){
+        this.page=1
+        this.rows=10
+        this.getNewsList(2)
+        return
+      }
+      if(val.type==='sedOneMethod'){
+        this.page=1
+        this.rows=10
+        this.getNewsList(1)
+        return
+      }
       this.isTitle=val.title
       this.detialMsg=val.item
       this.addOrupdata=val.type
       if(val.type){
-        this.page=1
-        this.rows=10
+        // this.page=1
+        // this.rows=10
         this.getNewsList(1)
       }
     },

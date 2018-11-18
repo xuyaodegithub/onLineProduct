@@ -1,6 +1,6 @@
 <template>
     <div class="content flex">
-      <img :src="item.url" alt="" v-for="(item,index) in picDataList">
+      <img :src="item.url" alt="" v-for="(item,index) in picDataList.item">
   </div>
 </template>
 
