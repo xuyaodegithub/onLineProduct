@@ -503,12 +503,16 @@
             return
           }
           console.log(data.startDate)
-          if(this.promotionAward<10 || this.promotionAward%10 !==0){
-            this.$message({
-              message: '推广奖励必须大于10且是10的倍数',
-              type: 'warning'
-            })
-            return
+          if(this.promotionAward==='' || this.promotionAward==0 ){
+            this.promotionAward=0
+          }else{
+            if(this.promotionAward<10 || this.promotionAward%10 !==0){
+              this.$message({
+                message: '推广奖励必须大于10且是10的倍数',
+                type: 'warning'
+              })
+              return
+            }
           }
           data.filter_S_promotionAward=this.promotionAward
           if(!data.indexImage){

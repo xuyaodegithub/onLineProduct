@@ -106,7 +106,8 @@
         else if(val===13) return '试用中心';
         else if(val===15) return '特卖详情';
         else if(val===16) return '精品详情';
-//        else if(val===15) return '试用中心轮播图';
+        else if(val===18) return '普通产品详情';
+        else if(val===19) return '发现页面';
         else return '整点抢详情'
       }
     },

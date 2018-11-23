@@ -57,7 +57,7 @@
     props:['newsList'],
     filters:{
         changeTime(val){
-          let data=new Date(val)
+          let data=new Date(val*1000)
           let year=data.getFullYear()
           let month=data.getMonth()+1
           let day= data.getDate()

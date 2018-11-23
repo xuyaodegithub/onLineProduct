@@ -155,6 +155,7 @@
           {value: 16, label: '精品详情'},
           {value: 17, label: '整点抢商品详情'},
           {value: 18, label: '普通商品详情'},
+          {value: 19, label: '发现页面'},
         ]
       };
     },
@@ -230,6 +231,7 @@
         else if(urlType===9) this.url=''
         else if(urlType===10) this.url=this.$store.state.editor.axiosQian+'/index/pinkIndex'
         else if(urlType===13) this.url=this.$store.state.editor.axiosQian+'/try/newCenter'
+        else if(urlType===19) this.url=this.$store.state.editor.axiosQian+'/index/newFindIndex'
         else this.url=''
         this.backfirst()
        /* else if(urlType===15) this.url='https://ol-h5-preview.olquan.cn/demo/iscroll/id/'

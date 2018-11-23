@@ -27,7 +27,7 @@
         <el-upload
           class="upload-demo"
           name="file"
-          action="http://test-admin-h5.olquan.cn/admin/weixin/messageSend/addMaterial"
+          action="http://ol-h5-admin.olquan.cn/admin/weixin/messageSend/addMaterial"
           :on-success="upSuccessfirst"
           :show-file-list="false">
           <span style="font-size: 12px;color: #777777;">(大小不超过5M，已开启图片水印)</span>

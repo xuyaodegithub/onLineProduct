@@ -119,6 +119,11 @@
           <el-input v-model="commodityResult.name" placeholder="请输入内容" size="mini"></el-input>
         </p>
         <p><label>组件类型:</label><span>产品列表</span></p>
+        <p class="clear" style="margin-bottom: 10px;">
+          <i class="el-icon-delete cu" style="margin-left: 5px" @click="classChangeI(1)"></i>
+          <i class="el-icon-caret-right cu" @click="classChangeI(2)"></i>
+          <i class="el-icon-caret-left cu" @click="classChangeI(3)"></i>
+        </p>
       </div>
       <div class="flmcList">
         <p><label>分类名称:</label>
@@ -136,7 +141,7 @@
         </p>-->
         <p style="display: flex"  v-if="commodityResult.contents.length>0"><label style="display: inline-block;margin-right: 15px;">分类banner图:</label>
           <!--<el-input v-model="marginPruct" placeholder="请输入内容" size="mini" @blur="change3(marginPruct)"></el-input>-->
-          <img :src="commodityResult.contents[num].classBannerImg ?  commodityResult.contents[num].classBannerImg.image : ''" alt="" style="width: 68px;height: 68px;border: none;"  v-if="commodityResult.contents.length>0">
+          <img :src="commodityResult.contents[addDataNumResult].classBannerImg ?  commodityResult.contents[addDataNumResult].classBannerImg.image : ''" alt="" style="width: 68px;height: 68px;border: none;"  v-if="commodityResult.contents.length>0">
           <i class="el-icon-close cu" style="float: right;font-size: 14px;color:red;"
              @click="CloseImg()"></i>
           <el-upload
@@ -859,6 +864,41 @@
             this.f5key--
           }
         }
+      },
+      classChangeI(key){
+        const item=this.commodityResult.contents[this.addDataNumResult]
+          if(key===1){
+            if(this.addDataNumResult>-1){
+              this.commodityResult.contents.splice(this.addDataNumResult,1)
+            }else{
+              this.$message({
+                message:'请先添加分类'
+              })
+            }
+          }else if(key===2){
+            if(this.addDataNumResult===this.commodityResult.contents.length-1){
+              this.commodityResult.contents.splice(this.addDataNumResult,1)
+              this.commodityResult.contents.unshift(item)
+              this.$store.commit('GET_ADD_DATA_NUM', 0)
+//              this.$store.commit('GET_CLASS_DATA_LIST', this.commodityResult.contents[key].dataList)
+            }else{
+              this.commodityResult.contents.splice(this.addDataNumResult,1)
+              this.commodityResult.contents.splice(this.addDataNumResult+1,0,item)
+              this.$store.commit('GET_ADD_DATA_NUM', this.addDataNumResult+1)
+              console.log(this.addDataNumResult)
+            }
+          }else{
+            if(this.addDataNumResult===0){
+              this.commodityResult.contents.splice(this.addDataNumResult,1)
+              this.commodityResult.contents.push(item)
+//              this.f5key=this.commodityResult.contents.length-1
+              this.$store.commit('GET_ADD_DATA_NUM', this.commodityResult.contents.length-1)
+            }else{
+              this.commodityResult.contents.splice(this.addDataNumResult,1)
+              this.commodityResult.contents.splice(this.addDataNumResult-1,0,item)
+              this.$store.commit('GET_ADD_DATA_NUM', this.addDataNumResult-1)
+            }
+          }
       }
     }
   }
@@ -936,9 +976,13 @@
     height: 68px;
   }
 
-  #zujianData .img > p > i ,.productf5 p i{
+  #zujianData .img > p > i ,.productf5 p i,#goodChangeList .banner-t p > i{
     float: right;
     font-size: 24px;
+  }
+  #goodChangeList .banner-t > p:last-child{
+    flex:1;
+    margin-right: 50px;
   }
 
   #goodChangeList .flmcList .el-input {

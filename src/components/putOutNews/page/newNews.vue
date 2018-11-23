@@ -14,7 +14,7 @@
               <i class="icon iconfont icon-xitonghoutai-shanchuicon" @click.stop="upTo(index,3)" v-if="index!==0"></i>
           </div>
         </div>
-        <p class="cu"><i class="el-icon-plus" @click="addOnenews"></i></p>
+        <p class="cu" v-if="type==='add'"><i class="el-icon-plus" @click="addOnenews"></i></p>
       </div>
       <div class="right">
         <el-input placeholder="请在这里输入标题(最多64字符)" class="bigTitle" v-model="isBigTitle" maxlength="64" @input="changeTitle(1)"></el-input>
@@ -77,7 +77,7 @@
               <el-upload
                 class="upload-demo"
                 name="file"
-                action="http://test-admin-h5.olquan.cn/admin/weixin/messageSend/addMaterial"
+                action="http://ol-h5-admin.olquan.cn/admin/weixin/messageSend/addMaterial"
                 :on-success="upSuccessfirst"
                 :show-file-list="false">
                 <!--<span style="font-size: 12px;color: #777777;">(大小不超过5M，已开启图片水印)</span>-->
