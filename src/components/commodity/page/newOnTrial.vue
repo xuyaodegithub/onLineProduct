@@ -131,6 +131,13 @@
           </p>
         </div>
       </el-form-item>
+
+      <el-form-item label="是否是悦选:" v-if="typeTrial==1">
+            <el-radio-group v-model="isYueXuan">
+              <el-radio :label="1">是</el-radio>
+              <el-radio :label="0">否</el-radio>
+            </el-radio-group>
+      </el-form-item>
       <!-- <el-form-item label="首页图片:" v-if="typeTrial!==3">
          <el-upload
            class="upload-demo"
@@ -227,7 +234,8 @@
     name: 'newOnTrial',
     data() {
       return {
-        tryTime: '',
+        isYueXuan:0,
+        tryTime: 30,
         promotionAward: '',
 //      isTypeTrial:false,
         tryDay: [{title: '1天', val: 1}, {title: '2天', val: 2}, {title: '3天', val: 3}],
@@ -387,10 +395,11 @@
         this.typeTrial = 1
         this.isSetTop = 1
         this.isStatus = 1
-        this.tryTime = '',
+        this.tryTime = 30,
         this.promotionAward=''
         this.isUpTime=''
         this.isDownTime=''
+        this.isYueXuan=0
       } else {
         let obj = {
           togetherProductIds: '',
@@ -406,6 +415,7 @@
         this.$store.commit('Coupon_With_Goods', obj)
         //console.log(1111)
         this.form.sort = this.upDataSaleGoodsResult.item.sort
+        this.isYueXuan = this.upDataSaleGoodsResult.item.isYueXuan
         this.isSetTop = this.upDataSaleGoodsResult.item.isSetTop
         this.form.date = this.upDataSaleGoodsResult.item.startDate
         this.form.desc = this.upDataSaleGoodsResult.item.description
@@ -469,10 +479,19 @@
           isSetTop: this.isSetTop,
           // normalStores:'',//试用库存
           tip: this.form.trip,
-          freeUseDays: this.tryTime,
+          freeUseDays: this.tryTime
 //          filter_S_promotionAward:this.promotionAward
           // startDate:,
           //endDate:'',
+        }
+        if(!this.typeTrial){
+          this.$message({
+            type:'请选择试用类型'
+          })
+          return
+        }
+        if(this.typeTrial==1){
+          data.isYueXuan=this.isYueXuan
         }
         if (this.typeTrial == 3) {
 //        this.isTypeTrial=true

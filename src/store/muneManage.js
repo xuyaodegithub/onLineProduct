@@ -70,7 +70,8 @@ const muneManage={
         isOverSeasProduct:'',
         freeUseDays:'',
         buyCount:'',
-        promotionAward:''
+        promotionAward:'',
+        isYueXuan:''
       },
       //试用规格
       FreeUseProductNormalsMM:{
@@ -177,7 +178,7 @@ const muneManage={
       state.editor.addFreeUseProductMM.freeUseDays=data.freeUseDays
       state.editor.addFreeUseProductMM.buyCount=data.buyCount
       state.editor.addFreeUseProductMM.promotionAward=data.filter_S_promotionAward
-
+      state.editor.addFreeUseProductMM.isYueXuan=data.isYueXuan
     },
 //试用规格
     SET_FREEUSE_PRODUCT_NORMALS(state,data){
